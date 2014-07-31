@@ -82,6 +82,9 @@ body {
     margin-top: 100px;
     width: 400px;
 }
+.modal-content {
+   background-color: darkgray;
+}
 .modal-header {
     padding: 10px;
     padding-left: 30px;
