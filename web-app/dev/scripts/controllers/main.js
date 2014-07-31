@@ -14,4 +14,5 @@ angular.module('yoApp')
       'AngularJS',
       'Karma'
     ];
+
   });

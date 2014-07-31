@@ -32,9 +32,9 @@ body {
 }
 
 /* Customize container */
-@media (min-width: 768px) {
+@media (min-width: 1068px) {
   .container {
-    max-width: 730px;
+    max-width: 1030px;
   }
 }
 .container-narrow > hr {
@@ -60,7 +60,7 @@ body {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1068px) {
   /* Remove the padding we set earlier */
   .header,
   .marketing,
@@ -76,4 +76,21 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.modal-dialog {
+    margin-top: 100px;
+    width: 400px;
+}
+.modal-header {
+    padding: 10px;
+    padding-left: 30px;
+}
+.modal-body {
+    padding: 10px;
+    padding-left: 30px;
+}
+.modal-footer {
+    padding: 10px;
+    padding-left: 30px;
 }
