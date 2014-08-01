@@ -137,6 +137,9 @@
 .search-city{
     margin-top: 50px;
 }
+.search-city-btn{
+   padding: 12px 12px;
+}
 .weather-align1{
      margin-top: 50px;
     margin-left: 50px;
@@ -154,4 +157,7 @@
 }
 .recent-location{
     margin-top: 50px;
+}
+body{
+background-image: url("../images/weather1.jpg");
 }
