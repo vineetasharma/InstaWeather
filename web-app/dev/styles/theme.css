@@ -425,7 +425,7 @@ a:focus, button:focus {
   background-position: center center;
   height: 650px;
   position: relative;
-  padding-top: 115px; }
+  padding-top: 50px; }
   @media (max-width: 991px) {
     #home #hero {
       padding-top: 100px; } }
