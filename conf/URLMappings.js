@@ -19,5 +19,4 @@ _app.get("/cluster/worker/list", controllers.cluster.list);
 _app.get('/', controllers.home.index);
 
 //User routes
-_app.post('/', controllers.user.loginHandler);
 _app.get('/logout', controllers.user.logout);

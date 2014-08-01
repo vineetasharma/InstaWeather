@@ -59,17 +59,6 @@ AppBuilder.initLogger(function (message, level) {
 //Initialize the Express middlewares
 app.set('port', _config.port);
 app.set('views', path.join(__dirname, "views"));
-app.engine('ejs', viewEngine);
-app.set('view engine', 'ejs');
-app.use(express.logger("dev"));
-
-//Web dirs are conditional
-if (__appEnv == "production") {
-    app.use(express.static(path.join(__dirname, 'web-app', "dist")));
-} else {
-    app.use(express.static(path.join(__dirname, 'web-app', "bower_components")));
-    app.use(express.static(path.join(__dirname, 'web-app', "dev")));
-}
 app.use(express.cookieParser());
 app.use(Util.localToBearerStrategyMiddleWare);
 app.use(express.json());
@@ -89,7 +78,17 @@ global.__defineGetter__("_app", function () {
     return app;
 });
 
+app.engine('ejs', viewEngine);
+app.set('view engine', 'ejs');
+app.use(express.logger("dev"));
 
+//Web dirs are conditional
+if (__appEnv == "production") {
+  app.use(express.static(path.join(__dirname, 'web-app', "dist")));
+} else {
+  app.use(express.static(path.join(__dirname, 'web-app', "bower_components")));
+  app.use(express.static(path.join(__dirname, 'web-app', "dev")));
+}
 //Initialize the Database connection and load models
 AppBuilder.initDomains(function () {
     //Init Hooks
