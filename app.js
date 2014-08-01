@@ -65,6 +65,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(expressValidator());
 app.use(express.methodOverride());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(AppBuilder.apiHelperToolInjectionMiddleware);
 app.use(connectFormidable());
 app.use(app.router);
