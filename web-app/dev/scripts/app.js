@@ -24,7 +24,6 @@ angular
             templateUrl: '../views/contact.html',
             controller: 'contactCtrl'
         })
-
         .otherwise({
         redirectTo: '/'
       });
