@@ -11,7 +11,7 @@
  * */
 exports.schema = {
     geoNameId:Number,
-    locationName:string,
+    locationName:{type:String},
     latitude:Number,
     longitude:Number,
     searchCount:Number

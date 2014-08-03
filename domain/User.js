@@ -10,10 +10,10 @@
  * Define the Schema of the collection (MongooseJS schema definition)
  * */
 exports.schema = {
-    username:string,
-    email:string,
-    accessToken:string,
+    username:String,
+    email:String,
+    accessToken:String,
     lastSearched : { },
     accounts: [ ],
-    profilePicUrl:string
+    profilePicUrl:String
 };
