@@ -28,14 +28,14 @@
         }</style>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/theme.css">
     <link rel="stylesheet" type="text/css" href="styles/animate.css">
     <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css">
-    <script src="scripts/app.js"></script>
-    <!--<script src="bower_components/angular/angular.min.js"></script>-->
-    <script src="scripts/controllers/home.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+   <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/main.js"></script>
 </head>
@@ -58,19 +58,17 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="#" class="">
+                    <a href="#/about" class="">
                         about
                     </a>
                 </li>
                 <li class="">
-                    <a href="#" class="">
+                    <a href="#/contact" class="">
                         contact
                     </a>
                 </li>
-                <li>
-                    <!--<input type="button" class="btn bg-primary btn-lg" ng-click="signIn()" value="login"/>-->
-                    <!--<span  value="login">login</span>-->
-                    <a href="" ng-click="signIn()">
+                <li id="NotLoggedIn">
+                     <a href="" ng-click="signIn()">
                         LogIn
                     </a>
                 </li>
@@ -91,115 +89,10 @@
         </div>
     </div>
 </div>
-
-<div class="row content-row content-row-align">
-    <div class="col-lg-8">
-        <div class="input-group search-city">
-            <input type="text" class="form-control" placeholder="Search By City...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default search-city-btn" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-        </div>
-        <!-- /input-group -->
-        <div class="weather-align1">
-            <div class="box-info full weather-widget">
-                <div class="overlay-weather-info">
-                    <div class="weather-info-city">
-                        <h4><i class="fa fa-map-marker"></i> YOGYAKARTA, INDONESIA</h4>
-
-                        <div id="weather-icon">
-                            <i class="wi-day-sprinkle weather-icon"></i>
-                        </div>
-                        <div id="weather-info">
-                            <h5>Sprinkle day</h5>
-
-                            <h1>32<sup>°</sup>C</h1>
-                        </div>
-                    </div>
-                    <!-- End div .weather-info-city -->
-                </div>
-                <!-- End div .overlay-weather-info -->
-            </div>
-            <!-- End div .box-info -->
-        </div>
-        <!-- /.panel -->
-
-        <!-- /.panel -->
-        <div class="weather-align2">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Default Panel
-                        </div>
-                        <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                        </div>
-                        <div class="panel-footer">
-                            Panel Footer
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Primary Panel
-                        </div>
-                        <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                        </div>
-                        <div class="panel-footer">
-                            Panel Footer
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            Success Panel
-                        </div>
-                        <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                        </div>
-                        <div class="panel-footer">
-                            Panel Footer
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col-lg-4 -->
-            </div>
-        </div>
-        <!-- /.panel -->
-    </div>
-    <div class="col-md-3 recent-location ">
-        <div>
-            <div class="list-group sidebar-inner1">
-                <a href="#">
-
-                </a>
-            </div>
-            <!-- /.list-group -->
-        </div>
-        <div>
-            <div class="list-group sidebar-inner2">
-                <a href="#">
-
-                </a>
-            </div>
-            <!-- /.list-group -->
-        </div>
-
-    </div>
-    <!-- /.col-lg-8 -->
-</div>
 <!-- /.row -->
-<!--    <div ng-view=""></div>-->
+
+<div data-ng-view></div>
+
 <link rel="stylesheet" type="text/css" href="styles/main.css">
-
-
 </body>
 </html>

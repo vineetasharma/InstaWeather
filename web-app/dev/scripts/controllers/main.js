@@ -8,11 +8,6 @@
  * Controller of the yoApp
  */
 angular.module('yoApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-
-  });
+    .controller('mainCtrl',['$scope',function ($scope) {
+        console.log(">>>>>>>>>>>main page called>>>>>>>>>>>");
+    }]);

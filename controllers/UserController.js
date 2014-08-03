@@ -8,14 +8,6 @@
 var EventName = require("../src/enum/EventName");
 
 /**
- * Handles the route which renders the dashboard page
- * @url "/"
- * */
-exports.dashboard = function (req, res) {
-    res.render("dashboard", {});
-}.secured();
-
-/**
  * Handles the login form submission
  * @url "/"
  * */
