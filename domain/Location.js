@@ -15,4 +15,5 @@ exports.schema = {
     latitude:Number,
     longitude:Number,
     searchCount:Number
+
 };
