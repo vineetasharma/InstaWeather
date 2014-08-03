@@ -3,4 +3,3 @@ bower_components/
 client/
 node_modules/
 experiments
- web-app/dev/views/profile.html
