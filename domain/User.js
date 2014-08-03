@@ -16,5 +16,4 @@ exports.schema = {
     lastSearched : { },
     accounts: [ ],
     profilePicUrl:String
-
 };
