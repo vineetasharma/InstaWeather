@@ -12,7 +12,7 @@ angular
   .module('yoApp', ['ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/home', {
         templateUrl: '../views/main.html',
         controller: 'mainCtrl'
       })
@@ -25,6 +25,6 @@ angular
             controller: 'contactCtrl'
         })
         .otherwise({
-        redirectTo: '/'
+        redirectTo: '/home'
       });
   });
