@@ -1,23 +1,29 @@
-exports.findOrCreateTwitterAccountService = function (twitterUserName, displayName) {
+exports.findOrCreateTwitterAccountService = function (twitterUserName, displayName, done) {
     var emitter = this;
     User.findOne({twitterUserId: twitterUserName}, function (err, data) {
-        if (err)
+        if (err) {
             emitter.emit("error", err);
-        else if (!data) {
+            done(err,profile);
+        }else if (!data) {
             new User({
                 name: displayName,
                 twitterUserId: twitterUserName,
                 enabled: true
             }).save(function (err) {
-                    if (err)
+                    if (err) {
                         log.error(err);
-                    else
+                        done(err, profile);
+                    }
+                    else {
+                        done(null, profile);
                         log.info('user is created');
-                })
+                    }
+                });
             emitter.emit('success', displayName);
         }
         if (data) {
             log.info("Welcome", displayName);
+            done(null, profile);
             emitter.emit('success', displayName);
         }
     })

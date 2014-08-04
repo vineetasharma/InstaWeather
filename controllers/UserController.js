@@ -9,3 +9,7 @@ exports.findOrCreateFacebookAccountController=function(accessToken, refreshToken
     UserService.findOrCreateFacebookAccountService(profile,done);
     log.info("facebook user controller profile", profile);
 };
+
+exports.logout=function(req,res){
+    log.info(req.session.user);
+};

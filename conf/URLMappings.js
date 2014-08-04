@@ -80,6 +80,11 @@ _app.get('/auth/twitter/callback',
 //        log.info(req.session);
 //    }
 //})
+
 //User routes
-/*
- _app.get('/logout', controllers.user.logout);*/
+// _app.get('/logout', controllers.user.logout);
+_app.get('/logout', function(req, res){
+    console.log(req.session.user)
+    req.session.user=null;
+    res.redirect('/');
+});
