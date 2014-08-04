@@ -10,8 +10,18 @@
  * @url "/"
  * */
 exports.index = function (req, res) {
-    if(req.user){
-        req.session.user=req.user.username;
-    }
-    res.render('index', {user: req.session.user ? req.session.user : null});
+   /* if(req.user) {
+        res.loginUser(req.user._id.toString(), req.user.username, ['user']);
+        console.log(">>>>>>>>>>>>>>>>.REQUEST CHECKLOGGEDIN", req.checkLoggedIn());
+    }*/
+    var user=req.checkLoggedIn();
+    res.render('index', {user: user? user.name : null});
+};
+exports.profile = function (req, res) {
+if(req.checkLoggedIn())
+        res.loginUser(req.user._id.toString(), req.user.username, ['user']);
+       // console.log(">>>>>>>>>>>>>>>>.REQUEST CHECKLOGGEDIN", req.checkLoggedIn());
+
+    var user=req.checkLoggedIn();
+    res.render('index', {user: user? user.name : null});
 };
