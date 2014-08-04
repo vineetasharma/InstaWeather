@@ -13,7 +13,8 @@ exports.schema = {
     username:String,
     email:String,
     accessToken:String,
+    fbId: String,
+    twitterId: String,
     lastSearched : { },
-    accounts: [ ],
     profilePicUrl:String
 };

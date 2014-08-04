@@ -13,7 +13,7 @@ var controllers = {
 
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy
-    ,TwitterStrategy = require('passport-twitter').Strategy;
+    , TwitterStrategy = require('passport-twitter').Strategy;
 
 
 passport.serializeUser(function (user, done) {
@@ -28,21 +28,17 @@ passport.use(new FacebookStrategy({
         clientID: _config.facebookAuth.clientID,
         clientSecret: _config.facebookAuth.clientSecret,
         callbackURL: _config.facebookAuth.callbackURL
-    },function (accessToken, refreshToken, profile, done) {
-
-        done(null, profile);
-    }
+    },controllers.user.findOrCreateFacebookAccountController
 ));
 
 passport.use(new TwitterStrategy({
     consumerKey: _config.twitterAuth.consumerKey,
     consumerSecret: _config.twitterAuth.consumerSecret,
     callbackURL: _config.twitterAuth.callbackURL
-}, function (token, tokenSecret, profile, done) {
-    done(null, profile);
-}));
+},controllers.user.findOrCreateTwitterAccountController));
 
 //Cluster API
+
 _app.get("/cluster/worker/list", controllers.cluster.list);
 
 //Home/Auth URL Mappings
@@ -60,7 +56,7 @@ _app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 // authentication has failed.
 _app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { successRedirect: '/',
-        failureRedirect: '/login' }));
+        failureRedirect: '/' }));
 
 
 // Redirect the user to Twitter for authentication.  When complete, Twitter
@@ -74,7 +70,16 @@ _app.get('/auth/twitter', passport.authenticate('twitter'));
 // authentication has failed.
 _app.get('/auth/twitter/callback',
     passport.authenticate('twitter', { successRedirect: '/',
-        failureRedirect: '/login' }));
+        failureRedirect: '/' }));
 
+//_app.get("/isLoggedIn",function(){
+//    if(req.session){
+//        log.info(req.session);
+//    }
+//    else{
+//        log.info(req.session);
+//    }
+//})
 //User routes
-_app.get('/logout', controllers.user.logout);
+/*
+ _app.get('/logout', controllers.user.logout);*/

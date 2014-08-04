@@ -10,5 +10,9 @@
  * @url "/"
  * */
 exports.index = function (req, res) {
-  res.render('index', {error: null});
+    if(req.user){
+        req.session.user=req.user._json.name;
+        //console.info(req.user._json);
+    }
+    res.render('index', {user: req.session.user ? req.session.user : null});
 };
