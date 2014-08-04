@@ -6,36 +6,36 @@
 
 //Require Controllers
 var controllers = {
-    cluster: require("../controllers/ClusterController"),
-    user: require("../controllers/UserController"),
-    home: require("../controllers/HomeController")
+  cluster: require("../controllers/ClusterController"),
+  user: require("../controllers/UserController"),
+  home: require("../controllers/HomeController")
 };
 
 var passport = require('passport')
-    , FacebookStrategy = require('passport-facebook').Strategy
-    , TwitterStrategy = require('passport-twitter').Strategy;
+  , FacebookStrategy = require('passport-facebook').Strategy
+  , TwitterStrategy = require('passport-twitter').Strategy;
 
 
 passport.serializeUser(function (user, done) {
-    done(null, user);
+  done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
-    done(null, user);
+  done(null, user);
 });
 
 passport.use(new FacebookStrategy({
-        clientID: _config.facebookAuth.clientID,
-        clientSecret: _config.facebookAuth.clientSecret,
-        callbackURL: _config.facebookAuth.callbackURL
-    },controllers.user.findOrCreateFacebookAccountController
+    clientID: _config.facebookAuth.clientID,
+    clientSecret: _config.facebookAuth.clientSecret,
+    callbackURL: _config.facebookAuth.callbackURL
+  }, controllers.user.findOrCreateFacebookAccountController
 ));
 
 passport.use(new TwitterStrategy({
-    consumerKey: _config.twitterAuth.consumerKey,
-    consumerSecret: _config.twitterAuth.consumerSecret,
-    callbackURL: _config.twitterAuth.callbackURL
-},controllers.user.findOrCreateTwitterAccountController));
+  consumerKey: _config.twitterAuth.consumerKey,
+  consumerSecret: _config.twitterAuth.consumerSecret,
+  callbackURL: _config.twitterAuth.callbackURL
+}, controllers.user.findOrCreateTwitterAccountController));
 
 //Cluster API
 
@@ -55,8 +55,8 @@ _app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 _app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/',
-        failureRedirect: '/' }));
+  passport.authenticate('facebook', { successRedirect: '/',
+    failureRedirect: '/' }));
 
 
 // Redirect the user to Twitter for authentication.  When complete, Twitter
@@ -69,22 +69,11 @@ _app.get('/auth/twitter', passport.authenticate('twitter'));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 _app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', { successRedirect: '/',
-        failureRedirect: '/' }));
+  passport.authenticate('twitter', { successRedirect: '/',
+    failureRedirect: '/' }));
 
-//_app.get("/isLoggedIn",function(){
-//    if(req.session){
-//        log.info(req.session);
-//    }
-//    else{
-//        log.info(req.session);
-//    }
-//})
 
-//User routes
-// _app.get('/logout', controllers.user.logout);
-_app.get('/logout', function(req, res){
-    console.log(req.session.user)
-    req.session.user=null;
-    res.redirect('/');
+_app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
 });

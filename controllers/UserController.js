@@ -1,15 +1,24 @@
+exports.findOrCreateTwitterAccountController = function (accessToken, refreshToken, profile, done) {
+  UserService.findOrCreateTwitterAccountService(profile)
+    .on("success", function () {
 
-exports.findOrCreateTwitterAccountController=function(accessToken, refreshToken, profile, done){
-    UserService.findOrCreateTwitterAccountService(profile,done);
-    log.info("twitter user controller profile", req.user);
+    })
+    .on("error", function () {
+
+    });
 };
 
 
-exports.findOrCreateFacebookAccountController=function(accessToken, refreshToken, profile, done){
-    UserService.findOrCreateFacebookAccountService(profile,done);
-    log.info("facebook user controller profile", profile);
+exports.findOrCreateFacebookAccountController = function (accessToken, refreshToken, profile, done) {
+  UserService.findOrCreateFacebookAccountService(profile)
+    .on("success", function (user) {
+      done(null, user);
+    })
+    .on("error", function (err) {
+      done(err, profile);
+    });
 };
 
-exports.logout=function(req,res){
-    log.info(req.session.user);
+exports.logout = function (req, res) {
+  log.info(req.session.user);
 };

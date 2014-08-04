@@ -11,9 +11,7 @@
  * */
 exports.index = function (req, res) {
     if(req.user){
-        req.session.user=req.user._json.name;
-        console.info(req.user._json);
+        req.session.user=req.user.username;
     }
-    console.info("????????????"+req.user)
     res.render('index', {user: req.session.user ? req.session.user : null});
 };
