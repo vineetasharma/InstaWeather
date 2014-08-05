@@ -14,6 +14,5 @@ exports.index = function (req, res) {
     if(req.user){
         req.session.user=req.user.username;
     }
-//    res.render('index', {user: req.session.user ? req.session.user : null});
-    res.render('index', {user: req.user ? req.user : null});
+    res.render('index', {user: req.session.user ? req.session.user : null});
 };
