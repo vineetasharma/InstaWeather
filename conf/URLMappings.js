@@ -55,7 +55,7 @@ _app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 _app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/profile',
+  passport.authenticate('facebook', { successRedirect: '/',
     failureRedirect: '/' }));
 
 
@@ -77,5 +77,3 @@ _app.get('/logout', function (req, res) {
   res.logoutUser();
   res.redirect('/');
 });
-
-_app.get('/profile',controllers.home.profile);

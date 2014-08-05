@@ -11,6 +11,7 @@
  * */
 exports.schema = {
     username:String,
+    password:String,
     email:String,
     accessToken:String,
     fbId: String,
