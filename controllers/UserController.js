@@ -10,7 +10,7 @@ exports.findOrCreateTwitterAccountController = function (accessToken, refreshTok
 
 
 exports.findOrCreateFacebookAccountController = function (accessToken, refreshToken, profile, done) {
-  UserService.findOrCreateFacebookAccountService(profile)
+  UserService.findOrCreateFacebookAccountService(accessToken,profile)
     .on("success", function (user) {
       done(null, user);
     })

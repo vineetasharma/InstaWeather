@@ -31,33 +31,32 @@ exports.findOrCreateTwitterAccountService = function (profile) {
   })
 }.toEmitter();
 
-exports.findOrCreateFacebookAccountService = function (profile) {
-  var emitter = this;
-  User.findOne({email: profile.emails[0].value}, function (err, data) {
-    if (err) {
-      emitter.emit("error", err);
-    }
-    else if (!data) {
-      new User({
-        username: profile.displayName,
-        email: profile.emails[0].value,
-        fbId: profile.id
-      }).save(function (err, user) {
-          if (err) {
-            log.error(err);
+exports.findOrCreateFacebookAccountService = function (accessToken,profile) {
+    var emitter = this;
+    User.findOne({email: profile.emails[0].value}, function (err, data) {
+        if (err) {
             emitter.emit("error", err);
-          }
-          else {
-            log.info('user is created');
-              log.info("USER name"+user.username);
-            emitter.emit("success", user.username)
-          }
-        });
-    }
-    else if (data) {
-      log.info("Welcome", profile.displayName);
-        console.log(data);
-      emitter.emit('success', data.username);
-    }
-  })
-}.toEmitter()
+        }
+        else if (!data) {
+            new User({
+                username: profile.displayName,
+                email: profile.emails[0].value,
+                fbId: profile.id,
+                accessToken: accessToken
+            }).save(function (err, user) {
+                    if (err) {
+                        log.error(err);
+                        emitter.emit("error", err);
+                    }
+                    else {
+                        log.info('user is created');
+                        emitter.emit("success", user)
+                    }
+                });
+        }
+        else if (data) {
+            log.info("Welcome", profile.displayName);
+            emitter.emit('success', data);
+        }
+    })
+}.toEmitter();

@@ -10,10 +10,9 @@
  * @url "/"
  * */
 exports.index = function (req, res) {
-    console.log(req.user);
-    if(req.user){
-        req.session.user=req.user.username;
+    if(req.user) {
+        res.loginUser(req.user._id.toString(), req.user.username, ['user']);
     }
-//    res.render('index', {user: req.session.user ? req.session.user : null});
-    res.render('index', {user: req.user ? req.user : null});
+    var user=req.checkLoggedIn();
+    res.render('index', {user: (user? user.name : (req.user ? req.user.username : null))});
 };
