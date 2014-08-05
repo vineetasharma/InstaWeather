@@ -8,7 +8,8 @@ var express = require('express'),
     connectFormidable = require('./custom_modules/connect-formidable'),
     Util = require("./src/Utils"),
     viewEngine = require("ejs-locals"),
-    socket = require('socket.io');
+    socket = require('socket.io'),
+    expressSession = require('express-session');
 
 
 // Use the BearerStrategy with Passport.
@@ -59,6 +60,7 @@ AppBuilder.initLogger(function (message, level) {
 //Initialize the Express middlewares
 app.set('port', _config.port);
 app.set('views', path.join(__dirname, "views"));
+app.use(expressSession({secret: 'IW_Secret'}))
 app.use(express.cookieParser());
 app.use(Util.localToBearerStrategyMiddleWare);
 app.use(express.json());

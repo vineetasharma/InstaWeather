@@ -9,25 +9,22 @@
  * Main module of the application.
  */
 angular
-  .module('yoApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
+  .module('yoApp', ['ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+      .when('/home', {
+        templateUrl: '../views/main.html',
+        controller: 'mainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
+        .when('/about',{
+            templateUrl: '../views/about.html',
+            controller: 'aboutCtrl'
+        })
+        .when('/contact',{
+            templateUrl: '../views/contact.html',
+            controller: 'contactCtrl'
+        })
+        .otherwise({
+        redirectTo: '/home'
       });
   });

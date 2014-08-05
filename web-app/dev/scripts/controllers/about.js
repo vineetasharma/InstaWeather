@@ -8,10 +8,6 @@
  * Controller of the yoApp
  */
 angular.module('yoApp')
-  .controller('AboutCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+    .controller('AboutCtrl', ['$scope',function ($scope) {
+        console.log(">>>>>>>>>>>>About us called>>>>>>>>>>")
+    }]);
