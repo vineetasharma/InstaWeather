@@ -49,13 +49,15 @@ exports.findOrCreateFacebookAccountService = function (profile) {
           }
           else {
             log.info('user is created');
-            emitter.emit("success", user)
+              log.info("USER name"+user.username);
+            emitter.emit("success", user.username)
           }
         });
     }
     else if (data) {
       log.info("Welcome", profile.displayName);
-      emitter.emit('success', data);
+        console.log(data);
+      emitter.emit('success', data.username);
     }
   })
 }.toEmitter()
