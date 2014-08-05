@@ -74,6 +74,6 @@ _app.get('/auth/twitter/callback',
 
 
 _app.get('/logout', function (req, res) {
-  req.logout();
+  res.logoutUser();
   res.redirect('/');
 });
