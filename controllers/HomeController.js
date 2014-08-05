@@ -10,7 +10,6 @@
  * @url "/"
  * */
 exports.index = function (req, res) {
-    console.log(req.user);
     if(req.user){
         req.session.user=req.user.username;
     }

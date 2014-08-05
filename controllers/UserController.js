@@ -1,10 +1,10 @@
 exports.findOrCreateTwitterAccountController = function (accessToken, refreshToken, profile, done) {
   UserService.findOrCreateTwitterAccountService(profile)
-    .on("success", function (user) {
-          done(null, user);
+    .on("success", function () {
+
     })
-    .on("error", function (err) {
-          done(err, user);
+    .on("error", function () {
+
     });
 };
 
