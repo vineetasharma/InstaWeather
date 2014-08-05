@@ -1,32 +1,27 @@
 exports.findOrCreateTwitterAccountService = function (profile) {
-    console.log("twitter profile........",profile);
   var emitter = this;
-    var twitterUserName=profile.username;
-    console.log(twitterUserName+"username");
-    console.log(profile.photos[0].value+"username urrrrrrrrrrrrrrrrrrrllllllllllllllllllllllll");
-  User.findOne({twitterId: twitterUserName}, function (err, data) {
+  User.findOne({twitterId: profile.id}, function (err, data) {
     if (err) {
       emitter.emit("error", err);
     } else if (!data) {
       new User({
           username: profile.displayName,
-          twitterId: twitterUserName,
-        enabled: true,
+          twitterId: profile.id,
           profilePicUrl:profile.photos[0].value
-//          accessToken:
-      }).save(function (err) {
+      }).save(function (err,user) {
           if (err) {
             log.error(err);
+              emitter.emit('error', err);
           }
           else {
             log.info('user is created');
+              emitter.emit('success', user);
           }
         });
-      emitter.emit('success', profile.displayName);
     }
     if (data) {
       log.info("Welcome", profile.displayName);
-      emitter.emit('success', profile.displayName);
+      emitter.emit('success', data);
     }
   })
 }.toEmitter();
