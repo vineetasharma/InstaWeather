@@ -8,6 +8,16 @@
  * Controller of the yoApp
  */
 angular.module('yoApp')
-    .controller('mainCtrl',['$scope',function ($scope) {
-        console.log(">>>>>>>>>>>main page called>>>>>>>>>>>");
+    .controller('mainCtrl', ['$scope', function ($scope) {
+
+
+        jQuery(function () {
+
+            var options = {
+                types: ['(cities)']
+            };
+
+            $("#city").geocomplete(options);
+
+        });
     }]);
