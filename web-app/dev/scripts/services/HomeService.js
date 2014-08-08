@@ -18,7 +18,6 @@ angular.module('yoApp')
                         error(function (error) {
                             console.log("error during saving information: ",error.message);
                         });
-                    console.log(data,"alwar info");
                     callback(data);
                 }
                ,error: function(err) {
