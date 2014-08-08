@@ -11,7 +11,7 @@
             </div>
         </form>
         <!-- /input-group -->
-        <table ng-show="WIWeatherResult.weatherObservation.temperature">
+       <!-- <table ng-show="WIWeatherResult.weatherObservation.temperature">
             <tr>
                 <td></td>
                 <td>{{WILocalionResult.geonames[0].adminName1}}</td>
@@ -40,14 +40,14 @@
                     {{WIWeatherResult.weatherObservation.windSpeed}}"
                 </td>
             </tr>
-           <!-- <tr>
+           &lt;!&ndash; <tr>
                 <td>
                     lng:
                 </td>
                 <td>
                     {{WIWeatherResult.weatherObservation.lng}}"
                 </td>
-            </tr>-->
+            </tr>&ndash;&gt;
             <tr>
                 <td>
                   cloud
@@ -56,18 +56,19 @@
                     <img src="{{imageURL}}">
                 </td>
             </tr>
-        </table>
-        <div class="weather-align1">
+        </table>-->
+        <div class="weather-align1" ng-show="WIWeatherResult">
             <div class="box-info full weather-widget">
                 <div class="overlay-weather-info">
                     <div class="weather-info-city">
-                        <h4><i class="fa fa-map-marker"></i> YOGYAKARTA, INDONESIA</h4>
+                        <h4><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
                         <div id="weather-icon">
                             <i class="wi-day-sprinkle weather-icon"></i>
+                            <img src="{{imageURL}}">
                         </div>
                         <div id="weather-info">
                             <h5>Sprinkle day</h5>
-                            <h1>32<sup>°</sup>C</h1>
+                            <h1>{{WIWeatherResult.weatherObservation.temperature}}<sup>°</sup>C</h1>
                         </div>
                     </div>
                     <!-- End div .weather-info-city -->

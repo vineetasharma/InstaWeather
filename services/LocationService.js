@@ -14,6 +14,7 @@ exports.save = function (reqData) {
             new Location({
                 geoNameId:reqData.geonames[0].geonameId,
                 locationName:reqData.geonames[0].name,
+                fullName:(reqData.geonames[0].name+', '+reqData.geonames[0].adminName1+', '+reqData.geonames[0].countryName),
                 latitude:reqData.geonames[0].lat,
                 longitude:reqData.geonames[0].lng,
                 searchCount: 1

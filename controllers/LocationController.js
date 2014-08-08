@@ -21,6 +21,7 @@ exports.save=function(req, res){
                 res.sendSuccessAPIResponse({
                     geoNameId:location.geonameId,
                     locationName:location.locationName,
+                    fullName:location.fullName,
                     latitude:location.latitude,
                     longitude:location.longitude,
                     searchCount:location.searchCount
