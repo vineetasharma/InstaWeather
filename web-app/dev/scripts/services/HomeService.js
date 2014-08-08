@@ -19,7 +19,6 @@ angular.module('yoApp')
                             console.log("error during saving information: ",error.message);
                         });
                     console.log(data,"alwar info");
-                    console.log(data,"alwar info");
                     callback(data);
                 }
                ,error: function(err) {

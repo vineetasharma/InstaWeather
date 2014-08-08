@@ -19,7 +19,7 @@ angular.module('yoApp')
         $scope.WILocalionResult;
         $scope.WIWeatherResult;
 
-        $scope.getDeatails=function(){
+        $scope.getDetails=function(){
             HomeService.getDeatails(function(result) {
                 $scope.WILocalionResult=result;
                 HomeService.getWeatherDeatails(result,function(weatherInfo){
