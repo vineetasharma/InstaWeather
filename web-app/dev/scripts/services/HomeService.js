@@ -1,5 +1,5 @@
 angular.module('yoApp')
-    .service('HomeService', function () {
+    .service('HomeService',['$http', function ($http) {
        this.getDeatails=function(callback) {
             jQuery.ajax({
                 url: "http://ws.geonames.org/searchJSON",
@@ -46,4 +46,4 @@ angular.module('yoApp')
                 }
             });
         }
-    });
+    }]);
