@@ -8,7 +8,8 @@
 var controllers = {
   cluster: require("../controllers/ClusterController"),
   user: require("../controllers/UserController"),
-  home: require("../controllers/HomeController")
+  home: require("../controllers/HomeController"),
+    location:require("../controllers/LocationController")
 };
 
 var passport = require('passport')
@@ -72,8 +73,9 @@ _app.get('/auth/twitter/callback',
   passport.authenticate('twitter', { successRedirect: '/',
     failureRedirect: '/' }));
 
-
 _app.get('/logout', function (req, res) {
   res.logoutUser();
   res.redirect('/');
 });
+
+_app.post('/addlocationdata',controllers.location.save);

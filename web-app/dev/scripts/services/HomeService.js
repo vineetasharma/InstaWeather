@@ -1,5 +1,5 @@
 angular.module('yoApp')
-    .service('HomeService', function () {
+    .service('HomeService',['$http', function ($http) {
        this.getDeatails=function(callback) {
             jQuery.ajax({
                 url: "http://ws.geonames.org/searchJSON",
@@ -11,6 +11,13 @@ angular.module('yoApp')
                     username: 'vineetasharma'
                 },
                 success: function (data) {
+                    $http.post("/addlocationdata",data)
+                        .success(function () {
+                            console.log("Information sucessfully added");
+                        }).
+                        error(function (error) {
+                            console.log("error during saving information: ",error.message);
+                        });
                     callback(data);
                 }
                ,error: function(err) {
@@ -36,4 +43,4 @@ angular.module('yoApp')
                 }
             });
         }
-    });
+    }]);
