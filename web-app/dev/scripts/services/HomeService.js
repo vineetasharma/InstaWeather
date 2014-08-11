@@ -45,4 +45,8 @@ angular.module('yoApp')
                 }
             });
         }
+        /*this.getRecentSearchPlacesDeatails=function() {
+
+
+        }*/
     }]);

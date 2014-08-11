@@ -61,14 +61,25 @@
             <div class="box-info full weather-widget">
                 <div class="overlay-weather-info">
                     <div class="weather-info-city">
+                        <!--<span>{{WILocalionResult}}</span>-->
                         <h4><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
                         <div id="weather-icon">
                             <i class="wi-day-sprinkle weather-icon"></i>
                             <img src="{{imageURL}}">
                         </div>
                         <div id="weather-info">
-                            <h5>Sprinkle day</h5>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2H_R1X8oRNLrkj4_WFibgZlT5Zo_ZIX7b-fsjtxJoRpfXSZXaaw">
+
                             <h1>{{WIWeatherResult.weatherObservation.temperature}}<sup>°</sup>C</h1>
+                        </div>
+                        <div id="weather-icon">
+                            <img src="http://icons.iconarchive.com/icons/dapino/beach/128/wind-mill-icon.png" height="50" width="50">
+
+                        </div>
+                        <div id="weather-info">
+
+                            <h1>{{WIWeatherResult.weatherObservation.windSpeed}}</h1>
+
                         </div>
                     </div>
                     <!-- End div .weather-info-city -->
@@ -108,7 +119,7 @@
         <div>
             <div class="list-group sidebar-inner2">
                 <a href="#">
-
+Most Visited places
                 </a>
             </div>
             <!-- /.list-group -->
