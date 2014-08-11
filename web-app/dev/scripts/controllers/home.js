@@ -9,6 +9,15 @@ angular.module('yoApp')
             };
             $("#city").geocomplete(options);
         });
+        /*disabled a button*/
+        $(document).ready(function(){
+            $('button').attr('disabled','disabled');
+            $('input[type="text"]').change(function(){
+                if($(this).val != ''){
+                    $('button').removeAttr('disabled');
+                }
+            });
+        });
 
         $scope.signIn = function () {
             jQuery('#signin').modal({
@@ -18,12 +27,15 @@ angular.module('yoApp')
 
         $scope.WILocalionResult;
         $scope.WIWeatherResult;
+        $scope.imageURL;
+        $scope.recentData;
 
-        $scope.getDetails=function(){
-            HomeService.getDeatails(function(result) {
-                $scope.WILocalionResult=result;
-                HomeService.getWeatherDeatails(result,function(weatherInfo){
-                    $scope.WIWeatherResult=weatherInfo;
+        $scope.getDetails = function () {
+            $('button').attr('disabled','disabled');
+            HomeService.getDeatails(function (result) {
+                $scope.WILocalionResult = result;
+                HomeService.getWeatherDeatails(result, function (weatherInfo) {
+                    $scope.WIWeatherResult = weatherInfo;
                     console.log($scope.WIWeatherResult);
                     $scope.$apply();
                 });
@@ -31,11 +43,23 @@ angular.module('yoApp')
                // console.log($scope.WILocalionResult,"wether information");
             });
         }
-//        $scope.imageURL='http://past.theweathernetwork.com/common/images/web/wicons/d.gif';
-        /*
-        'http://past.theweathernetwork.com/common/images/web/wicons/a.gif' sunny
-        'http://past.theweathernetwork.com/common/images/web/wicons/e.gif' variable
-        'http://past.theweathernetwork.com/common/images/web/wicons/f.gif' cloudy with sunny breaks
+       /* $http.get("/findRecentlocation")
+            .success(function (result) {
+                console.log("RESULT"+result);
+                $scope.recentData
 
-        'http://past.theweathernetwork.com/common/images/web/wicons/k.gif' cloudy*/
+            }).
+            error(function (error) {
+                console.log("error while searching data: ",error.message);
+            });*/
+        /* clouds
+         'http://past.theweathernetwork.com/common/images/web/wicons/a.gif' sunny
+         'http://past.theweathernetwork.com/common/images/web/wicons/e.gif' variable
+         'http://past.theweathernetwork.com/common/images/web/wicons/f.gif' cloudy with sunny breaks
+
+         'http://past.theweathernetwork.com/common/images/web/wicons/k.gif' cloudy*/
     }]);
+/*
+* wind Speed
+* http://icons.iconarchive.com/icons/dapino/beach/128/wind-mill-icon.png
+* */
