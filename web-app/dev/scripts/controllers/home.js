@@ -12,6 +12,7 @@ angular.module('yoApp')
         /*disabled a button*/
         $(document).ready(function(){
             $('button').attr('disabled','disabled');
+            $('#info').hide();
             $('input[type="text"]').change(function(){
                 if($(this).val != ''){
                     $('button').removeAttr('disabled');
@@ -27,39 +28,24 @@ angular.module('yoApp')
 
         $scope.WILocalionResult;
         $scope.WIWeatherResult;
-        $scope.imageURL;
-        $scope.recentData;
 
         $scope.getDetails = function () {
             $('button').attr('disabled','disabled');
             HomeService.getDeatails(function (result) {
                 $scope.WILocalionResult = result;
                 HomeService.getWeatherDeatails(result, function (weatherInfo) {
+                    console.log(weatherInfo);
+                    if(!(weatherInfo.weatherObservation)) {
+                        $('#info').show();
+                        $('#info').html("Sorry! weather information not found");
+                    }
+                    else
+                        $('#info').hide();
+
                     $scope.WIWeatherResult = weatherInfo;
-                    console.log($scope.WIWeatherResult);
                     $scope.$apply();
                 });
 
-               // console.log($scope.WILocalionResult,"wether information");
             });
         }
-       /* $http.get("/findRecentlocation")
-            .success(function (result) {
-                console.log("RESULT"+result);
-                $scope.recentData
-
-            }).
-            error(function (error) {
-                console.log("error while searching data: ",error.message);
-            });*/
-        /* clouds
-         'http://past.theweathernetwork.com/common/images/web/wicons/a.gif' sunny
-         'http://past.theweathernetwork.com/common/images/web/wicons/e.gif' variable
-         'http://past.theweathernetwork.com/common/images/web/wicons/f.gif' cloudy with sunny breaks
-
-         'http://past.theweathernetwork.com/common/images/web/wicons/k.gif' cloudy*/
     }]);
-/*
-* wind Speed
-* http://icons.iconarchive.com/icons/dapino/beach/128/wind-mill-icon.png
-* */

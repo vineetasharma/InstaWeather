@@ -35,8 +35,6 @@ angular.module('yoApp')
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-                    console.log(result);
-                    console.log(data);
                    callback(data);
                 }
                 , error: function (err) {
@@ -44,9 +42,5 @@ angular.module('yoApp')
                     callback(null);
                 }
             });
-        }
-        /*this.getRecentSearchPlacesDeatails=function() {
-
-
-        }*/
+        };
     }]);

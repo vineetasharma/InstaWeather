@@ -10,54 +10,7 @@
                             </span>
             </div>
         </form>
-        <!-- /input-group -->
-       <!-- <table ng-show="WIWeatherResult.weatherObservation.temperature">
-            <tr>
-                <td></td>
-                <td>{{WILocalionResult.geonames[0].adminName1}}</td>
-            </tr>
-            <tr>
-                <td>
-                    Temperature:
-                </td>
-                <td>
-                    <h1>{{WIWeatherResult.weatherObservation.temperature}}<sup>°</sup>C</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    clouds:
-                </td>
-                <td>
-                    {{WIWeatherResult.weatherObservation.clouds}}"
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    windSpeed:
-                </td>
-                <td>
-                    {{WIWeatherResult.weatherObservation.windSpeed}}"
-                </td>
-            </tr>
-           &lt;!&ndash; <tr>
-                <td>
-                    lng:
-                </td>
-                <td>
-                    {{WIWeatherResult.weatherObservation.lng}}"
-                </td>
-            </tr>&ndash;&gt;
-            <tr>
-                <td>
-                  cloud
-                </td>
-                <td>
-                    <img src="{{imageURL}}">
-                </td>
-            </tr>
-        </table>-->
-        <div ng-show="WIWeatherResult">
+        <div ng-show="WIWeatherResult.weatherObservation.temperature">
         <div class="weather-align1">
             <div class="box-info full weather-widget">
                 <div class="overlay-weather-info">
@@ -111,6 +64,7 @@
         </div>
         <!-- /.panel -->
             </div>
+        <div id="info"></div>
     </div>
     <div class="col-md-3 recent-location ">
         <div>

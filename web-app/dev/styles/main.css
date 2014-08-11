@@ -240,3 +240,10 @@ body {
     width: 100px;
     margin-left: 10px;
 }
+
+#info{
+    margin-left: 20px;
+    margin-top: 50px;
+    color: red;
+    font-size: 40px;
+}
