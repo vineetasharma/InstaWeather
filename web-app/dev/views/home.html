@@ -57,13 +57,13 @@
                 </td>
             </tr>
         </table>-->
-        <div ng-show="WIWeatherResult.weatherObservation.temperature">
+        <div ng-show="WIWeatherResult">
         <div class="weather-align1">
             <div class="box-info full weather-widget">
                 <div class="overlay-weather-info">
                     <div class="weather-info-city">
                         <h4 class="h4"><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
-                        <div id="weather-icon" ng-show=" WIWeatherResult.weatherObservation.cloudsCode">
+                        <div id="weather-icon" ng-show="WIWeatherResult.weatherObservation.cloudsCode">
                             <i class="wi-day-sprinkle weather-icon"></i>
                             <img class="img-icon" src="../images/cloudicon/{{WIWeatherResult.weatherObservation.cloudsCode}}.png">
                         </div>
