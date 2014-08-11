@@ -31,7 +31,8 @@ angular.module('yoApp')
                // console.log($scope.WILocalionResult,"wether information");
             });
         }
-        $scope.imageURL='http://past.theweathernetwork.com/common/images/web/wicons/d.gif';/*
+//        $scope.imageURL='http://past.theweathernetwork.com/common/images/web/wicons/d.gif';
+        /*
         'http://past.theweathernetwork.com/common/images/web/wicons/a.gif' sunny
         'http://past.theweathernetwork.com/common/images/web/wicons/e.gif' variable
         'http://past.theweathernetwork.com/common/images/web/wicons/f.gif' cloudy with sunny breaks

@@ -9,7 +9,7 @@ var controllers = {
   cluster: require("../controllers/ClusterController"),
   user: require("../controllers/UserController"),
   home: require("../controllers/HomeController"),
-    location:require("../controllers/LocationController")
+  location:require("../controllers/LocationController")
 };
 
 var passport = require('passport')

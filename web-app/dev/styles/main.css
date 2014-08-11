@@ -4,6 +4,7 @@
 .footer {
     padding-left: 15px;
     padding-right: 15px;
+
 }
 
 /* Custom page header */
@@ -153,14 +154,16 @@
 .weather-align1 {
     margin-top: 50px;
     margin-left: 50px;
+    color: white;
 }
 
 .weather-align2 {
-    margin-top: 150px;
+    margin-top: 75px;
 }
 
 #weather-icon {
-    width: 190PX;
+    width: 200PX;
+    height: 200px;
     float: left;
 }
 
@@ -182,7 +185,7 @@ body {
 .wa-1 {
     margin-top: 25px;
     background-color: #9acfea;
-    height: 200px;
+    height: 100px;
     border-radius: 10px;
     opacity: 0.6;
 }
@@ -215,4 +218,25 @@ body {
 
 #LoggedIn {
     visibility: hidden;
+}
+.h4{
+    font-size: 40px;
+}
+.h5{
+    font-size: 20px;
+}
+.h1{
+    font-size: 150px;
+}
+
+.img-icon{
+    height: 100%;
+    width: 100%;
+}
+
+.hw{
+    vertical-align: middle;
+    height: 100px;
+    width: 100px;
+    margin-left: 10px;
 }

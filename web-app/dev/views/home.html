@@ -57,18 +57,19 @@
                 </td>
             </tr>
         </table>-->
-        <div class="weather-align1" ng-show="WIWeatherResult">
+        <div ng-show="WIWeatherResult">
+        <div class="weather-align1">
             <div class="box-info full weather-widget">
                 <div class="overlay-weather-info">
                     <div class="weather-info-city">
-                        <h4><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
+                        <h4 class="h4"><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
                         <div id="weather-icon">
                             <i class="wi-day-sprinkle weather-icon"></i>
-                            <img src="{{imageURL}}">
+                            <img class="img-icon" src="../images/cloudicon/{{WIWeatherResult.weatherObservation.cloudsCode}}.png">
                         </div>
                         <div id="weather-info">
-                            <h5>Sprinkle day</h5>
-                            <h1>{{WIWeatherResult.weatherObservation.temperature}}<sup>°</sup>C</h1>
+                            <h5 class="h5">{{WIWeatherResult.weatherObservation.clouds}}</h5>
+                            <h1 class="h1">{{WIWeatherResult.weatherObservation.temperature}}<sup>°</sup>C</h1>
                         </div>
                     </div>
                     <!-- End div .weather-info-city -->
@@ -80,29 +81,36 @@
         <!-- /.panel -->
 
         <!-- /.panel -->
-       <!-- <div class="weather-align2">
+        <div class="weather-align2">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="panel wa-1">
-
+                        <div id="weather-icon">
+                            <img class="hw" src="../images/img/humidity.png">
+                        </div>
+                        <div id="weather-info">
+                            <h5>Humidity</h5>
+                            <h1>{{WIWeatherResult.weatherObservation.humidity + " %"}}</h1>
+                        </div>
                     </div>
                 </div>
-                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
-                <div class="col-lg-4">
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-6">
                     <div class="panel wa-1">
-
+                        <div id="weather-icon">
+                            <img class="hw" src="../images/img/windSpeed.gif">
+                        </div>
+                        <div id="weather-info">
+                            <h5>WindSpeed</h5>
+                            <h1>{{WIWeatherResult.weatherObservation.windSpeed + " km/h"}}</h1>
+                        </div>
                     </div>
                 </div>
-                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
-                <div class="col-lg-4">
-                    <div class="panel  wa-1">
-
-                    </div>
-                </div>
-                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+                <!-- /.col-lg-4 -->
             </div>
-        </div>-->
+        </div>
         <!-- /.panel -->
+            </div>
     </div>
     <div class="col-md-3 recent-location ">
         <div>
