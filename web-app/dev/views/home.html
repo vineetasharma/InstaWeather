@@ -2,11 +2,12 @@
     <div class="col-lg-8">
         <form>
             <div class="input-group search-city">
-                <input id="city" type="text" class="form-control" placeholder="Search By City...">
+                <input id="city" type="text" class="form-control" placeholder="Search By City..." ng-model="city">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()">
+                                <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()" ng-disabled="!city">
                                     <i class="fa fa-search"></i>
                                 </button>
+
                             </span>
             </div>
         </form>

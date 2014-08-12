@@ -10,15 +10,6 @@ angular.module('yoApp')
             $("#city").geocomplete(options);
         });
 
-        /*disabled a button*/
-        $(document).ready(function () {
-            $('button').attr('disabled', 'disabled');
-            $('#city').change(function () {
-                if ($(this).val != '') {
-                    $('button').removeAttr('disabled');
-                }
-            });
-        });
 
         /*login pop up*/
         $scope.signIn = function () {
@@ -29,9 +20,10 @@ angular.module('yoApp')
         /*recieving location information and then weather information to show weather information on home page*/
 
         $scope.getDetails = function () {
+            $scope.isDisabled=true;
             $scope.WILocalionResult=null;
             $scope.WIWeatherResult=null;
-            $('button').attr('disabled', 'disabled');
+//            $('button').attr('disabled', 'disabled');
 
           $scope.showInfo=false;
             HomeService.getDetails(function (result) {
