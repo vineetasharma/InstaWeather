@@ -3,6 +3,8 @@ angular.module('yoApp')
 
         this.getDetails = function (callback) {
             var searchLocation = jQuery("#city").val().toString().split(', ');
+
+
             var searchLocationLength = searchLocation.length;
             console.log("location to be search: ", searchLocation);
             jQuery.ajax({
@@ -50,27 +52,25 @@ angular.module('yoApp')
                 }
             });
         };
-        /*this.getWeather=function(result,callback) {
+        this.getWeatherInfo=function(result,callback) {
          jQuery.ajax({
-         url: "http://api.geonames.org/findNearByWeatherJSON?",
-         dataType: "jsonp",
-         data: {
-         lat:result.latitude,
-         lng:result.longitude,
-         username: 'vineetasharma'
-         },
+             url: "http://api.openweathermap.org/data/2.5/weather?",
+             dataType: "jsonp",
+             data: {
+                 lat: result.latitude,
+                 lon: result.longitude
+             },
          success: function (data) {
 
-         console.log(data, 'weather info');
+         console.log(data, 'weather info most search location');
          callback(data);
-         }
-         , error: function (err) {
+         }, error: function (err) {
          console.log(err);
          callback(null);
          }
          });
-         }*/
-         this.getMostSearchPlaceDeatails=function(callback) {
+         }
+         this.getMostSearchPlaceDetails=function(callback) {
          $http.get("/findlocationdata")
          .success(function (data) {
          console.log("Information find",data);

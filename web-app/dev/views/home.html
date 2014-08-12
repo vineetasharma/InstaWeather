@@ -16,7 +16,7 @@
             <div class="box-info full weather-widget">
                 <div class="overlay-weather-info">
                     <div class="weather-info-city">
-                        <h4 class="h4"><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
+                        <h4 class="h4"><i class="fa fa-map-marker"></i> {{fullName}}</h4>
                         <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
                             <i class="wi-day-sprinkle weather-icon"></i>
                             <img class="img-icon" src="http://openweathermap.org/img/w/{{WIWeatherResult.weather[0].icon}}.png">
@@ -74,7 +74,7 @@
             <div class="list-group sidebar-inner2">
                 <h3>Most Visited place</h3>
                 <ul ng-repeat="data in mostVisitedData">
-                    <li><a href="javascript:void(0);">{{data.locationName}}</a></li>
+                    <a><span ng-click="getWeather(data)">{{data.locationName}}</span></a>
                 </ul>
                 <!--<h3>{{mostVisitedData.locationName}}</h3>-->
 
