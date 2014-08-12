@@ -1,5 +1,6 @@
 angular.module('yoApp')
     .service('HomeService', ['$http', function ($http) {
+
         this.getDetails = function (callback) {
             var searchLocation = jQuery("#city").val().toString().split(', ');
             var searchLocationLength = searchLocation.length;
