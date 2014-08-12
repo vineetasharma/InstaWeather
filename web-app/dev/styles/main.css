@@ -267,3 +267,13 @@ body {
     color: red;
     font-size: 40px;
 }
+
+.in-h3{
+    padding: 20px;
+    padding-left: 40px;
+}
+.loc{
+    padding-left: 40px;
+    color: #222222;
+    font-size: 18px;
+}
