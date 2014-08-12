@@ -1,46 +1,53 @@
 angular.module('yoApp')
-    .service('HomeService',['$http', function ($http) {
-       this.getDeatails=function(callback) {
+    .service('HomeService', ['$http', function ($http) {
+
+        this.getDetails = function (callback) {
+            var searchLocation = jQuery("#city").val().toString().split(', ');
+            var searchLocationLength = searchLocation.length;
+            console.log("location to be search: ", searchLocation);
             jQuery.ajax({
                 url: "http://ws.geonames.org/searchJSON",
                 dataType: "jsonp",
                 data: {
-                    featureClass: "P",
-                    style: "full",
-                    name_equals: (jQuery("#city").val().toString().split(','))[0],
+                    name_equals: searchLocation[0],
+                    adminName1: (searchLocationLength) > 1 ? searchLocation[1] : false,
+                    countryName: searchLocation[searchLocationLength - 1],
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-                    $http.post("/addlocationdata",data)
-                        .success(function () {
-                            console.log("Information sucessfully added");
-                        }).
-                        error(function (error) {
-                            console.log("error during saving information: ",error.message);
-                        });
-                    callback(data);
-                }
-               ,error: function(err) {
+                    if(data.geonames.length){
+                        $http.post("/addlocationdata", data)
+                            .success(function () {
+                                console.log("Information sucessfully added");
+                            }).
+                            error(function (error) {
+                                console.log("error during saving information: ", error.message);
+                            });
+                        callback(data);
+                    }
+                    else
+                      callback(null);
+                }, error: function (err) {
+                    console.log("error during searching location: ", err);
                     callback(null);
                 }
             });
         };
-        this.getWeatherDeatails=function(result) {
+        this.getWeatherDetails = function (result, callback) {
             jQuery.ajax({
-                url: "http://api.geonames.org/findNearByWeatherJSON?",
+                url: "http://api.openweathermap.org/data/2.5/weather?",
                 dataType: "jsonp",
                 data: {
-                    lat:result.geonames[0].lat,
-                    lng:result.geonames[0].lng,
-                    username: 'vineetasharma'
+                    lat: result.geonames[0].lat,
+                    lon: result.geonames[0].lng
                 },
                 success: function (data) {
-                    console.log(result);
-                    console.log(data);
-                }
-                , error: function (err) {
-                    console.log(err);
+                    console.log("Weather information is: ", data);
+                    callback(data);
+                }, error: function (err) {
+                    console.log("error during recieving weather data: ", err);
+                    callback(null);
                 }
             });
-        }
+        };
     }]);

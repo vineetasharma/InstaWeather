@@ -2,26 +2,28 @@
     <div class="col-lg-8">
         <form>
             <div class="input-group search-city">
-                <input id="city" type="text" class="form-control" placeholder="Search By City...">
+                <input id="city" type="text" class="form-control" placeholder="Search By City..." ng-model="city">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default search-city-btn" ng-click="getDeatails()" type="button">
+                                <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()" ng-disabled="!city">
                                     <i class="fa fa-search"></i>
                                 </button>
+
                             </span>
             </div>
         </form>
-        <!-- /input-group -->
+        <div ng-show="WIWeatherResult">
         <div class="weather-align1">
             <div class="box-info full weather-widget">
                 <div class="overlay-weather-info">
                     <div class="weather-info-city">
-                        <h4><i class="fa fa-map-marker"></i> YOGYAKARTA, INDONESIA</h4>
-                        <div id="weather-icon">
+                        <h4 class="h4"><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
+                        <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
                             <i class="wi-day-sprinkle weather-icon"></i>
+                            <img class="img-icon" src="http://openweathermap.org/img/w/{{WIWeatherResult.weather[0].icon}}.png">
                         </div>
                         <div id="weather-info">
-                            <h5>Sprinkle day</h5>
-                            <h1>32<sup>°</sup>C</h1>
+                            <h5 class="h5">{{WIWeatherResult.weather[0].description}}</h5>
+                            <h1 class="h1">{{WIWeatherResult.main.temp-273 | number:2}}<sup>°</sup>C</h1>
                         </div>
                     </div>
                     <!-- End div .weather-info-city -->
@@ -35,27 +37,37 @@
         <!-- /.panel -->
         <div class="weather-align2">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="panel wa-1">
-
+                        <div id="humidity-icon">
+                            <img class="hw" src="../images/img/humidity.png">
+                        </div>
+                        <div id="humidity-info">
+                            <h5>Humidity</h5>
+                            <h1>{{WIWeatherResult.main.humidity + " %"}}</h1>
+                        </div>
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="panel wa-1">
-
-                    </div>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <div class="panel  wa-1">
-
+                        <div id="windspeed-icon">
+                            <img class="hw" src="../images/img/windSpeed.gif">
+                        </div>
+                        <div id="windspeed-info">
+                            <h5>WindSpeed</h5>
+                            <h1>{{WIWeatherResult.wind.speed + " km/h"}}</h1>
+                        </div>
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
             </div>
         </div>
         <!-- /.panel -->
+            </div>
+        <div id="info" ng-show="showInfo">
+            <h1>Sorry! weather information not found</h1>
+        </div>
     </div>
     <div class="col-md-3 recent-location ">
         <div>
