@@ -20,7 +20,7 @@ angular.module('yoApp')
         /*recieving location information and then weather information to show weather information on home page*/
 
         $scope.getDetails = function () {
-            $scope.isDisabled=true;
+           // $scope.isDisabled=true;
             $scope.WILocalionResult=null;
             $scope.WIWeatherResult=null;
 //            $('button').attr('disabled', 'disabled');
@@ -30,6 +30,8 @@ angular.module('yoApp')
                 if (result) {
                     console.log("showInfo",$scope.showInfo);
                     $scope.WILocalionResult = result;
+                    $scope.fullName=result.geonames[0].name+', '+result.geonames[0].adminName1+', '+result.geonames[0].countryName;
+
                     HomeService.getWeatherDetails(result, function (weatherInfo) {
                         console.log(weatherInfo,'wether info in homejs');
                         $scope.WIWeatherResult = weatherInfo;
@@ -43,33 +45,28 @@ angular.module('yoApp')
                 }
             });
         }
-        HomeService.getMostSearchPlaceDeatails(function(data){
+        HomeService.getMostSearchPlaceDetails(function(data){
 
 
                 $scope.mostVisitedData = data;
 
-//                $scope.$apply();
+            });
+        $scope.getWeather = function (data) {
+            HomeService.getWeatherInfo(data,function(weatherInfo){
+                $scope.fullName=data.fullName;
+                $scope.WIWeatherResult = weatherInfo;
+                console.log(weatherInfo);
+                $scope.$apply();
+
+
             });
 
-            // console.log($scope.WILocalionResult,"wether information");
+        }
+
 
 
 
 
         console.log($scope.mostVisitedData, 'most visited place weather info');
-        /* $http.get("/findRecentlocation")
-         .success(function (result) {
-         console.log("RESULT"+result);
-         $scope.recentData
 
-         }).
-         error(function (error) {
-         console.log("error while searching data: ",error.message);
-         });*/
-        /* clouds
-         'http://past.theweathernetwork.com/common/images/web/wicons/a.gif' sunny
-         'http://past.theweathernetwork.com/common/images/web/wicons/e.gif' variable
-         'http://past.theweathernetwork.com/common/images/web/wicons/f.gif' cloudy with sunny breaks
-
-         'http://past.theweathernetwork.com/common/images/web/wicons/k.gif' cloudy*/
     }]);
