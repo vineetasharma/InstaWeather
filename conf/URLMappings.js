@@ -79,3 +79,4 @@ _app.get('/logout', function (req, res) {
 });
 
 _app.post('/addlocationdata',controllers.location.save);
+_app.get('/findlocationdata',controllers.location.find);

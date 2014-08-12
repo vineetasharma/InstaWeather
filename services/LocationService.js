@@ -44,3 +44,30 @@ exports.save = function (reqData) {
         }
     })
 }.toEmitter();
+exports.find = function (reqData) {
+    var emitter = this;
+    Location.find(/*function (err, location) {
+         if (err) {
+         emitter.emit(EventName.ERROR, err);
+         }
+
+         else if (location) {
+         log.info("Locations find");
+         var data = location.sort({searchCount: -1});
+         console.log(data);
+         emitter.emit(EventName.DONE, data);
+         }
+         }*/).sort({searchCount:-1}).limit(5).exec(function(err,result){
+
+            if (err) {
+                log.info("Locations find error: ",err.message);
+                emitter.emit(EventName.ERROR, err);
+            }
+
+            else {
+                log.info("Locations find: ",result);
+                emitter.emit(EventName.DONE, result);
+            }
+        });
+
+}.toEmitter();

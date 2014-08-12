@@ -72,9 +72,12 @@
     <div class="col-md-3 recent-location ">
         <div>
             <div class="list-group sidebar-inner2">
-                <a href="#">
+                <h3>Most Visited place</h3>
+                <ul ng-repeat="data in mostVisitedData">
+                    <li><a href="javascript:void(0);">{{data.locationName}}</a></li>
+                </ul>
+                <!--<h3>{{mostVisitedData.locationName}}</h3>-->
 
-                </a>
             </div>
             <!-- /.list-group -->
         </div>

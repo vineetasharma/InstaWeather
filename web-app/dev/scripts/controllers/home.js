@@ -43,4 +43,33 @@ angular.module('yoApp')
                 }
             });
         }
+        HomeService.getMostSearchPlaceDeatails(function(data){
+
+
+                $scope.mostVisitedData = data;
+
+//                $scope.$apply();
+            });
+
+            // console.log($scope.WILocalionResult,"wether information");
+
+
+
+
+        console.log($scope.mostVisitedData, 'most visited place weather info');
+        /* $http.get("/findRecentlocation")
+         .success(function (result) {
+         console.log("RESULT"+result);
+         $scope.recentData
+
+         }).
+         error(function (error) {
+         console.log("error while searching data: ",error.message);
+         });*/
+        /* clouds
+         'http://past.theweathernetwork.com/common/images/web/wicons/a.gif' sunny
+         'http://past.theweathernetwork.com/common/images/web/wicons/e.gif' variable
+         'http://past.theweathernetwork.com/common/images/web/wicons/f.gif' cloudy with sunny breaks
+
+         'http://past.theweathernetwork.com/common/images/web/wicons/k.gif' cloudy*/
     }]);

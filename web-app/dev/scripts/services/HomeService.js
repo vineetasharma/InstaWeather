@@ -50,4 +50,37 @@ angular.module('yoApp')
                 }
             });
         };
+        /*this.getWeather=function(result,callback) {
+         jQuery.ajax({
+         url: "http://api.geonames.org/findNearByWeatherJSON?",
+         dataType: "jsonp",
+         data: {
+         lat:result.latitude,
+         lng:result.longitude,
+         username: 'vineetasharma'
+         },
+         success: function (data) {
+
+         console.log(data, 'weather info');
+         callback(data);
+         }
+         , error: function (err) {
+         console.log(err);
+         callback(null);
+         }
+         });
+         }*/
+         this.getMostSearchPlaceDeatails=function(callback) {
+         $http.get("/findlocationdata")
+         .success(function (data) {
+         console.log("Information find",data);
+         callback(data);
+         }).
+         error(function (error) {
+         console.log("error during finding information: ",error.message);
+         callback(error);
+         });
+
+
+         }
     }]);
