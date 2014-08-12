@@ -10,19 +10,19 @@
                             </span>
             </div>
         </form>
-        <div ng-show="WIWeatherResult.weatherObservation.temperature">
+        <div ng-show="WIWeatherResult">
         <div class="weather-align1">
             <div class="box-info full weather-widget">
                 <div class="overlay-weather-info">
                     <div class="weather-info-city">
                         <h4 class="h4"><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
-                        <div id="weather-icon" ng-show="WIWeatherResult.weatherObservation.cloudsCode">
+                        <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
                             <i class="wi-day-sprinkle weather-icon"></i>
-                            <img class="img-icon" src="../images/cloudicon/{{WIWeatherResult.weatherObservation.cloudsCode}}.png">
+                            <img class="img-icon" src="http://openweathermap.org/img/w/{{WIWeatherResult.weather[0].icon}}.png">
                         </div>
                         <div id="weather-info">
-                            <h5 class="h5">{{WIWeatherResult.weatherObservation.clouds}}</h5>
-                            <h1 class="h1">{{WIWeatherResult.weatherObservation.temperature}}<sup>°</sup>C</h1>
+                            <h5 class="h5">{{WIWeatherResult.weather[0].description}}</h5>
+                            <h1 class="h1">{{WIWeatherResult.main.temp-273 | number:2}}<sup>°</sup>C</h1>
                         </div>
                     </div>
                     <!-- End div .weather-info-city -->
@@ -38,24 +38,24 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="panel wa-1">
-                        <div id="weather-icon">
+                        <div id="humidity-icon">
                             <img class="hw" src="../images/img/humidity.png">
                         </div>
-                        <div id="weather-info">
+                        <div id="humidity-info">
                             <h5>Humidity</h5>
-                            <h1>{{WIWeatherResult.weatherObservation.humidity + " %"}}</h1>
+                            <h1>{{WIWeatherResult.main.humidity + " %"}}</h1>
                         </div>
                     </div>
                 </div>
                 <!-- /.col-lg-4 -->
                 <div class="col-lg-6">
                     <div class="panel wa-1">
-                        <div id="weather-icon">
+                        <div id="windspeed-icon">
                             <img class="hw" src="../images/img/windSpeed.gif">
                         </div>
-                        <div id="weather-info">
+                        <div id="windspeed-info">
                             <h5>WindSpeed</h5>
-                            <h1>{{WIWeatherResult.weatherObservation.windSpeed + " km/h"}}</h1>
+                            <h1>{{WIWeatherResult.wind.speed + " km/h"}}</h1>
                         </div>
                     </div>
                 </div>

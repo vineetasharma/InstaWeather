@@ -171,6 +171,26 @@
     width: 200PX;
     margin-left: 200px;
 }
+#humidity-icon {
+    width: 200PX;
+    height: 200px;
+    float: left;
+}
+
+#humidity-info {
+    width: 200PX;
+    margin-left: 200px;
+}
+#windspeed-icon {
+    width: 200PX;
+    height: 200px;
+    float: left;
+}
+
+#windspeed-info {
+    width: 200PX;
+    margin-left: 200px;
+}
 
 .recent-location {
     margin-top: 50px;
