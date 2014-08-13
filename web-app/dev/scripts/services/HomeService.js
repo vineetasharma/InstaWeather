@@ -3,8 +3,6 @@ angular.module('yoApp')
 
         this.getDetails = function (callback) {
             var searchLocation = jQuery("#city").val().toString().split(', ');
-
-
             var searchLocationLength = searchLocation.length;
             console.log("location to be search: ", searchLocation);
             jQuery.ajax({
@@ -17,7 +15,7 @@ angular.module('yoApp')
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-                    if(data.geonames.length){
+                    if (data.geonames.length) {
                         $http.post("/addlocationdata", data)
                             .success(function () {
                                 console.log("Information sucessfully added");
@@ -28,20 +26,21 @@ angular.module('yoApp')
                         callback(data);
                     }
                     else
-                      callback(null);
+                        callback(null);
                 }, error: function (err) {
                     console.log("error during searching location: ", err);
                     callback(null);
                 }
             });
         };
+
         this.getWeatherDetails = function (result, callback) {
             jQuery.ajax({
                 url: "http://api.openweathermap.org/data/2.5/weather?",
                 dataType: "jsonp",
                 data: {
-                    lat: result.geonames[0].lat,
-                    lon: result.geonames[0].lng
+                    lat: result.geonames ? result.geonames[0].lat : result.latitude,
+                    lon: result.geonames ? result.geonames[0].lng : result.longitude
                 },
                 success: function (data) {
                     console.log("Weather information is: ", data);
@@ -52,35 +51,16 @@ angular.module('yoApp')
                 }
             });
         };
-        this.getWeatherInfo=function(result,callback) {
-         jQuery.ajax({
-             url: "http://api.openweathermap.org/data/2.5/weather?",
-             dataType: "jsonp",
-             data: {
-                 lat: result.latitude,
-                 lon: result.longitude
-             },
-         success: function (data) {
 
-         console.log(data, 'weather info most search location');
-         callback(data);
-         }, error: function (err) {
-         console.log(err);
-         callback(null);
-         }
-         });
-         }
-         this.getMostSearchPlaceDetails=function(callback) {
-         $http.get("/findlocationdata")
-         .success(function (data) {
-         console.log("Information find",data);
-         callback(data);
-         }).
-         error(function (error) {
-         console.log("error during finding information: ",error.message);
-         callback(error);
-         });
-
-
-         }
+        this.getMostSearchPlaceDetails = function (callback) {
+            $http.get("/getMostSearchPlaceDetails")
+                .success(function (data) {
+                    console.log("Information find", data);
+                    callback(data);
+                }).
+                error(function (error) {
+                    console.log("error during finding information: ", error.message);
+                    callback(error);
+                });
+        }
     }]);

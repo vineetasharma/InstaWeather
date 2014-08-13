@@ -4,7 +4,7 @@
 var EventName = require("../src/enum/EventName");
 var HttpStatusCode = require("../src/enum/HttpStatusCode");
 
-exports.save=function(req, res){
+exports.saveSearchPlaceDetails=function(req, res){
     //Check for Errors
     var errors = req.validationErrors();
 
@@ -12,7 +12,7 @@ exports.save=function(req, res){
         res.sendErrorAPIResponse(errors, HttpStatusCode.VALIDATION_ERROR);  //Validation Failed
     } else {
        //Go Ahead With Listing
-        LocationService.save(req.body)
+        LocationService.saveSearchPlaceDetails(req.body)
             .on(EventName.ERROR, function (err) {
                 log.error(err);
                 res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
@@ -29,7 +29,8 @@ exports.save=function(req, res){
             });
     }
 };
-exports.find=function(req, res){
+
+exports.getMostSearchPlaceDetails=function(req, res){
     //Check for Errors
     console.log('find called in location controller');
 
@@ -38,9 +39,8 @@ exports.find=function(req, res){
     if (Boolean(errors)) {
         res.sendErrorAPIResponse(errors, HttpStatusCode.VALIDATION_ERROR);
     } else {
-
         console.log('find called');
-        LocationService.find(req.body)
+        LocationService.getMostSearchPlaceDetails()
             .on(EventName.ERROR, function (err) {
                 log.error(err);
                 res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);

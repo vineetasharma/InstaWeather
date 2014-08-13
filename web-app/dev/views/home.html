@@ -8,7 +8,6 @@
                                         ng-disabled="!city">
                                     <i class="fa fa-search"></i>
                                 </button>
-
                             </span>
             </div>
         </form>
@@ -18,7 +17,6 @@
                     <div class="overlay-weather-info">
                         <div class="weather-info-city">
                             <h4 class="h4"><i class="fa fa-map-marker"></i> {{fullName}}</h4>
-
                             <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
                                 <i class="wi-day-sprinkle weather-icon"></i>
                                 <img class="img-icon"
@@ -26,7 +24,6 @@
                             </div>
                             <div id="weather-info">
                                 <h5 class="h5">{{WIWeatherResult.weather[0].description}}</h5>
-
                                 <h1 class="h1">{{WIWeatherResult.main.temp-273 | number:2}}<sup>°</sup>C</h1>
                             </div>
                         </div>
@@ -48,7 +45,6 @@
                             </div>
                             <div id="humidity-info">
                                 <h5>Humidity</h5>
-
                                 <h1>{{WIWeatherResult.main.humidity + " %"}}</h1>
                             </div>
                         </div>
@@ -61,7 +57,6 @@
                             </div>
                             <div id="windspeed-info">
                                 <h5>WindSpeed</h5>
-
                                 <h1>{{WIWeatherResult.wind.speed + " km/h"}}</h1>
                             </div>
                         </div>
@@ -77,29 +72,17 @@
     </div>
     <div class="col-md-3 recent-location ">
         <div>
-            <!--<div class="sidebar-inner2">
-                <h3 class="list-group">Most Visited place</h3>
-                <ul class="list-group" ng-repeat="data in mostVisitedData">
-                    <a class="list-group"><span ng-click="getWeather(data)">{{data.locationName}}</span></a>
-                </ul>
-                &lt;!&ndash;<h3>{{mostVisitedData.locationName}}</h3>&ndash;&gt;-->
-
-
-            <div class="sidebar-inner2">
+             <div class="sidebar-inner2">
                 <ul class="list-group">
                     <h3 class="list-group-item in-h3">Most Visited place</h3>
                     <a ng-repeat="data in mostVisitedData">
-                        <li class="list-group-item loc" ng-click="getWeather(data)"><strong>></strong>{{""+data.locationName}}
+                        <li class="list-group-item loc" ng-click="getWeather(data)"><strong>></strong>{{" "+data.locationName}}
                         </li>
                     </a>
-
-
                 </ul>
             </div>
             <!-- /.l
             <!-- /.list-group -->
-
-
         </div>
         <!-- /.col-lg-8 -->
     </div>
