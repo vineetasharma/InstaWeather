@@ -70,13 +70,13 @@
             <h1>Sorry! weather information not found</h1>
         </div>
     </div>
-    <div class="col-md-3 recent-location ">
+    <div class="col-md-3 recent-location " ng-show="mostVisitedData.length>0">
         <div>
              <div class="sidebar-inner2">
                 <ul class="list-group">
                     <h3 class="list-group-item in-h3"><strong>Most Searched Place</strong></h3>
-                    <a  class="list-group-item loc" ng-repeat="data in mostVisitedData" href="javascript:void(0);">
-                        <li ng-click="getWeather(data)">{{" "+data.fullName}}
+                    <a  class="list-group-item loc" ng-repeat="data in mostVisitedData | orderBy:'searchCount':true" href="javascript:void(0);">
+                        <li ng-click="getWeather(data,$index)">{{" "+data.fullName}}
                         </li>
                     </a>
                 </ul>

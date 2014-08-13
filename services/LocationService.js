@@ -48,7 +48,7 @@ exports.saveSearchPlaceDetails = function (reqData) {
 
 exports.getMostSearchPlaceDetails = function () {
     var emitter = this;
-    Location.find().sort({searchCount: -1}).limit(5).exec(function (err, result) {
+    Location.find().exec(function (err, result) {
 
         if (err) {
             log.info("Locations find error: ", err.message);
