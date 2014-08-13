@@ -128,8 +128,8 @@
 
 .sidebar-inner2 {
     margin-top: 50px;
-    background-color: #9acfea;
-    height: 300px;
+    background-color: transparent;
+    height: 288px;
     border-radius: 10px;
     opacity: 0.6;
 }
@@ -266,4 +266,14 @@ body {
     margin-top: 50px;
     color: red;
     font-size: 40px;
+}
+
+.in-h3{
+    padding: 20px;
+    padding-left: 22px;
+}
+.loc{
+    padding-left: 30px;
+    color: #222222;
+    font-size: 16px;
 }

@@ -4,81 +4,86 @@
             <div class="input-group search-city">
                 <input id="city" type="text" class="form-control" placeholder="Search By City..." ng-model="city">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()" ng-disabled="!city">
+                                <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()"
+                                        ng-disabled="!city">
                                     <i class="fa fa-search"></i>
                                 </button>
-
                             </span>
             </div>
         </form>
         <div ng-show="WIWeatherResult">
-        <div class="weather-align1">
-            <div class="box-info full weather-widget">
-                <div class="overlay-weather-info">
-                    <div class="weather-info-city">
-                        <h4 class="h4"><i class="fa fa-map-marker"></i> {{(WILocalionResult.geonames[0].name+', '+WILocalionResult.geonames[0].adminName1+', '+WILocalionResult.geonames[0].countryName)}}</h4>
-                        <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
-                            <i class="wi-day-sprinkle weather-icon"></i>
-                            <img class="img-icon" src="http://openweathermap.org/img/w/{{WIWeatherResult.weather[0].icon}}.png">
+            <div class="weather-align1">
+                <div class="box-info full weather-widget">
+                    <div class="overlay-weather-info">
+                        <div class="weather-info-city">
+                            <h4 class="h4"><i class="fa fa-map-marker"></i> {{fullName}}</h4>
+                            <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
+                                <i class="wi-day-sprinkle weather-icon"></i>
+                                <img class="img-icon"
+                                     src="http://openweathermap.org/img/w/{{WIWeatherResult.weather[0].icon}}.png">
+                            </div>
+                            <div id="weather-info">
+                                <h5 class="h5">{{WIWeatherResult.weather[0].description}}</h5>
+                                <h1 class="h1">{{WIWeatherResult.main.temp-273 | number:2}}<sup>°</sup>C</h1>
+                            </div>
                         </div>
-                        <div id="weather-info">
-                            <h5 class="h5">{{WIWeatherResult.weather[0].description}}</h5>
-                            <h1 class="h1">{{WIWeatherResult.main.temp-273 | number:2}}<sup>°</sup>C</h1>
-                        </div>
+                        <!-- End div .weather-info-city -->
                     </div>
-                    <!-- End div .weather-info-city -->
+                    <!-- End div .overlay-weather-info -->
                 </div>
-                <!-- End div .overlay-weather-info -->
+                <!-- End div .box-info -->
             </div>
-            <!-- End div .box-info -->
-        </div>
-        <!-- /.panel -->
+            <!-- /.panel -->
 
-        <!-- /.panel -->
-        <div class="weather-align2">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel wa-1">
-                        <div id="humidity-icon">
-                            <img class="hw" src="../images/img/humidity.png">
-                        </div>
-                        <div id="humidity-info">
-                            <h5>Humidity</h5>
-                            <h1>{{WIWeatherResult.main.humidity + " %"}}</h1>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-lg-6">
-                    <div class="panel wa-1">
-                        <div id="windspeed-icon">
-                            <img class="hw" src="../images/img/windSpeed.gif">
-                        </div>
-                        <div id="windspeed-info">
-                            <h5>WindSpeed</h5>
-                            <h1>{{WIWeatherResult.wind.speed + " km/h"}}</h1>
+            <!-- /.panel -->
+            <div class="weather-align2">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel wa-1">
+                            <div id="humidity-icon">
+                                <img class="hw" src="../images/img/humidity.png">
+                            </div>
+                            <div id="humidity-info">
+                                <h5>Humidity</h5>
+                                <h1>{{WIWeatherResult.main.humidity + " %"}}</h1>
+                            </div>
                         </div>
                     </div>
+                    <!-- /.col-lg-4 -->
+                    <div class="col-lg-6">
+                        <div class="panel wa-1">
+                            <div id="windspeed-icon">
+                                <img class="hw" src="../images/img/windSpeed.gif">
+                            </div>
+                            <div id="windspeed-info">
+                                <h5>WindSpeed</h5>
+                                <h1>{{WIWeatherResult.wind.speed + " km/h"}}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-4 -->
                 </div>
-                <!-- /.col-lg-4 -->
             </div>
+            <!-- /.panel -->
         </div>
-        <!-- /.panel -->
-            </div>
         <div id="info" ng-show="showInfo">
             <h1>Sorry! weather information not found</h1>
         </div>
     </div>
-    <div class="col-md-3 recent-location ">
+    <div class="col-md-3 recent-location " ng-show="mostVisitedData.length>0">
         <div>
-            <div class="list-group sidebar-inner2">
-                <a href="#">
-
-                </a>
+             <div class="sidebar-inner2">
+                <ul class="list-group">
+                    <h3 class="list-group-item in-h3"><strong>Most Searched Place</strong></h3>
+                    <a  class="list-group-item loc" ng-repeat="data in mostVisitedData | orderBy:'searchCount':true | limitTo:5" href="javascript:void(0);">
+                        <li ng-click="getWeather(data)">{{" "+data.fullName}}
+                        </li>
+                    </a>
+                </ul>
             </div>
+            <!-- /.l
             <!-- /.list-group -->
         </div>
-
+        <!-- /.col-lg-8 -->
     </div>
-    <!-- /.col-lg-8 -->
-</div>
+    </div>

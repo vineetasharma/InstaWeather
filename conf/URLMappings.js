@@ -78,4 +78,6 @@ _app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
-_app.post('/addlocationdata',controllers.location.save);
+_app.post('/addlocationdata',controllers.location.saveSearchPlaceDetails);
+
+_app.get('/getMostSearchPlaceDetails',controllers.location.getMostSearchPlaceDetails);
