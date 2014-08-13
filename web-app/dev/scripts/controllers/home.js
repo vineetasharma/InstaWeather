@@ -54,6 +54,7 @@ angular.module('yoApp')
         $scope.getWeather = function (data) {
             HomeService.getWeatherInfo(data,function(weatherInfo){
                 $scope.fullName=data.fullName;
+                $scope.city=data.fullName;
                 $scope.WIWeatherResult = weatherInfo;
                 console.log(weatherInfo);
                 $scope.$apply();
