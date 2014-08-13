@@ -3,20 +3,20 @@
 //Import Enums
 var EventName = require("../src/enum/EventName");
 /*
-* */
+ * */
 exports.saveSearchPlaceDetails = function (reqData) {
     var emitter = this;
-    Location.findOne({geoNameId:reqData.geonames[0].geonameId}, function (err, location) {
+    Location.findOne({geoNameId: reqData.geoNameId ? reqData.geoNameId : reqData.geonames[0].geonameId}, function (err, location) {
         if (err) {
             emitter.emit(EventName.ERROR, err);
         }
         else if (!location) {
             new Location({
-                geoNameId:reqData.geonames[0].geonameId,
-                locationName:reqData.geonames[0].name,
-                fullName:(reqData.geonames[0].name+', '+reqData.geonames[0].adminName1+', '+reqData.geonames[0].countryName),
-                latitude:reqData.geonames[0].lat,
-                longitude:reqData.geonames[0].lng,
+                geoNameId: reqData.geonames[0].geonameId,
+                locationName: reqData.geonames[0].name,
+                fullName: (reqData.geonames[0].name + ', ' + reqData.geonames[0].adminName1 + ', ' + reqData.geonames[0].countryName),
+                latitude: reqData.geonames[0].lat,
+                longitude: reqData.geonames[0].lng,
                 searchCount: 1
             }).save(function (err, location) {
                     if (err) {
@@ -31,7 +31,7 @@ exports.saveSearchPlaceDetails = function (reqData) {
         }
         else if (location) {
             log.info("Location already exists", location.locationName);
-            Location.update({geoNameId:location.geoNameId},{$inc:{searchCount:1}},function(err) {
+            Location.update({geoNameId: location.geoNameId}, {$inc: {searchCount: 1}}, function (err) {
                 if (err) {
                     log.error(err);
                     emitter.emit(EventName.ERROR, err);
@@ -46,20 +46,19 @@ exports.saveSearchPlaceDetails = function (reqData) {
 }.toEmitter();
 
 
-
 exports.getMostSearchPlaceDetails = function () {
     var emitter = this;
-    Location.find().sort({searchCount:-1}).limit(5).exec(function(err,result){
+    Location.find().sort({searchCount: -1}).limit(5).exec(function (err, result) {
 
-            if (err) {
-                log.info("Locations find error: ",err.message);
-                emitter.emit(EventName.ERROR, err);
-            }
+        if (err) {
+            log.info("Locations find error: ", err.message);
+            emitter.emit(EventName.ERROR, err);
+        }
 
-            else {
-                log.info("Locations find: ",result);
-                emitter.emit(EventName.DONE, result);
-            }
-        });
+        else {
+            log.info("Locations find: ", result);
+            emitter.emit(EventName.DONE, result);
+        }
+    });
 
 }.toEmitter();

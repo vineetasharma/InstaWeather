@@ -16,14 +16,14 @@ angular.module('yoApp')
                 },
                 success: function (data) {
                     if (data.geonames.length) {
-                        $http.post("/addlocationdata", data)
+    /*                    $http.post("/addlocationdata", data)
                             .success(function () {
                                 console.log("Information sucessfully added");
                             }).
                             error(function (error) {
                                 console.log("error during saving information: ", error.message);
                             });
-                        callback(data);
+    */                    callback(data);
                     }
                     else
                         callback(null);
@@ -61,6 +61,16 @@ angular.module('yoApp')
                 error(function (error) {
                     console.log("error during finding information: ", error.message);
                     callback(error);
+                });
+        }
+
+        this.updateOrSaveLocationDetails=function(data){
+            $http.post("/addlocationdata", data)
+                .success(function () {
+                    console.log("Information sucessfully added");
+                }).
+                error(function (error) {
+                    console.log("error during saving information: ", error.message);
                 });
         }
     }]);
