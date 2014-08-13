@@ -69,7 +69,4 @@ angular.module('yoApp')
                 $scope.$apply();
             });
         };
-
-        console.log($scope.mostVisitedData, 'most visited place weather info');
-
     }]);

@@ -54,11 +54,8 @@ exports.getMostSearchPlaceDetails = function () {
             log.info("Locations find error: ", err.message);
             emitter.emit(EventName.ERROR, err);
         }
-
         else {
-            log.info("Locations find: ", result);
             emitter.emit(EventName.DONE, result);
         }
     });
-
 }.toEmitter();

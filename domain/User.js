@@ -16,6 +16,6 @@ exports.schema = {
     accessToken:String,
     fbId: String,
     twitterId: String,
-    lastSearched : { },
+    lastSearchedLocation : {},
     profilePicUrl:String
 };
