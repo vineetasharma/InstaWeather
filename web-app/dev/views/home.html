@@ -16,7 +16,7 @@
                 <div class="box-info full weather-widget">
                     <div class="overlay-weather-info">
                         <div class="weather-info-city">
-                            <h4 class="h4"><i class="fa fa-map-marker"></i> {{city}}</h4>
+                            <h4 class="h4"><i class="fa fa-map-marker"></i> {{fullName}}</h4>
                             <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
                                 <i class="wi-day-sprinkle weather-icon"></i>
                                 <img class="img-icon"
@@ -74,9 +74,9 @@
         <div>
              <div class="sidebar-inner2">
                 <ul class="list-group">
-                    <h3 class="list-group-item in-h3">Most Visited place</h3>
-                    <a ng-repeat="data in mostVisitedData" href="javascript:void(0);">
-                        <li class="list-group-item loc" ng-click="getWeather(data)"><strong>></strong>{{" "+data.fullName}}
+                    <h3 class="list-group-item in-h3"><strong>Most Searched Place</strong></h3>
+                    <a  class="list-group-item loc" ng-repeat="data in mostVisitedData" href="javascript:void(0);">
+                        <li ng-click="getWeather(data)">{{" "+data.fullName}}
                         </li>
                     </a>
                 </ul>

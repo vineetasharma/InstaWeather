@@ -47,7 +47,8 @@ angular.module('yoApp')
 
         $scope.getWeather = function (result) {
             HomeService.getWeatherDetails(result,function(weatherInfo){
-                $scope.city=result.fullName ? result.fullName :(result.geonames[0].name+', '+result.geonames[0].adminName1+', '+result.geonames[0].countryName);
+                $scope.fullName=result.fullName ? result.fullName :(result.geonames[0].name+', '+result.geonames[0].adminName1+', '+result.geonames[0].countryName);
+                $scope.city=$scope.fullName;
                 $scope.WIWeatherResult = weatherInfo;
                 console.log("wether info in homejs",weatherInfo);
                 $scope.$apply();
