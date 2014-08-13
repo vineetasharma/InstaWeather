@@ -43,27 +43,23 @@ angular.module('yoApp')
         };
 
 
-        $scope.getWeather = function (result, index) {
-            if (index) {
-                $scope.mostVisitedData[index].searchCount++;
+        $scope.getWeather = function (result) {
+            var flag = false;
+            $scope.mostVisitedData.forEach(function (mostVisited) {
+                if (mostVisited.geoNameId == result.geoNameId) {
+                    mostVisited.searchCount++;
+                    flag = true;
+                }
+            });
+            if (!flag) {
+                $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
+                    locationName: result.geonames[0].name,
+                    fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
+                    latitude: result.geonames[0].lat,
+                    longitude: result.geonames[0].lng,
+                    searchCount: 1});
             }
-            else {
-                for (i in $scope.mostVisitedData) {
-                    if ($scope.mostVisitedData[i].geoNameId === result.geonames[0].geonameId) {
-                        $scope.mostVisitedData[i].searchCount++;
-                        var flag = true;
-                    }
-                }
-                if (!flag) {
-                    $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
-                        locationName: result.geonames[0].name,
-                        fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
-                        latitude: result.geonames[0].lat,
-                        longitude: result.geonames[0].lng,
-                        searchCount: 1});
-                }
 
-            }
             HomeService.updateOrSaveLocationDetails(result);
             HomeService.getWeatherDetails(result, function (weatherInfo) {
                 $scope.fullName = result.fullName ? result.fullName : (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName);
