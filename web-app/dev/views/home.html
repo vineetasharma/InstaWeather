@@ -75,7 +75,7 @@
              <div class="sidebar-inner2">
                 <ul class="list-group">
                     <h3 class="list-group-item in-h3">Most Visited place</h3>
-                    <a ng-repeat="data in mostVisitedData">
+                    <a ng-repeat="data in mostVisitedData" href="javascript:void(0);">
                         <li class="list-group-item loc" ng-click="getWeather(data)"><strong>></strong>{{" "+data.locationName}}
                         </li>
                     </a>
