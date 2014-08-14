@@ -49,7 +49,6 @@ exports.saveSearchPlaceDetails = function (reqData) {
 exports.getMostSearchPlaceDetails = function () {
     var emitter = this;
     Location.find().exec(function (err, result) {
-
         if (err) {
             log.info("Locations find error: ", err.message);
             emitter.emit(EventName.ERROR, err);
@@ -64,7 +63,6 @@ exports.getMostSearchPlaceDetails = function () {
 exports.getLastSearchLocation = function (userId) {
     var emitter = this;
     User.findOne({_id:userId}).exec(function (err, user) {
-
         if (err) {
             log.info("Locations find error: ", err.message);
             emitter.emit(EventName.ERROR, err);
