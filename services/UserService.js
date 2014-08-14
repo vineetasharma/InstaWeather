@@ -55,3 +55,25 @@ exports.findOrCreateFacebookAccountService = function (accessToken,profile) {
         }
     })
 }.toEmitter();
+
+
+exports.addLastSearchedLocation = function (userId,lastSearchedLocation ) {
+    var emitter = this;
+    var location={
+        geoNameId: lastSearchedLocation.geoNameId,
+        locationName: lastSearchedLocation.locationName,
+        fullName: lastSearchedLocation.fullName,
+        latitude: lastSearchedLocation.latitude,
+        longitude: lastSearchedLocation.longitude
+    };
+    User.update({_id: userId},{$set:{lastSearchedLocation : location}}, function (err, data) {
+        if (err) {
+            log.info("Error in update lastSearchedLocation");
+            emitter.emit("error", err);
+        }
+        else{
+            log.info("sucessfull update lastSearchedLocation: ",data);
+            emitter.emit('success', data);
+        }
+    })
+}.toEmitter();

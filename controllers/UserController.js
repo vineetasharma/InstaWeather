@@ -18,7 +18,3 @@ exports.findOrCreateFacebookAccountController = function (accessToken, refreshTo
       done(err, profile);
     });
 };
-
-exports.logout = function (req, res) {
-  log.info(req.session.user);
-};

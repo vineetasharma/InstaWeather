@@ -4,7 +4,6 @@ angular.module('yoApp')
         this.getDetails = function (callback) {
             var searchLocation = jQuery("#city").val().toString().split(', ');
             var searchLocationLength = searchLocation.length;
-            console.log("location to be search: ", searchLocation);
             jQuery.ajax({
                 url: "http://ws.geonames.org/searchJSON",
                 dataType: "jsonp",
@@ -16,14 +15,7 @@ angular.module('yoApp')
                 },
                 success: function (data) {
                     if (data.geonames.length) {
-    /*                    $http.post("/addlocationdata", data)
-                            .success(function () {
-                                console.log("Information sucessfully added");
-                            }).
-                            error(function (error) {
-                                console.log("error during saving information: ", error.message);
-                            });
-    */                    callback(data);
+                    callback(data);
                     }
                     else
                         callback(null);
@@ -43,7 +35,6 @@ angular.module('yoApp')
                     lon: result.geonames ? result.geonames[0].lng : result.longitude
                 },
                 success: function (data) {
-                    console.log("Weather information is: ", data);
                     callback(data);
                 }, error: function (err) {
                     console.log("error during recieving weather data: ", err);
@@ -55,14 +46,13 @@ angular.module('yoApp')
         this.getMostSearchPlaceDetails = function (callback) {
             $http.get("/getMostSearchPlaceDetails")
                 .success(function (data) {
-                    console.log("Information find", data);
                     callback(data);
                 }).
                 error(function (error) {
                     console.log("error during finding information: ", error.message);
                     callback(error);
                 });
-        }
+        };
 
         this.updateOrSaveLocationDetails=function(data){
             $http.post("/addlocationdata", data)
@@ -71,6 +61,18 @@ angular.module('yoApp')
                 }).
                 error(function (error) {
                     console.log("error during saving information: ", error.message);
+                });
+        };
+
+        this.getLastSearchLocation=function(callback){
+            $http.get("/getLastSearchLocation")
+                .success(function (location) {
+                    console.log("getLastSearchLocation found in HOME SERVICE.....................> "+location);
+                    callback(location);
+                }).
+                error(function (error) {
+                    console.log("error during getLastSearchLocation: ", error.message);
+                    callback(error);
                 });
         }
     }]);

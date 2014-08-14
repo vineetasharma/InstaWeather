@@ -54,11 +54,23 @@ exports.getMostSearchPlaceDetails = function () {
             log.info("Locations find error: ", err.message);
             emitter.emit(EventName.ERROR, err);
         }
-
         else {
-            log.info("Locations find: ", result);
             emitter.emit(EventName.DONE, result);
         }
     });
+}.toEmitter();
 
+
+exports.getLastSearchLocation = function (userId) {
+    var emitter = this;
+    User.findOne({_id:userId}).exec(function (err, user) {
+
+        if (err) {
+            log.info("Locations find error: ", err.message);
+            emitter.emit(EventName.ERROR, err);
+        }
+        else {
+            emitter.emit(EventName.DONE, user.lastSearchedLocation);
+        }
+    });
 }.toEmitter();

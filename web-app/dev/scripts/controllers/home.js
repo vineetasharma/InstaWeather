@@ -17,10 +17,31 @@ angular.module('yoApp')
             });
         };
 
+/*
+        $scope.getLastSearchLocation = function () {
+            console.log("getLastSearchLocation called...............");
+            HomeService.getLastSearchLocation(function (location) {
+                if (location) {
+                    $scope.getWeather(location);
+                }
+                else{
+                    console.log("location data is null for last search");
+                }
+            });
+        };
+*/
 
         (function () {
             HomeService.getMostSearchPlaceDetails(function (data) {
                 $scope.mostVisitedData = data;
+            });
+            HomeService.getLastSearchLocation(function (location) {
+                if (location!=='null') {
+                    $scope.getWeather(location);
+                }
+                else{
+                    console.log("location data is null for last search");
+                }
             });
         })();
 
@@ -46,7 +67,7 @@ angular.module('yoApp')
         $scope.getWeather = function (result) {
             var flag = false;
             $scope.mostVisitedData.forEach(function (mostVisited) {
-                if (mostVisited.geoNameId == result.geoNameId) {
+                if (mostVisited.geoNameId == (result.geoNameId?result.geoNameId:result.geonames[0].geonameId)) {
                     mostVisited.searchCount++;
                     flag = true;
                 }
@@ -60,6 +81,7 @@ angular.module('yoApp')
                     searchCount: 1});
             }
 
+
             HomeService.updateOrSaveLocationDetails(result);
             HomeService.getWeatherDetails(result, function (weatherInfo) {
                 $scope.fullName = result.fullName ? result.fullName : (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName);
@@ -69,7 +91,4 @@ angular.module('yoApp')
                 $scope.$apply();
             });
         };
-
-        console.log($scope.mostVisitedData, 'most visited place weather info');
-
     }]);

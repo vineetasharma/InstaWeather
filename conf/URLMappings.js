@@ -80,4 +80,6 @@ _app.get('/logout', function (req, res) {
 
 _app.post('/addlocationdata',controllers.location.saveSearchPlaceDetails);
 
-_app.get('/getMostSearchPlaceDetails',controllers.location.getMostSearchPlaceDetails);
+_app.get('/getmostsearchplacedetails',controllers.location.getMostSearchPlaceDetails);
+
+_app.get('/getLastSearchLocation',controllers.location.getLastSearchLocation);
