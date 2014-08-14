@@ -63,7 +63,7 @@ exports.getMostSearchPlaceDetails = function () {
 
 exports.getLastSearchLocation = function (userId) {
     var emitter = this;
-    User.find({_id:userId}).exec(function (err, user) {
+    User.findOne({_id:userId}).exec(function (err, user) {
 
         if (err) {
             log.info("Locations find error: ", err.message);

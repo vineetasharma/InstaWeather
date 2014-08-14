@@ -68,7 +68,6 @@ exports.getLastSearchLocation = function (req, res) {
                     res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
                 })
                 .on(EventName.DONE, function (location) {
-                    log.info(location, "-----------------lastLocation-------------------");
                     res.sendSuccessAPIResponse(location, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
                 });
         }
