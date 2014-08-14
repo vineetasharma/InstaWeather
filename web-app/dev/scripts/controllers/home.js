@@ -67,7 +67,7 @@ angular.module('yoApp')
         $scope.getWeather = function (result) {
             var flag = false;
             $scope.mostVisitedData.forEach(function (mostVisited) {
-                if (mostVisited.geoNameId == result.geoNameId) {
+                if (mostVisited.geoNameId == (result.geoNameId?result.geoNameId:result.geonames[0].geonameId)) {
                     mostVisited.searchCount++;
                     flag = true;
                 }
