@@ -33,14 +33,6 @@ exports.saveSearchPlaceDetails = function (req, res) {
                 }
                     res.sendSuccessAPIResponse(location, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
             });
-        /* UserService.addLastSearchedLocation(user._id,location)
-         .on(EventName.ERROR, function (err) {
-         log.error(err);
-         res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
-         })
-         .on(EventName.DONE, function (result) {
-         res.sendSuccessAPIResponse(result, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
-         });*/
     }
 };
 
@@ -58,5 +50,30 @@ exports.getMostSearchPlaceDetails = function (req, res) {
             .on(EventName.DONE, function (data) {
                 res.sendSuccessAPIResponse(data, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
             });
+    }
+};
+
+
+exports.getLastSearchLocation = function (req, res) {
+    //Check for Errors
+    var user = req.checkLoggedIn();
+    var errors = req.validationErrors();
+    if (Boolean(errors)) {
+        res.sendErrorAPIResponse(errors, HttpStatusCode.VALIDATION_ERROR);
+    } else {
+        if (user) {
+            LocationService.getLastSearchLocation(user._id)
+                .on(EventName.ERROR, function (err) {
+                    log.error(err);
+                    res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
+                })
+                .on(EventName.DONE, function (location) {
+                    log.info(location, "-----------------lastLocation-------------------");
+                    res.sendSuccessAPIResponse(location, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
+                });
+        }
+        else{
+            res.sendSuccessAPIResponse(null, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
+        }
     }
 };

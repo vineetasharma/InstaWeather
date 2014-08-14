@@ -59,3 +59,18 @@ exports.getMostSearchPlaceDetails = function () {
         }
     });
 }.toEmitter();
+
+
+exports.getLastSearchLocation = function (userId) {
+    var emitter = this;
+    User.find({_id:userId}).exec(function (err, user) {
+
+        if (err) {
+            log.info("Locations find error: ", err.message);
+            emitter.emit(EventName.ERROR, err);
+        }
+        else {
+            emitter.emit(EventName.DONE, user.lastSearchedLocation);
+        }
+    });
+}.toEmitter();

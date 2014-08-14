@@ -62,5 +62,17 @@ angular.module('yoApp')
                 error(function (error) {
                     console.log("error during saving information: ", error.message);
                 });
+        };
+
+        this.getLastSearchLocation=function(callback){
+            $http.get("/getLastSearchLocation")
+                .success(function (location) {
+                    console.log("getLastSearchLocation found.....................> "+location);
+                    callback(location);
+                }).
+                error(function (error) {
+                    console.log("error during getLastSearchLocation: ", error.message);
+                    callback(error);
+                });
         }
     }]);

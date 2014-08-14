@@ -37,7 +37,6 @@ exports.findOrCreateFacebookAccountService = function (accessToken,profile) {
                 username: profile.displayName,
                 email: profile.emails[0].value,
                 fbId: profile.id,
-                lastSearched : { },
                 accessToken: accessToken
             }).save(function (err, user) {
                     if (err) {
