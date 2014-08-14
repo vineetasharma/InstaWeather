@@ -67,7 +67,7 @@ angular.module('yoApp')
         this.getLastSearchLocation=function(callback){
             $http.get("/getLastSearchLocation")
                 .success(function (location) {
-                    console.log("getLastSearchLocation found in HOME SERVICE.....................> "+location);
+                    console.log("getLastSearchLocation found in HOME SERVICE.....................> ",location);
                     callback(location);
                 }).
                 error(function (error) {
