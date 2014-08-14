@@ -54,8 +54,6 @@ angular.module('yoApp')
             HomeService.getDetails(function (result) {
                 if (result) {
                     $scope.WILocalionResult = result;
-                    HomeService.updateOrSaveLocationDetails(result);
-
                     $scope.getWeather(result);
                 }
                 else {
@@ -84,6 +82,7 @@ angular.module('yoApp')
             }
 
 
+            HomeService.updateOrSaveLocationDetails(result);
             HomeService.getWeatherDetails(result, function (weatherInfo) {
                 $scope.fullName = result.fullName ? result.fullName : (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName);
                 $scope.city = $scope.fullName;
