@@ -16,7 +16,7 @@ angular.module('yoApp')
         });
 
         HomeService.getLastSearchLocation(function (location) {
-            if (location!=='null') {
+           if (location!=='null') {
                 $scope.getWeather(location);
             }
             else{
@@ -64,7 +64,6 @@ angular.module('yoApp')
                 $scope.fullName = result.fullName ? result.fullName : (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName);
                 $scope.city = $scope.fullName;
                 $scope.WIWeatherResult = weatherInfo;
-                console.log("weather info in homejs", weatherInfo);
                 $scope.$apply();
             });
         };

@@ -278,3 +278,34 @@ body {
     color: #222222;
     font-size: 16px;
 }
+.aboutus{
+    color:white;
+    margin-top: 30px;
+}
+.aboutus-p{
+    font-size: 24px;
+    text-align: justify;
+    text-decoration: solid;
+    line-height: 150%;
+    text-indent : 50px;
+}
+
+.aboutus-hr{
+    border: 2px solid #000;
+}
+
+.followus{
+    height:50px;
+    width:50px;
+    overflow:hidden;
+    margin-right: 10px;
+    border-radius:50%;
+    margin-top:20%;
+    background-color: lightblue;
+    color: #f5f5f5;
+    font-size: 50px;
+    text-align: center;
+}
+a:hover{
+
+}

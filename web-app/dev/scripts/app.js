@@ -18,7 +18,7 @@ angular
       })
         .when('/about',{
             templateUrl: '../views/about.html',
-            controller: 'aboutCtrl'
+            controller: 'AboutCtrl'
         })
         .when('/contact',{
             templateUrl: '../views/contact.html',
