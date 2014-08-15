@@ -10,7 +10,7 @@ exports.sendMailService = function (mailData) {
     });
     var options = {
         from: 'contactinstaweather@gmail.com',
-        to: 'vineetasharma18791@gmail.com',
+        to: 'contactinstaweather@gmail.com',
         subject: mailData.subject,
         html: mailData.message
     };
