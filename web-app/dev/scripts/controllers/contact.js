@@ -1,23 +1,22 @@
 angular.module('yoApp')
     .controller('contactCtrl', ['$scope', 'ContactService', function ($scope, ContactService) {
-        console.log(">>>>>>>>>>contact us called>>>>>>>>>>>>");
-        /* $scope.name='';*/
         $scope.sendMail = function () {
-            /*if ($scope.name == '' || $scope.email == '' || $scope.subject == '' || $scope.message == '') {
+            if ($scope.name == undefined|| $scope.email == undefined|| $scope.message == undefined) {
                 alert('fill all fields');
 
             }
-            else {*/
+            else {
                 var mailData = {
                     name: $scope.name,
                     email: $scope.email,
-                    subject: $scope.subject,
                     message: $scope.message
                 };
-                alert('in alse l fields');
                 ContactService.sendMail(mailData);
+            $scope.name='';
+            $scope.email='';
+            $scope.message='';
 
-//            }
+            }
 
 
         }
