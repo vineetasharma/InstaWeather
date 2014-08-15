@@ -1,7 +1,7 @@
 exports.sendMailService = function (mailData) {
     var emitter = this;
     console.log(mailData, 'maildata');
-    var transport = _nodemailer.createTransport("SMTP", {
+    var transport = _nodemailer.createTransport( {
         service: "Gmail",
         auth: {
             user: "contactinstaweather@gmail.com",
@@ -10,7 +10,7 @@ exports.sendMailService = function (mailData) {
     });
     var options = {
         from: 'contactinstaweather@gmail.com',
-        to: 'vineetasharma18791@gmail.com',
+        to: 'contactinstaweather@gmail.com',
         subject: mailData.subject,
         html: mailData.message
     };
