@@ -10,4 +10,10 @@ angular.module('yoApp')
                 keyboard: true
             });
         };
+
+        $scope.showPromptEmail = function () {
+            jQuery('#promptemail').modal({
+                keyboard: true
+            });
+        };
     }]);

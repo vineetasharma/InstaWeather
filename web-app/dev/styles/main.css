@@ -333,3 +333,9 @@ body {
     box-shadow: inset 0 0 5px rgba(53,86,129, 0.5);
     font-family: 'Muli', sans-serif;
 }
+.email{
+    margin-left: 10px;
+    padding-left: 7px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
