@@ -1,3 +1,6 @@
+//Import Enums
+var EventName = require("../src/enum/EventName");
+
 exports.findOrCreateTwitterAccountService = function (profile) {
   var emitter = this;
   User.findOne({twitterId: profile.id}, function (err, data) {
@@ -7,6 +10,7 @@ exports.findOrCreateTwitterAccountService = function (profile) {
       new User({
           username: profile.displayName,
           twitterId: profile.id,
+          email:"",
           profilePicUrl:profile.photos[0].value
       }).save(function (err,user) {
           if (err) {
@@ -74,6 +78,20 @@ exports.addLastSearchedLocation = function (userId,lastSearchedLocation ) {
         else{
             log.info("sucessfull update lastSearchedLocation: ",data);
             emitter.emit('success', data);
+        }
+    })
+}.toEmitter();
+
+exports.addEmail = function (userId,email) {
+    var emitter = this;
+    User.update({_id: userId},{$set:{email : email}}, function (err, data) {
+        if (err) {
+            log.info("Error in update email");
+            emitter.emit(EventName.ERROR, err);
+        }
+        else{
+            log.info("email sucessfull updated: ",data);
+            emitter.emit(EventName.DONE, data);
         }
     })
 }.toEmitter();

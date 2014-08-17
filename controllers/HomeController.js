@@ -14,5 +14,5 @@ exports.index = function (req, res) {
         res.loginUser(req.user._id, req.user.username, ['user']);
     }
     var user=req.checkLoggedIn();
-    res.render('index', {user: (user? user.name : (req.user ? req.user.username : null))});
+    res.render('index', {user: (user? user : (req.user ? req.user : null))});
 };

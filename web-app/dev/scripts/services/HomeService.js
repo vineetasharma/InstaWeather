@@ -47,8 +47,8 @@ angular.module('yoApp')
             $http.get("/getMostSearchPlaceDetails")
                 .success(function (data) {
                     callback(data);
-                }).
-                error(function (error) {
+                })
+                .error(function (error) {
                     console.log("error during finding information: ", error.message);
                     callback(error);
                 });

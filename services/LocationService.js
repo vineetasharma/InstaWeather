@@ -25,7 +25,7 @@ exports.saveSearchPlaceDetails = function (reqData) {
                     }
                     else {
                         log.info('Location information saved');
-                        emitter.emit(EventName.DONE, location)
+                        emitter.emit(EventName.DONE, location);
                     }
                 });
         }
