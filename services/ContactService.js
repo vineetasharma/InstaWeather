@@ -10,9 +10,9 @@ exports.sendMailService = function (mailData) {
         }
     });
     var options = {
-        from: 'contactinstaweather@gmail.com',
+        from: mailData.email,
         to: 'contactinstaweather@gmail.com',
-        subject: mailData.subject,
+        subject: mailData.name,
         html: mailData.message
     };
     transport.sendMail(options, function (err,res) {
