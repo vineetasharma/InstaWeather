@@ -6,13 +6,12 @@ var HttpStatusCode = require("../src/enum/HttpStatusCode");
 
 exports.sendMail = function (req,res) {
     ContactService.sendMailService(req.body)
-        .on("success", function () {
-            log.info('mail sent');
-
+        .on(EventName.ERROR, function (err) {
+            log.error(err);
+            res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
         })
-        .on("error", function (err) {
-            log.info('error while sending mail',err);
-
-//            done(err);
+        .on(EventName.DONE, function (data) {
+            log.info(data,'in contact controller');
+            res.sendSuccessAPIResponse(data, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
         });
 };

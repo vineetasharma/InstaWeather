@@ -1,7 +1,8 @@
+var EventName = require("../src/enum/EventName");
 exports.sendMailService = function (mailData) {
     var emitter = this;
     console.log(mailData, 'maildata');
-    var transport = _nodemailer.createTransport("SMTP", {
+    var transport = _nodemailer.createTransport( {
         service: "Gmail",
         auth: {
             user: "contactinstaweather@gmail.com",
@@ -18,11 +19,11 @@ exports.sendMailService = function (mailData) {
         log.info('in contact service  ');
         if (err) {
             log.info('in contact service  err ',err.message);
-            emitter.emit("error", err);
+            emitter.emit(EventName.ERROR, err);
         }
         else {
             log.info('in contact service  success',res);
-            emitter.emit('success');
+            emitter.emit(EventName.DONE,res);
         }
 
     });

@@ -1,19 +1,30 @@
 angular.module('yoApp')
-    .controller('contactCtrl',['$scope','ContactService',function ($scope,ContactService) {
-        console.log(">>>>>>>>>>contact us called>>>>>>>>>>>>");
-      /* $scope.name='';*/
-        $scope.sendMail=function(){
-            if($scope.name==='' && $scope.email==='' && $scope.subject==='' && $scope.message==''){
-
+    .controller('contactCtrl', ['$scope', 'ContactService', function ($scope, ContactService) {
+        $scope.sendMail = function () {
+            $scope.disable=true;
+            if ($scope.name == undefined|| $scope.email == undefined|| $scope.message == undefined) {
+                $scope.disable=true;
             }
-            else{
-                var mailData={
+            else {
+                var mailData = {
                     name: $scope.name,
                     email: $scope.email,
-                    subject: $scope.subject,
-                    message:$scope.message
+                    message: $scope.message
                 };
-                ContactService.sendMail(mailData);
+                ContactService.sendMail(mailData,function(data){
+                    if(data){
+                        alert('mail sent successfully');
+                        $scope.name='';
+                        $scope.email='';
+                        $scope.message='';
+                        $scope.disable=true;
+
+                    }
+                    $scope.disable=false;
+
+
+                });
+
 
             }
 
