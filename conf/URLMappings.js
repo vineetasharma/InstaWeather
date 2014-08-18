@@ -36,7 +36,7 @@ passport.use(new TwitterStrategy({
   consumerKey: _config.twitterAuth.consumerKey,
   consumerSecret: _config.twitterAuth.consumerSecret,
   callbackURL: _config.twitterAuth.callbackURL
-}, controllers.user.findOrCreateTwitterAccountController));
+}, controllers.user.findTwitterAccountController));
 
 //Cluster API
 
@@ -84,4 +84,4 @@ _app.get('/getMostSearchPlaceDetails',controllers.location.getMostSearchPlaceDet
 
 _app.get('/getLastSearchLocation',controllers.location.getLastSearchLocation);
 
-_app.put('/addEmail/:_id',controllers.user.addEmail);
+_app.put('/addemailandcreatetwitteracc/:email',controllers.user.addEmailAndCreateTwitterAcc);

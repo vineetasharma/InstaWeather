@@ -3,6 +3,7 @@
  */
 angular.module('yoApp')
     .controller('mainCtrl', ['$scope','MainService', function ($scope,MainService) {
+        console.log('main.js called');
 
         /*login pop up*/
         $scope.signIn = function () {
@@ -17,9 +18,11 @@ angular.module('yoApp')
             });
         };
 
-        $scope.addEmail=function(userId,email){
+        $scope.addEmail=function(user,email){
             if(isValidEmail(email)){
-                MainService.addEmail(userId,email);
+                var userData=JSON.parse(user);
+                userData['email']=email;
+                MainService.addEmail(userData);
             }
             else{
                 console.log("invalid:",email);

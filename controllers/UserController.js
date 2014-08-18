@@ -2,41 +2,42 @@
 var EventName = require("../src/enum/EventName");
 var HttpStatusCode = require("../src/enum/HttpStatusCode");
 
-exports.findOrCreateTwitterAccountController = function (accessToken, refreshToken, profile, done) {
-  UserService.findOrCreateTwitterAccountService(profile)
-    .on("success", function (user) {
+exports.findTwitterAccountController = function (accessToken, refreshToken, profile, done) {
+  UserService.findTwitterAccountService(profile)
+    .on(EventName.DONE, function (user) {
           done(null, user);
     })
-    .on("error", function (err) {
-          done(err, user);
+    .on(EventName.ERROR, function (err) {
+          done(err, profile);
     });
 };
 
 
 exports.findOrCreateFacebookAccountController = function (accessToken, refreshToken, profile, done) {
   UserService.findOrCreateFacebookAccountService(accessToken,profile)
-    .on("success", function (user) {
+    .on(EventName.DONE, function (user) {
       done(null, user);
     })
-    .on("error", function (err) {
+    .on(EventName.ERROR, function (err) {
       done(err, profile);
     });
 };
 
 
-exports.addEmail = function (req, res) {
+exports.addEmailAndCreateTwitterAcc = function (req, res) {
     //Check for Errors
     var errors = req.validationErrors();
     if (Boolean(errors)) {
         res.sendErrorAPIResponse(errors, HttpStatusCode.VALIDATION_ERROR);
     } else {
-            UserService.addEmail(req.params._id,req.body.email)
-                .on(EventName.ERROR, function (err) {
-                    log.error(err);
-                    res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
-                })
-                .on(EventName.DONE, function (location) {
-                    res.sendSuccessAPIResponse(location, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
-                });
+        UserService.addEmailAndCreateTwitterAcc(req.params.email, req.body)
+            .on(EventName.ERROR, function (err) {
+                log.error(err);
+                res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
+            })
+            .on(EventName.DONE, function (user) {
+                res.loginUser(user._id, user.username, ['user']);
+                res.render('index', {user:{ data: user}});
+            });
     }
 };

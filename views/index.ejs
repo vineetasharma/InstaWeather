@@ -13,8 +13,8 @@
     <script src="scripts/geocompletejs/jquery.geocomplete.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/services/MainService.js"></script>
-    <script src="scripts/services/HomeService.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/services/HomeService.js"></script>
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <style type="text/css">@charset "UTF-8";
@@ -76,7 +76,8 @@
                     </a>
                 </li>
                 <%
-                if(!user)
+                    console.log(user.data);
+                if(!user.data)
                 { %>
                 <li id="NotLoggedIn">
                     <a href="" ng-click="signIn()">
@@ -87,7 +88,7 @@
                 else{ %>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                        Hi! <%= user.username || user.name %>
+                        Hi! <%= user.data.username || user.data.name %>
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -118,8 +119,8 @@
         </div>
     </div>
 </div>
-<%if(user)
-{if(!user.email && !user.roles) {%>
+<%if(user.data)
+{if(!user.data.email && !user.data.roles) {%>
 <script>
     $('document').ready(function(){
         jQuery('#promptemail').modal({
@@ -140,7 +141,10 @@
                 </div>
             </div>
             <div class="modal-body">
-                <a href="javaScript:void(0);" ng-click="addEmail('<%=user._id%>',email)"
+                <%
+                    var userData=JSON.stringify(user.data);
+                %>
+                <a href="javaScript:void(0);" ng-click="addEmail('<%=userData%>',email)"
                    ng-disabled="myForm.input.$error.email || myForm.input.$error.required"
                    class="btn btn-info modal-btn">Next</a>
             </div>

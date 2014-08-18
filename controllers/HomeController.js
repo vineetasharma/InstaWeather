@@ -10,9 +10,9 @@
  * @url "/"
  * */
 exports.index = function (req, res) {
-    if(req.user) {
+    if(req.user && !(req.user.twitterId)) {
         res.loginUser(req.user._id, req.user.username, ['user']);
     }
-    var user=req.checkLoggedIn();
-    res.render('index', {user: (user? user : (req.user ? req.user : null))});
+    var sessionUser=req.checkLoggedIn();
+    res.render('index', {user:{ data: sessionUser? sessionUser : (req.user ? req.user : null)}});
 };
