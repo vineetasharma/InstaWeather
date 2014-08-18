@@ -12,8 +12,8 @@ exports.sendMailService = function (mailData) {
     var options = {
         from: mailData.email,
         to: 'contactinstaweather@gmail.com',
-        subject: mailData.name,
-        html: mailData.message+' \n email:'+mailData.email
+        subject: 'message from '+mailData.name,
+        html: 'Hi,\n'+mailData.message+' \n From: \n name:'+mailData.name+'\n email:'+mailData.email
     };
     transport.sendMail(options, function (err,res) {
         log.info('in contact service  ');
