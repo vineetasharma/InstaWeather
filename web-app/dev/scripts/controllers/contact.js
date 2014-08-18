@@ -19,6 +19,8 @@ angular.module('yoApp')
                             message: $scope.message
                         };
                         ContactService.sendMail(mailData, function (data) {
+                            /*var progressBarWidth =10*$(".container-progress-bar").width()/ 100;
+                            $(".progressbar").width(progressBarWidth).html(10 + "% ");*/
                             if (data) {
                                 $(".alert-success").removeClass("in").show().delay(200).addClass("in").fadeOut(5000);
                                 $scope.name = '';
