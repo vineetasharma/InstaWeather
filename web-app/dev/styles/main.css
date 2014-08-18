@@ -322,7 +322,9 @@ body {
     box-shadow: inset 0 0 5px rgba(53,86,129, 0.5);
     font-family: 'Muli', sans-serif;
 }
-.pull-right{
-
-
+.from{
+    color: blue;
+}
+.message{
+    text-indent: 50px !important;
 }
