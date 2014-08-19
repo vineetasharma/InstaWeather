@@ -3,6 +3,7 @@ angular.module('yoApp')
 
         this.getDetails = function (callback) {
             var searchLocation = jQuery("#city").val().toString().split(', ');
+            console.log(searchLocation+" city input");
             var searchLocationLength = searchLocation.length;
             jQuery.ajax({
                 url: "http://ws.geonames.org/searchJSON",
@@ -14,7 +15,8 @@ angular.module('yoApp')
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-                    if (data.geonames.length) {
+                    console.log(data,'data in service');
+                    if (data) {
                     callback(data);
                     }
                     else

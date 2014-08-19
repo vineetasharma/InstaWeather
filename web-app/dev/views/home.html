@@ -1,14 +1,13 @@
 <div class="row content-row content-row-align">
     <div class="col-lg-8">
         <form>
-            <div class="input-group search-city">
+            <div class="search-city">
                 <input id="city" type="text" class="form-control" placeholder="Search By City..." ng-model="city">
-                                <span class="input-group-btn">
+                                <!--<span class="input-group-btn">
                                 <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()"
                                         ng-disabled="!city">
                                     <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                                </button>-->
             </div>
         </form>
         <div ng-show="WIWeatherResult">
@@ -66,6 +65,10 @@
             </div>
             <!-- /.panel -->
         </div>
+        <div ng-hide="WIWeatherResult">
+            <img src="../images/img/ajax_loader_gray_512.gif" style="width: 250px;height: 250px; margin-top: 50px" ng-show="reqLoader">
+
+        </div>
         <div id="info" ng-show="showInfo">
             <h1>Sorry! weather information not found</h1>
         </div>
@@ -74,7 +77,7 @@
         <div>
              <div class="sidebar-inner2">
                 <ul class="list-group">
-                    <h3 class="list-group-item in-h3"><strong>Most Searched Place</strong></h3>
+                    <h3 class="list-group-item in-h3"><strong>Most Searched Places</strong></h3>
                     <a  class="list-group-item loc" ng-repeat="data in mostVisitedData | orderBy:'searchCount':true | limitTo:5" href="javascript:void(0);">
                         <li ng-click="getWeather(data)">{{" "+data.fullName}}
                         </li>
