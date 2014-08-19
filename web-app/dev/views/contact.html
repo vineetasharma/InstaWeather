@@ -8,24 +8,19 @@
             </div>
         </div>
         <div class="row">
+
             <div >
 
-                <div class="alert alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    Provide a vaild email
+                    <div class="alert alert-info fade">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        Provide a valid email
+                    </div>
                 </div>
-            </div>
-            <div >
-
-                <div class="alert alert-info ">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    Provide a vaild email
-                </div>
-            </div>
-            <div>
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    Email <strong>Sent </strong>Sucessfully
+                <div class="pull-right">
+                    <div class="alert alert-success fade">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        Email <strong>Sent </strong>Successfully
+                    </div>
                 </div>
             </div>
             <div >
@@ -44,8 +39,7 @@
                     <input type="text" ng-model="name" placeholder="Name..." class="form-control" required>
 
 
-
-                    <input type="text" ng-model="email" placeholder="Email..." class="form-control" >
+                    <input type="text" ng-model="email" placeholder="Email..." class="form-control" required>
                     <textarea ng-model="message" placeholder="Message..." class="form-control" required></textarea>
                     <input type="submit" value="Send" class="btn btn-primary btn-sm" style=" width: 20%;"
                            ng-click="sendMail()" ng-disabled="disable">
@@ -68,5 +62,3 @@
             </div>
         </div>
     </div>
-</div>
-</div>
