@@ -68,7 +68,7 @@ exports.getLastSearchLocation = function (userId) {
             emitter.emit(EventName.ERROR, err);
         }
         else {
-            emitter.emit(EventName.DONE, user/*.lastSearchedLocation*/);
+            emitter.emit(EventName.DONE, user.lastSearchedLocation);
         }
     });
 }.toEmitter();

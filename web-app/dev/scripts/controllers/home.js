@@ -16,7 +16,7 @@ angular.module('yoApp')
         });
 
         HomeService.getLastSearchLocation(function (location) {
-           if (location!=='null') {
+           if (location!=='null' && location) {
                 $scope.getWeather(location);
             }
             else{
