@@ -1,14 +1,13 @@
 <div class="row content-row content-row-align">
     <div class="col-lg-8">
         <form>
-            <div class="input-group search-city">
+            <div class="search-city">
                 <input id="city" type="text" class="form-control" placeholder="Search By City..." ng-model="city">
-                                <span class="input-group-btn">
+                                <!--<span class="input-group-btn">
                                 <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()"
                                         ng-disabled="!city">
                                     <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                                </button>-->
             </div>
         </form>
         <div ng-show="WIWeatherResult">
@@ -65,6 +64,10 @@
                 </div>
             </div>
             <!-- /.panel -->
+        </div>
+        <div ng-hide="WIWeatherResult">
+            <img src="../images/img/ajax_loader_gray_512.gif" style="width: 250px;height: 250px; margin-top: 50px" ng-show="reqLoader">
+
         </div>
         <div id="info" ng-show="showInfo">
             <h1>Sorry! weather information not found</h1>

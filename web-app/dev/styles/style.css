@@ -41,8 +41,8 @@ h4 { color: #555; }
 
 img { max-width: 100%; }
 
-::-moz-selection { color: #fff; text-shadow: none; }
-::selection { color: #fff; text-shadow: none; }
+/*::-moz-selection { color: #fff; text-shadow: none; }*/
+/*::selection { color: #fff; text-shadow: none; }*/
 
 
 /***** General style, all sections *****/
