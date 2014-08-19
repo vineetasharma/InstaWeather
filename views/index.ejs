@@ -12,7 +12,6 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="scripts/geocompletejs/jquery.geocomplete.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="scripts/services/MainService.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/HomeService.js"></script>
     <script src="scripts/controllers/home.js"></script>
@@ -76,8 +75,7 @@
                     </a>
                 </li>
                 <%
-                    console.log(user.data);
-                if(!user.data)
+                if(!user || !(user.email?true:(user.roles?true:false)))
                 { %>
                 <li id="NotLoggedIn">
                     <a href="" ng-click="signIn()">
@@ -88,7 +86,7 @@
                 else{ %>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                        Hi! <%= user.data.username || user.data.name %>
+                        Hi! <%= user.username || user.name %>
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -117,52 +115,6 @@
                 <a href="/auth/twitter" class="btn btn-info modal-btn"><span class="fa fa-twitter"></span> Twitter</a>
             </div>
         </div>
-    </div>
-</div>
-<%if(user.data)
-{if(!user.data.email && !user.data.roles) {%>
-<script>
-    $('document').ready(function(){
-        jQuery('#promptemail').modal({
-            keyboard: true
-        });
-    });
-</script>
-<div id="promptemail" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="email modal-header">
-                <div class="input-group">
-                    <form name="myForm">
-                        Email: <input type="email" name="input" ng-model="email" required>
-                        <span class="error" ng-show="myForm.input.$error.required">Required!</span>
-                        <span class="error" ng-show="myForm.input.$error.email">Not valid email!</span>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-body">
-                <%
-                    var userData=JSON.stringify(user.data);
-                %>
-                <a href="javaScript:void(0);" ng-click="addEmail('<%=userData%>',email)"
-                   ng-disabled="myForm.input.$error.email || myForm.input.$error.required"
-                   class="btn btn-info modal-btn">Next</a>
-            </div>
-        </div>
-    </div>
-</div>
-<%}
-}%>
-<div class="pull-right">
-    <div class="alert alert-success fade">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Alert!</strong> Email Registered Sucessfully
-    </div>
-</div>
-<div class="pull-right">
-    <div class="alert alert-error fade">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Alert!</strong> Email Not Registered Sucessfully
     </div>
 </div>
 <!-- /.row -->

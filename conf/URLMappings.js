@@ -6,45 +6,49 @@
 
 //Require Controllers
 var controllers = {
-  cluster: require("../controllers/ClusterController"),
-  user: require("../controllers/UserController"),
-  home: require("../controllers/HomeController"),
-  location:require("../controllers/LocationController")
+    cluster: require("../controllers/ClusterController"),
+    user: require("../controllers/UserController"),
+    home: require("../controllers/HomeController"),
+    location: require("../controllers/LocationController")
 };
 
 var passport = require('passport')
-  , FacebookStrategy = require('passport-facebook').Strategy
-  , TwitterStrategy = require('passport-twitter').Strategy;
+    , FacebookStrategy = require('passport-facebook').Strategy
+    , TwitterStrategy = require('passport-twitter').Strategy;
 
 
 passport.serializeUser(function (user, done) {
-  done(null, user);
+    done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
-  done(null, user);
+    done(null, user);
 });
 
 passport.use(new FacebookStrategy({
-    clientID: _config.facebookAuth.clientID,
-    clientSecret: _config.facebookAuth.clientSecret,
-    callbackURL: _config.facebookAuth.callbackURL
-  }, controllers.user.findOrCreateFacebookAccountController
+        clientID: _config.facebookAuth.clientID,
+        clientSecret: _config.facebookAuth.clientSecret,
+        callbackURL: _config.facebookAuth.callbackURL
+    }, controllers.user.findOrCreateFacebookAccountController
 ));
 
 passport.use(new TwitterStrategy({
-  consumerKey: _config.twitterAuth.consumerKey,
-  consumerSecret: _config.twitterAuth.consumerSecret,
-  callbackURL: _config.twitterAuth.callbackURL
+    consumerKey: _config.twitterAuth.consumerKey,
+    consumerSecret: _config.twitterAuth.consumerSecret,
+    callbackURL: _config.twitterAuth.callbackURL
 }, controllers.user.findTwitterAccountController));
 
 //Cluster API
-
 _app.get("/cluster/worker/list", controllers.cluster.list);
 
 //Home/Auth URL Mappings
 _app.get('/', controllers.home.index);
 
+//Home Add twitter Account having email
+_app.post('/addemailandcreatetwitterAcc', controllers.user.addEmailAndCreateTwitterAcc);
+
+//ask for email when first time twitter login
+_app.get('/askemail', controllers.home.askemail);
 
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
@@ -56,8 +60,7 @@ _app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 _app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/',
-    failureRedirect: '/' }));
+    passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/' }));
 
 
 // Redirect the user to Twitter for authentication.  When complete, Twitter
@@ -70,18 +73,30 @@ _app.get('/auth/twitter', passport.authenticate('twitter'));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 _app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { successRedirect: '/',
-    failureRedirect: '/' }));
+    passport.authenticate('twitter',{failureRedirect : '/'}),function (req, res) {
+        var  isEmail=req.user.email?true:false;
+        if (isEmail) {
+            return res.redirect('/');
+        }
+        else if(!isEmail) {
+            return res.redirect('/askemail');
+        }
+    });
 
+//logout user
 _app.get('/logout', function (req, res) {
-  res.logoutUser();
-  res.redirect('/');
+    res.logoutUser();
+    res.redirect('/');
 });
 
-_app.post('/addlocationdata',controllers.location.saveSearchPlaceDetails);
+//save searched location's details
+_app.post('/addlocationdata', controllers.location.saveSearchPlaceDetails);
 
-_app.get('/getMostSearchPlaceDetails',controllers.location.getMostSearchPlaceDetails);
+//get most searched place data
+_app.get('/getMostSearchPlaceDetails', controllers.location.getMostSearchPlaceDetails);
 
-_app.get('/getLastSearchLocation',controllers.location.getLastSearchLocation);
+//get last search loaction of a user
+_app.get('/getLastSearchLocation', controllers.location.getLastSearchLocation);
 
-_app.put('/addemailandcreatetwitteracc/:email',controllers.user.addEmailAndCreateTwitterAcc);
+/*
+ _app.put('/addemailandcreatetwitteracc/:email', controllers.user.addEmailAndCreateTwitterAcc);*/

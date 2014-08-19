@@ -32,7 +32,7 @@ exports.addEmailAndCreateTwitterAcc = function (email, profile) {
             new User({
                 username: profile.username,
                 twitterId: profile.twitterId,
-                email: profile.email,
+                email: email,
                 profilePicUrl: profile.photos[0].value
             }).save(function (err, user) {
                     if (err) {
@@ -40,7 +40,7 @@ exports.addEmailAndCreateTwitterAcc = function (email, profile) {
                         emitter.emit(EventName.ERROR, err);
                     }
                     else {
-                        log.info('user is created', user);
+                        log.info('user is created',user);
                         emitter.emit(EventName.DONE, user);
                     }
                 });

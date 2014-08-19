@@ -65,10 +65,10 @@ exports.getLastSearchLocation = function (req, res) {
             LocationService.getLastSearchLocation(user._id)
                 .on(EventName.ERROR, function (err) {
                     log.error(err);
-                    res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
+                    res.sendErrorAPIResponse(err, HttpStatusCode.SERVER_ERROR);
                 })
                 .on(EventName.DONE, function (location) {
-                    res.sendSuccessAPIResponse(location, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
+         //           res.sendSuccessAPIResponse(location, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
                 });
         }
         else{
