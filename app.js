@@ -11,7 +11,8 @@ var express = require('express'),
     socket = require('socket.io'),
     expressSession = require('express-session'),
     nodemailer=require('nodemailer'),
-    ejs=require('ejs');
+    ejs=require('ejs'),
+    process=require('process');
 
 
 // Use the BearerStrategy with Passport.
@@ -24,6 +25,9 @@ global.__defineGetter__("_nodemailer", function () {
 });
 global.__defineGetter__("_ejs", function () {
     return ejs
+});
+global.__defineGetter__("_process", function () {
+    return process
 });
 
 //give this worker a special Id
