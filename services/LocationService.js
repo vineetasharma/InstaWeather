@@ -24,20 +24,17 @@ exports.saveSearchPlaceDetails = function (reqData) {
                         emitter.emit(EventName.ERROR, err);
                     }
                     else {
-                        log.info('Location information saved');
                         emitter.emit(EventName.DONE, location)
                     }
                 });
         }
         else if (location) {
-            log.info("Location already exists", location.locationName);
             Location.update({geoNameId: location.geoNameId}, {$inc: {searchCount: 1}}, function (err) {
                 if (err) {
                     log.error(err);
                     emitter.emit(EventName.ERROR, err);
                 }
                 else {
-                    log.info('Location searchCount incrementerd');
                     emitter.emit(EventName.DONE, location);
                 }
             });

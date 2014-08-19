@@ -5,7 +5,7 @@ var EventName = require("../src/enum/EventName");
 var HttpStatusCode = require("../src/enum/HttpStatusCode");
 
 exports.sendMail = function (req,res) {
-    ContactService.sendMailService(req.body)
+    UserService.sendMailService(req.body)
         .on(EventName.ERROR, function (err) {
             log.error(err);
             res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);

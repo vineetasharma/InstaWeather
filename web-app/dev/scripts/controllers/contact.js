@@ -9,6 +9,7 @@ angular.module('yoApp')
         $(".alert-success").hide();
         $(".alert-dismissable").hide();
         $(".alert-error").hide();
+        $(".alert-warning").hide();
 
         $scope.sendMail = function () {
 
@@ -16,7 +17,7 @@ angular.module('yoApp')
 
 
             $scope.disable = true;
-            if ($scope.name && $scope.message) {
+            if ($scope.name && $scope.message && $scope.email) {
                 ContactService.isValidEmail($scope.email, function (valid) {
                     if (!valid) {
                         createAutoClosingAlert(".alert-info", 3000);
@@ -57,7 +58,7 @@ angular.module('yoApp')
             else{
                 $scope.disable = false;
                 $scope.loader=false;
-                createAutoClosingAlert(".alert-info", 3000);
+                createAutoClosingAlert(".alert-warning", 3000);
             }
 
         }
