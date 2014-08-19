@@ -29,6 +29,7 @@ angular.module('yoApp')
         };
 
         this.getWeatherDetails = function (result, callback) {
+            console.log('result in get weather details of home service ',result);
             jQuery.ajax({
                 url: "http://api.openweathermap.org/data/2.5/weather?",
                 dataType: "jsonp",
@@ -41,6 +42,8 @@ angular.module('yoApp')
                 }, error: function (err) {
                     console.log("error during recieving weather data: ", err);
                     callback(null);
+
+
                 }
             });
         };
@@ -69,6 +72,8 @@ angular.module('yoApp')
         this.getLastSearchLocation=function(callback){
             $http.get("/getLastSearchLocation")
                 .success(function (location) {
+                    if(location.length)
+                    callback(null);
                     callback(location);
                 }).
                 error(function (error) {

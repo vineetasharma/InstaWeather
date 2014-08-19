@@ -28,6 +28,7 @@ exports.findOrCreateTwitterAccountService = function (profile) {
 
 exports.findOrCreateFacebookAccountService = function (accessToken,profile) {
     var emitter = this;
+    console.log(profile,'FB profile');
     User.findOne({email: profile.emails[0].value}, function (err, data) {
         if (err) {
             emitter.emit("error", err);
@@ -37,7 +38,8 @@ exports.findOrCreateFacebookAccountService = function (accessToken,profile) {
                 username: profile.displayName,
                 email: profile.emails[0].value,
                 fbId: profile.id,
-                accessToken: accessToken
+                accessToken: accessToken,
+                profilePicUrl:'https://graph.facebook.com/'+profile.id+'/picture?type=small'
             }).save(function (err, user) {
                     if (err) {
                         log.error(err);

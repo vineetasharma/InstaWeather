@@ -17,8 +17,10 @@ exports.index = function (req, res) {
   if (req.user) {
     res.loginUser(req.user._id, req.user.username, ['user']);
   }
+    console.log(req.user,'user profile');
+    console.log(user,'user');
   var user = req.checkLoggedIn();
-  res.render('index', {user: (user ? user.name : (req.user ? req.user.username : null))});
+  res.render('index', {user: (user ? user.name : (req.user ? req.user.username : null)),picURL:(user?user.profilePicUrl:(req.user ? req.user.profilePicUrl : null))});
 };
 
 var EventName = require("../src/enum/EventName");
