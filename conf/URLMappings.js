@@ -9,7 +9,6 @@ var controllers = {
   cluster: require("../controllers/ClusterController"),
   user: require("../controllers/UserController"),
   home: require("../controllers/HomeController"),
-  contact: require("../controllers/ContactController"),
   location:require("../controllers/LocationController")
 };
 
@@ -84,4 +83,4 @@ _app.post('/addlocationdata',controllers.location.saveSearchPlaceDetails);
 _app.get('/getMostSearchPlaceDetails',controllers.location.getMostSearchPlaceDetails);
 
 _app.get('/getLastSearchLocation',controllers.location.getLastSearchLocation);
-_app.post('/sendMail',controllers.contact.sendMail);
+_app.post('/sendMail',controllers.home.sendMail);
