@@ -1,3 +1,5 @@
+var EventName = require("../src/enum/EventName");
+
 exports.findOrCreateTwitterAccountService = function (profile) {
   var emitter = this;
   User.findOne({twitterId: profile.id}, function (err, data) {
@@ -14,13 +16,11 @@ exports.findOrCreateTwitterAccountService = function (profile) {
               emitter.emit('error', err);
           }
           else {
-            log.info('user is created');
               emitter.emit('success', user);
           }
         });
     }
     if (data) {
-      log.info("Welcome", profile.displayName);
       emitter.emit('success', data);
     }
   })
@@ -50,7 +50,6 @@ exports.findOrCreateFacebookAccountService = function (accessToken,profile) {
                 });
         }
         else if (data) {
-            log.info("Welcome", profile.displayName);
             emitter.emit('success', data);
         }
     })
@@ -72,7 +71,6 @@ exports.addLastSearchedLocation = function (userId,lastSearchedLocation ) {
             emitter.emit("error", err);
         }
         else{
-            log.info("sucessfull update lastSearchedLocation: ",data);
             emitter.emit('success', data);
         }
     })

@@ -9,13 +9,25 @@ var express = require('express'),
     Util = require("./src/Utils"),
     viewEngine = require("ejs-locals"),
     socket = require('socket.io'),
-    expressSession = require('express-session');
+    expressSession = require('express-session'),
+    nodemailer=require('nodemailer'),
+    ejs=require('ejs'),
+    process=require('process');
 
 
 // Use the BearerStrategy with Passport.
 passport.use(new BearerStrategy(Util.verifyBearerToken));
 global.__defineGetter__("_passport", function () {
     return passport
+});
+global.__defineGetter__("_nodemailer", function () {
+    return nodemailer
+});
+global.__defineGetter__("_ejs", function () {
+    return ejs
+});
+global.__defineGetter__("_process", function () {
+    return process
 });
 
 //give this worker a special Id

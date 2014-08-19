@@ -18,6 +18,11 @@
       "clientSecret": "929abe47517dc2673cdab7b7f7650b8f",
       "callbackURL": "http://localhost:9092/auth/facebook/callback"
     },
+      "mailService":{
+          "service":"Gmail",
+          "email": "contactinstaweather@gmail.com",
+          "pass": "igdefault"
+      },
       "twitterAuth": {
           "consumerKey": "DEo7OyOxExJ3PuDqp8h6GpFr8",
           "consumerSecret": "Noh9fh7LHFO6Swt8cNnco60kdbei9O4lGViOCexS5mBTZXhspH",
