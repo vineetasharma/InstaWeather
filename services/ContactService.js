@@ -13,7 +13,7 @@ exports.sendMailService = function (mailData) {
         from: mailData.email,
         to: 'contactinstaweather@gmail.com',
         subject: mailData.name,
-        html: mailData.message
+        html: mailData.message+' \n email:'+mailData.email
     };
     transport.sendMail(options, function (err,res) {
         log.info('in contact service  ');
