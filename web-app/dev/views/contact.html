@@ -8,17 +8,8 @@
             </div>
         </div>
         <div class="row">
-            <div style="visibility: visible; animation-name: fadeInUp;"
-                 class="col-sm-7 contact-form wow fadeInUp animated animated">
-                <h3 class="h3-msg"><strong>Send us a message</strong></h3>
-                <div class="pull-right">
 
-                    <div class="alert alert-dismissable fade">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        Provide a valid email
-                    </div>
-                </div>
-                <div class="pull-right">
+            <div >
 
                     <div class="alert alert-info fade">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -31,16 +22,21 @@
                         Email <strong>Sent </strong>Successfully
                     </div>
                 </div>
-                <div class="pull-right">
-                    <div class="alert alert-error fade">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        Email Sending <strong>Failed</strong>
-                    </div>
+            </div>
+            <div >
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    Email Sending <strong>Failed</strong>
                 </div>
+            </div>
+            <div style="visibility: visible; animation-name: fadeInUp;"
+                 class="col-sm-7 contact-form wow fadeInUp animated animated">
+
+                <h3 class="h3-msg"><strong>Send us a message</strong></h3>
+
 
                 <form method="post">
                     <input type="text" ng-model="name" placeholder="Name..." class="form-control" required>
-
 
 
                     <input type="text" ng-model="email" placeholder="Email..." class="form-control" required>
@@ -50,12 +46,11 @@
                     <img src="../images/img/728.GIF" height="50" width="50" class="loader" ng-show="loader">
                 </form>
 
-
             </div>
             <div style="visibility: visible; animation-name: fadeInUp;"
                  class="col-sm-5 contact-address wow fadeInUp animated animated">
                 <div class="Corporate-Office">
-                    <h3><strong>Corporate Office:</strong></h3>
+                    <h3 class="h3-msg"><strong>Corporate Office:</strong></h3>
 
                     <div class="Corporate-Office-inner">
                         IntelliGrape Software (P) Ltd<br>
@@ -67,5 +62,3 @@
             </div>
         </div>
     </div>
-</div>
-</div>
