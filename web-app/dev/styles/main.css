@@ -127,7 +127,7 @@
 }
 
 .sidebar-inner2 {
-    margin-top: 50px;
+    margin-top: 70px;
     background-color: transparent;
     height: 288px;
     border-radius: 10px;
@@ -193,7 +193,7 @@
 }
 
 .recent-location {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 40px;
 }
 
@@ -347,4 +347,9 @@ body {
 .fb{
     background-color: #105cb6;
 }
+.timeDiv{
+    color: #222222;
+    padding-left: 0px;
+    padding-bottom: 10px;
 
+}

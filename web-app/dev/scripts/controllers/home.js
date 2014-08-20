@@ -2,9 +2,9 @@
  * Created by sandeepchhapola on 30/7/14.
  */
 angular.module('yoApp')
-    .controller('homeCtrl', ['$scope', 'HomeService', function ($scope, HomeService) {
+    .controller('homeCtrl', ['$scope', 'HomeService', '$interval', function ($scope, HomeService, $interval) {
 
-
+        $scope.format = 'M/d/yy h:mm:ss a';
         jQuery(function () {
 
             var options = {
@@ -28,7 +28,7 @@ angular.module('yoApp')
                 });
 
             });
-            ;
+
         });
 
         HomeService.getMostSearchPlaceDetails(function (data) {
@@ -36,7 +36,7 @@ angular.module('yoApp')
         });
 
         HomeService.getLastSearchLocation(function (location) {
-            if (location !== 'null' &&  location ) {
+            if (location !== 'null' && location) {
                 $scope.getWeather(location);
             }
             else {
@@ -73,8 +73,8 @@ angular.module('yoApp')
             $scope.WILocalionResult = null;
             $scope.WIWeatherResult = null;
             var flag = false;
-            if($scope.mostVisitedData) {
-                console.log('most visited',$scope.mostVisitedData);
+            if ($scope.mostVisitedData) {
+                console.log('most visited', $scope.mostVisitedData);
                 $scope.mostVisitedData.forEach(function (mostVisited) {
                     if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
                         mostVisited.searchCount++;
@@ -100,4 +100,24 @@ angular.module('yoApp')
                 $scope.$apply();
             });
         };
-    }]);
+    }])
+    .directive('myCurrentTime', ['$interval', 'dateFilter',
+        function ($interval, dateFilter) {
+            return function (scope, element, attrs) {
+                var format,
+                    stopTime;
+                function updateTime() {
+                    element.text(dateFilter(new Date(), format));
+                }
+
+                scope.$watch(attrs.myCurrentTime, function (value) {
+                    format = value;
+                    updateTime();
+                });
+
+                stopTime = $interval(updateTime, 1000);
+                element.on('$destroy', function () {
+                    $interval.cancel(stopTime);
+                });
+            }
+        }]);

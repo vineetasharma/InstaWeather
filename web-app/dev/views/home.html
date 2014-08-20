@@ -8,6 +8,8 @@
                                         ng-disabled="!city">
                                     <i class="fa fa-search"></i>
                                 </button>-->
+
+
             </div>
         </form>
         <div ng-show="WIWeatherResult">
@@ -74,8 +76,13 @@
         </div>
     </div>
     <div class="col-md-3 recent-location " ng-show="mostVisitedData.length>0">
-        <div>
+        <div class="timeDiv pull-left">
+            <h2><span my-current-time="format"></span></h2>
+
+        </div>
+
              <div class="sidebar-inner2">
+
                 <ul class="list-group">
                     <h3 class="list-group-item in-h3"><strong>Most Searched Places</strong></h3>
                     <a  class="list-group-item loc" ng-repeat="data in mostVisitedData | orderBy:'searchCount':true | limitTo:5" href="javascript:void(0);">
@@ -85,8 +92,7 @@
                 </ul>
             </div>
             <!-- /.l
-            <!-- /.list-group -->
-        </div>
+
         <!-- /.col-lg-8 -->
     </div>
     </div>
