@@ -17,5 +17,35 @@ exports.schema = {
     fbId: String,
     twitterId: String,
     lastSearchedLocation : {},
-    profilePicUrl:String
+    profilePicUrl:String,
+    profileData:{
+        About:String,
+        Birthday:String,
+        Gender:String,
+        Mobile:{type:Number},
+        CurrentCity:String
+    },
+    Address:{
+        Hometown:String,
+        City:String,
+        State:String,
+        Country:String,
+        pin:Number
+    }
 };
+
+/*
+profileData:{
+    About:"",
+        Birthday:"",
+        Gender:"",
+        Mobile:"",
+        CurrentCity:"",
+        Address:{
+        Hometown:"",
+            City:"",
+            State:"",
+            Country:"",
+            pin:""
+    }
+}*/

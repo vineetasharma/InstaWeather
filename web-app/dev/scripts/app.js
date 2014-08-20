@@ -16,6 +16,14 @@ angular
         templateUrl: '../views/home.html',
         controller: 'homeCtrl'
       })
+      .when('/profile', {
+        templateUrl: '../views/profile.html',
+        controller: 'homeCtrl'
+      })
+      .when('/profile/photos', {
+        templateUrl: '../views/userpics.html',
+        controller: 'homeCtrl'
+      })
         .when('/about',{
             templateUrl: '../views/about.html',
             controller: 'AboutCtrl'

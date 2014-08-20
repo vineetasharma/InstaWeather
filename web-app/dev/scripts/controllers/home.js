@@ -6,7 +6,6 @@ angular.module('yoApp')
 
 
         jQuery(function () {
-
             var options = {
                 types: ['(cities)']
             };
@@ -28,8 +27,8 @@ angular.module('yoApp')
                 });
 
             });
-            ;
         });
+
 
         HomeService.getMostSearchPlaceDetails(function (data) {
             $scope.mostVisitedData = data;
@@ -100,4 +99,6 @@ angular.module('yoApp')
                 $scope.$apply();
             });
         };
+
+
     }]);

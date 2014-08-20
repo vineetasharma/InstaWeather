@@ -83,4 +83,7 @@ _app.post('/addlocationdata',controllers.location.saveSearchPlaceDetails);
 _app.get('/getMostSearchPlaceDetails',controllers.location.getMostSearchPlaceDetails);
 
 _app.get('/getLastSearchLocation',controllers.location.getLastSearchLocation);
+
 _app.post('/sendMail',controllers.home.sendMail);
+
+_app.get('/getProfileDeta?:_id',controllers.user.getProfileDeta);

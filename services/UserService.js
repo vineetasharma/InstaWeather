@@ -9,7 +9,21 @@ exports.findOrCreateTwitterAccountService = function (profile) {
       new User({
           username: profile.displayName,
           twitterId: profile.id,
-          profilePicUrl:profile.photos[0].value
+          profilePicUrl:profile.photos[0].value,
+          profileData:{
+              About:"",
+              Birthday:"",
+              Gender:"",
+              Mobile:"",
+              CurrentCity:""
+          },
+          Address:{
+              Hometown:"",
+              City:"",
+              State:"",
+              Country:"",
+              pin:""
+          }
       }).save(function (err,user) {
           if (err) {
             log.error(err);
@@ -39,7 +53,21 @@ exports.findOrCreateFacebookAccountService = function (accessToken,profile) {
                 email: profile.emails[0].value,
                 fbId: profile.id,
                 accessToken: accessToken,
-                profilePicUrl:'https://graph.facebook.com/'+profile.id+'/picture?type=small'
+                profilePicUrl:'https://graph.facebook.com/'+profile.id+'/picture?type=small',
+                profileData:{
+                    About:"",
+                    Birthday:"",
+                    Gender:"",
+                    Mobile:"",
+                    CurrentCity:""
+                },
+                Address:{
+                    Hometown:"",
+                    City:"",
+                    State:"",
+                    Country:"",
+                    pin:""
+                }
             }).save(function (err, user) {
                     if (err) {
                         log.error(err);
@@ -74,6 +102,18 @@ exports.addLastSearchedLocation = function (userId,lastSearchedLocation ) {
         }
         else{
             emitter.emit('success', data);
+        }
+    })
+}.toEmitter();
+
+exports.getProfileDeta = function (userId) {
+    var emitter = this;
+    User.findOne({_id: userId},{profileData:1,Address:1}, function (err, data) {
+        if (err) {
+            emitter.emit(EventName.ERROR, err);
+        }
+        else{
+            emitter.emit(EventName.DONE, data);
         }
     })
 }.toEmitter();

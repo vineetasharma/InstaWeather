@@ -3,7 +3,6 @@ angular.module('yoApp')
 
         this.getDetails = function (callback) {
             var searchLocation = jQuery("#city").val().toString().split(', ');
-            console.log(searchLocation+" city input");
             var searchLocationLength = searchLocation.length;
             jQuery.ajax({
                 url: "http://ws.geonames.org/searchJSON",
@@ -29,7 +28,6 @@ angular.module('yoApp')
         };
 
         this.getWeatherDetails = function (result, callback) {
-            console.log('result in get weather details of home service ',result);
             jQuery.ajax({
                 url: "http://api.openweathermap.org/data/2.5/weather?",
                 dataType: "jsonp",
@@ -78,6 +76,18 @@ angular.module('yoApp')
                 }).
                 error(function (error) {
                     console.log("error during getLastSearchLocation: ", error.message);
+                    callback(error);
+                });
+        };
+        this.getProfileDeta=function(userId,callback){
+            $http.get("/getProfileDeta"+userId)
+                .success(function (userData) {
+                    if(!userData)
+                        callback(null);
+                    callback(userData);
+                }).
+                error(function (error) {
+                    console.log("error during getProfileDeta: ", error.message);
                     callback(error);
                 });
         }
