@@ -35,6 +35,9 @@ exports.addEmailAndCreateTwitterAcc = function (req, res) {
                 log.error(err);
                 res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
             })
+            .on(EventName.NOT_FOUND, function () {
+                res.redirect('/');
+            })
             .on(EventName.DONE, function (user) {
                 res.loginUser(user._id, user.username, ['user']);
                 res.redirect('/');
