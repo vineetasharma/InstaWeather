@@ -89,7 +89,7 @@
                 else{ %>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                        Hi! <%= user %>
+                        <img src='<%= picURL %>' style="width: 25px;height: 25px" onerror="this.src='images/img/defaultProfile.jpg'"> &nbsp;<%= user %>
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">

@@ -10,8 +10,8 @@ angular.module('yoApp')
             var options = {
                 types: ['(cities)']
             };
-            $("#city").geocomplete(options).bind("geocode:result", function(event, result){
-                $scope.reqLoader=true;
+            $("#city").geocomplete(options).bind("geocode:result", function (event, result) {
+                $scope.reqLoader = true;
                 console.log('getDetail method called');
                 $scope.WILocalionResult = null;
                 $scope.WIWeatherResult = null;
@@ -27,7 +27,8 @@ angular.module('yoApp')
                     }
                 });
 
-            });;
+            });
+            ;
         });
 
         HomeService.getMostSearchPlaceDetails(function (data) {
@@ -35,16 +36,17 @@ angular.module('yoApp')
         });
 
         HomeService.getLastSearchLocation(function (location) {
-           if (location!=='null') {
+            if (location !== 'null' &&  location ) {
                 $scope.getWeather(location);
             }
-            else{
+            else {
+                $scope.reqLoader = false;
                 console.log("location data is null for last search");
             }
         });
         /*recieving location information and then weather information to show weather information on home page*/
         $scope.getDetails = function () {
-            $scope.reqLoader=true;
+            $scope.reqLoader = true;
             console.log('getDetail method called');
             $scope.WILocalionResult = null;
             $scope.WIWeatherResult = null;
@@ -55,7 +57,7 @@ angular.module('yoApp')
                 if (result) {
                     $scope.WILocalionResult = result;
                     $scope.getWeather(result);
-                    $scope.reqLoader=false;
+                    $scope.reqLoader = false;
                 }
                 else {
                     $scope.showInfo = true;
@@ -65,24 +67,28 @@ angular.module('yoApp')
         };
 
         $scope.getWeather = function (result) {
-            $scope.reqLoader=true;
-            console.log('getDetail method called');
+
+            $scope.reqLoader = true;
+            console.log('getWeather method called');
             $scope.WILocalionResult = null;
             $scope.WIWeatherResult = null;
             var flag = false;
-            $scope.mostVisitedData.forEach(function (mostVisited) {
-                if (mostVisited.geoNameId == (result.geoNameId?result.geoNameId:result.geonames[0].geonameId)) {
-                    mostVisited.searchCount++;
-                    flag = true;
+            if($scope.mostVisitedData) {
+                console.log('most visited',$scope.mostVisitedData);
+                $scope.mostVisitedData.forEach(function (mostVisited) {
+                    if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
+                        mostVisited.searchCount++;
+                        flag = true;
+                    }
+                });
+                if (!flag) {
+                    $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
+                        locationName: result.geonames[0].name,
+                        fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
+                        latitude: result.geonames[0].lat,
+                        longitude: result.geonames[0].lng,
+                        searchCount: 1});
                 }
-            });
-            if (!flag) {
-                $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
-                    locationName: result.geonames[0].name,
-                    fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
-                    latitude: result.geonames[0].lat,
-                    longitude: result.geonames[0].lng,
-                    searchCount: 1});
             }
 
 
