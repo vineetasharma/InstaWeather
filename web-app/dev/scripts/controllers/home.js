@@ -36,7 +36,7 @@ angular.module('yoApp')
         });
 
         HomeService.getLastSearchLocation(function (location) {
-            if (location !== 'null' &&  location ) {
+            if (location !== 'null' && location) {
                 $scope.getWeather(location);
             }
             else {
@@ -50,8 +50,6 @@ angular.module('yoApp')
             console.log('getDetail method called');
             $scope.WILocalionResult = null;
             $scope.WIWeatherResult = null;
-
-
             $scope.showInfo = false;
             HomeService.getDetails(function (result) {
                 if (result) {
@@ -67,37 +65,42 @@ angular.module('yoApp')
         };
 
         $scope.getWeather = function (result) {
-
-            $scope.reqLoader = true;
             console.log('getWeather method called');
-            $scope.WILocalionResult = null;
-            $scope.WIWeatherResult = null;
-            var flag = false;
-            if($scope.mostVisitedData) {
-                console.log('most visited',$scope.mostVisitedData);
-                $scope.mostVisitedData.forEach(function (mostVisited) {
-                    if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
-                        mostVisited.searchCount++;
-                        flag = true;
+            if (result.geonames.length > 0) {
+                $scope.showInfo = false;
+                $scope.reqLoader = true;
+                $scope.WILocalionResult = null;
+                $scope.WIWeatherResult = null;
+                var flag = false;
+                if ($scope.mostVisitedData) {
+                    console.log('most visited', $scope.mostVisitedData);
+                    $scope.mostVisitedData.forEach(function (mostVisited) {
+                        if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
+                            mostVisited.searchCount++;
+                            flag = true;
+                        }
+                    });
+                    if (!flag) {
+                        $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
+                            locationName: result.geonames[0].name,
+                            fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
+                            latitude: result.geonames[0].lat,
+                            longitude: result.geonames[0].lng,
+                            searchCount: 1});
                     }
-                });
-                if (!flag) {
-                    $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
-                        locationName: result.geonames[0].name,
-                        fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
-                        latitude: result.geonames[0].lat,
-                        longitude: result.geonames[0].lng,
-                        searchCount: 1});
                 }
+                HomeService.updateOrSaveLocationDetails(result);
+                HomeService.getWeatherDetails(result, function (weatherInfo) {
+                    $scope.fullName = result.fullName ? result.fullName : (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName);
+                    $scope.city = $scope.fullName;
+                    $scope.WIWeatherResult = weatherInfo;
+                    $scope.$apply();
+                });
             }
-
-
-            HomeService.updateOrSaveLocationDetails(result);
-            HomeService.getWeatherDetails(result, function (weatherInfo) {
-                $scope.fullName = result.fullName ? result.fullName : (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName);
-                $scope.city = $scope.fullName;
-                $scope.WIWeatherResult = weatherInfo;
+            else{;
+                $scope.reqLoader = false;
+                $scope.showInfo = true;
                 $scope.$apply();
-            });
+            }
         };
     }]);
