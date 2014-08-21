@@ -127,7 +127,7 @@
 }
 
 .sidebar-inner2 {
-    margin-top: 70px;
+    margin-top: 40px;
     background-color: transparent;
     height: 288px;
     border-radius: 10px;
@@ -347,9 +347,10 @@ body {
 .fb{
     background-color: #105cb6;
 }
-.timeDiv{
-    color: #222222;
-    padding-left: 0px;
-    padding-bottom: 10px;
-
+.clockDiv{
+    margin-left: 52px;
+}
+.innerClockDiv{
+    width: 150px;
+    height: 150px;
 }
