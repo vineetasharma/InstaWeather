@@ -1,11 +1,22 @@
 /**
  * Created by sandeepchhapola on 30/7/14.
  */
+
 angular.module('yoApp')
     .controller('homeCtrl', ['$scope', 'HomeService', '$interval', function ($scope, HomeService, $interval) {
 
-        $scope.format = 'h:mm:ss';
-        $scope.formatDate='M/d/yy';
+        $scope.format = 'h:mm';
+        $scope.formatDate='d';
+        var monthNames = [ "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December" ];
+        var dayNames=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+//        var month=jQuery('.dateClass').text();
+//        alert(jQuery('.dateClass').text());
+        var date=new Date();
+        var day=date.getDay();
+        $scope.month=monthNames[date.getMonth()];
+        $scope.day=dayNames[day-1];
+        console.log(day,':',$scope.month);
         jQuery(function () {
 
             var options = {
