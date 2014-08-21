@@ -3,11 +3,11 @@
         <form>
             <div class="search-city">
                 <input id="city" type="text" class="form-control" placeholder="Search By City..." ng-model="city">
-                <!--<span class="input-group-btn">
-                <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()"
-                        ng-disabled="!city">
-                    <i class="fa fa-search"></i>
-                </button>-->
+                                <!--<span class="input-group-btn">
+                                <button class="btn btn-default search-city-btn" type="button" ng-click="getDetails()"
+                                        ng-disabled="!city">
+                                    <i class="fa fa-search"></i>
+                                </button>-->
 
 
             </div>
@@ -18,7 +18,6 @@
                     <div class="overlay-weather-info">
                         <div class="weather-info-city">
                             <h4 class="h4"><i class="fa fa-map-marker"></i> {{fullName}}</h4>
-
                             <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
                                 <i class="wi-day-sprinkle weather-icon"></i>
                                 <img class="img-icon"
@@ -26,7 +25,6 @@
                             </div>
                             <div id="weather-info">
                                 <h5 class="h5">{{WIWeatherResult.weather[0].description}}</h5>
-
                                 <h1 class="h1">{{WIWeatherResult.main.temp-273 | number:2}}<sup>°</sup>C</h1>
                             </div>
                         </div>
@@ -48,7 +46,6 @@
                             </div>
                             <div id="humidity-info">
                                 <h5>Humidity</h5>
-
                                 <h1>{{WIWeatherResult.main.humidity + " %"}}</h1>
                             </div>
                         </div>
@@ -61,7 +58,6 @@
                             </div>
                             <div id="windspeed-info">
                                 <h5>WindSpeed</h5>
-
                                 <h1>{{WIWeatherResult.wind.speed + " km/h"}}</h1>
                             </div>
                         </div>
@@ -72,8 +68,7 @@
             <!-- /.panel -->
         </div>
         <div ng-hide="WIWeatherResult">
-            <img src="../images/img/ajax_loader_gray_512.gif" style="width: 250px;height: 250px; margin-top: 50px"
-                 ng-show="reqLoader">
+            <img src="../images/img/ajax_loader_gray_512.gif" style="width: 250px;height: 250px; margin-top: 50px" ng-show="reqLoader">
 
         </div>
         <div id="info" ng-show="showInfo">
@@ -81,26 +76,27 @@
         </div>
     </div>
     <div class="col-md-3 recent-location " ng-show="mostVisitedData.length>0">
-        <div class="clockDiv">
-            <div id="jqRadialGauge" class="innerClockDiv">
+        <div class="timeDiv pull-left">
+            <div class="timeDivLeft col-sm-3">
+                <h2><strong><span class="dateClass"  my-current-time="format"></span></strong></h2>
             </div>
+            <div class="timeDivRight col-sm-3"><h2><strong><span class="dateClass" my-current-time="formatDate"></span></strong></h2></div>
+
+
         </div>
 
+             <div class="sidebar-inner2">
 
-        <div class="sidebar-inner2">
+                <ul class="list-group">
+                    <h3 class="list-group-item in-h3"><strong>Most Searched Places</strong></h3>
+                    <a  class="list-group-item loc" ng-repeat="data in mostVisitedData | orderBy:'searchCount':true | limitTo:5" href="javascript:void(0);">
+                        <li ng-click="getWeather(data)">{{" "+data.fullName}}
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            <!-- /.l
 
-            <ul class="list-group">
-                <h3 class="list-group-item in-h3"><strong>Most Searched Places</strong></h3>
-                <a class="list-group-item loc"
-                   ng-repeat="data in mostVisitedData | orderBy:'searchCount':true | limitTo:5"
-                   href="javascript:void(0);">
-                    <li ng-click="getWeather(data)">{{" "+data.fullName}}
-                    </li>
-                </a>
-            </ul>
-        </div>
-        <!-- /.l
-
-    <!-- /.col-lg-8 -->
+        <!-- /.col-lg-8 -->
     </div>
-</div>
+    </div>

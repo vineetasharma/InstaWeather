@@ -127,7 +127,7 @@
 }
 
 .sidebar-inner2 {
-    margin-top: 40px;
+    margin-top: 70px;
     background-color: transparent;
     height: 288px;
     border-radius: 10px;
@@ -347,10 +347,25 @@ body {
 .fb{
     background-color: #105cb6;
 }
-.clockDiv{
-    margin-left: 52px;
+.timeDiv{
+    color: #222222;
+    padding-left: 0px;
+    padding-bottom: 10px;
+
 }
-.innerClockDiv{
-    width: 150px;
-    height: 150px;
+.timeDivLeft{
+    float: left;
+    width: 140px;
+    border-bottom-left-radius:6px;
+    border-top-left-radius:6px ;
+    background-color: cornflowerblue;
+    font-variant-numeric:diagonal-fractions;
+}
+.timeDivRight{
+    float: right;
+    width: 140px;
+    border-bottom-right-radius:6px;
+    border-top-right-radius:6px ;
+    background-color: cornflowerblue;
+
 }
