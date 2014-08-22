@@ -3,7 +3,7 @@ angular.module('yoApp')
 
         this.getDetails = function (callback) {
             var searchLocation = jQuery("#city").val().toString().split(', ');
-            console.log(searchLocation+" city input");
+            console.log(searchLocation + " city input");
             var searchLocationLength = searchLocation.length;
             jQuery.ajax({
                 url: "http://ws.geonames.org/searchJSON",
@@ -15,9 +15,9 @@ angular.module('yoApp')
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-                    console.log(data,'data in service');
+                    console.log(data, 'data in service');
                     if (data) {
-                    callback(data);
+                        callback(data);
                     }
                     else
                         callback(null);
@@ -29,23 +29,47 @@ angular.module('yoApp')
         };
 
         this.getWeatherDetails = function (result, callback) {
-            console.log('result in get weather details of home service ',result);
-            jQuery.ajax({
-                url: "http://api.openweathermap.org/data/2.5/weather?",
-                dataType: "jsonp",
-                data: {
-                    lat: result.geonames ? result.geonames[0].lat : result.latitude,
-                    lon: result.geonames ? result.geonames[0].lng : result.longitude
-                },
-                success: function (data) {
-                    callback(data);
-                }, error: function (err) {
-                    console.log("error during recieving weather data: ", err);
-                    callback(null);
+            console.log('result in get weather details of home service ', result);
+            if(result.geolocation_data){
+                jQuery.ajax({
+                    url: "http://api.openweathermap.org/data/2.5/weather?",
+                    dataType: "jsonp",
+                    data: {
+                        lat: result.geolocation_data.latitude,
+                        lon: result.geolocation_data.longitude
+                    },
+                    success: function (data) {
+                        callback(data);
+                    }, error: function (err) {
+                        console.log("error during receiving weather data: ", err);
+                        callback(null);
 
 
-                }
-            });
+                    }
+                });
+
+            }
+            else{
+                console.log('else part of getWeather Details');
+                jQuery.ajax({
+                    url: "http://api.openweathermap.org/data/2.5/weather?",
+                    dataType: "jsonp",
+                    data: {
+                        lat: result.geonames ? result.geonames[0].lat : result.latitude,
+                        lon: result.geonames ? result.geonames[0].lng : result.longitude
+                    },
+                    success: function (data) {
+                        callback(data);
+                    }, error: function (err) {
+                        console.log("error during recieving weather data: ", err);
+                        callback(null);
+
+
+                    }
+                });
+
+            }
+
         };
 
         this.getMostSearchPlaceDetails = function (callback) {
@@ -59,7 +83,7 @@ angular.module('yoApp')
                 });
         };
 
-        this.updateOrSaveLocationDetails=function(data){
+        this.updateOrSaveLocationDetails = function (data) {
             $http.post("/addlocationdata", data)
                 .success(function () {
                     console.log("Information sucessfully added");
@@ -69,16 +93,35 @@ angular.module('yoApp')
                 });
         };
 
-        this.getLastSearchLocation=function(callback){
+        this.getLastSearchLocation = function (callback) {
             $http.get("/getLastSearchLocation")
                 .success(function (location) {
-                    if(location.length)
-                    callback(null);
+                    if (location.length)
+                        callback(null);
                     callback(location);
                 }).
                 error(function (error) {
                     console.log("error during getLastSearchLocation: ", error.message);
                     callback(error);
                 });
+        }
+        this.showCurrentLocationInfo = function (Userip,callback) {
+            jQuery.ajax({
+                url: "http://api.ipaddresslabs.com/iplocation/v1.7/locateip",
+                dataType:'jsonp',
+                data:{
+                    key:'SAKZ66Z99U4NH5AS84HZ',
+                    ip:Userip,
+                    format:'json'
+                },
+                success: function (data) {
+                    console.log(data, 'data of current location in home service using IP');
+                    callback(data);
+                }, error: function (err) {
+                    console.log("error during searching current  location using IP: ", err);
+                    callback(null);
+                }
+
+            });
         }
     }]);

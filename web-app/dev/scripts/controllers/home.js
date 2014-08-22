@@ -4,16 +4,51 @@
 
 angular.module('yoApp')
     .controller('homeCtrl', ['$scope', 'HomeService', '$interval', function ($scope, HomeService, $interval) {
+        console.log(myip, 'MyIp address');
+        var user = $('#profileData').val();
+        console.log(user, 'user');
+        if (!user) {
+            $scope.reqLoader = true;
+            HomeService.showCurrentLocationInfo(myip, function (currentLocationInfo) {
+                if (currentLocationInfo) {
+                    HomeService.getWeatherDetails(currentLocationInfo, function (data) {
+                        if (data) {
+                            console.log('current location Weather info', data);
+                            $scope.reqLoader = false;
+                            $scope.fullName = currentLocationInfo.geolocation_data.city + ',' + currentLocationInfo.geolocation_data.country_name;
+                            $scope.city = $scope.fullName;
+                            $scope.WIWeatherResult = data;
+                        }
+
+                    });
+                }
+
+            });
+        }
+        else {
+            console.log('else part of user');
+            HomeService.getLastSearchLocation(function (location) {
+                console.log(location);
+                if (location !== 'null' && location) {
+                    $scope.getWeather(location);
+                }
+                else {
+                    $scope.reqLoader = false;
+                    console.log("location data is null for last search");
+                }
+            });
+        }
+
 
         $scope.format = 'h:mm';
-        $scope.formatDate='d';
+        $scope.formatDate = 'd';
         var monthNames = [ "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December" ];
-        var dayNames=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-        var date=new Date();
-        var day=date.getDay();
-        $scope.month=monthNames[date.getMonth()];
-        $scope.day=dayNames[day-1];
+        var dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        var date = new Date();
+        var day = date.getDay();
+        $scope.month = monthNames[date.getMonth()];
+        $scope.day = dayNames[day - 1];
         jQuery(function () {
 
             var options = {
@@ -43,15 +78,7 @@ angular.module('yoApp')
             $scope.mostVisitedData = data;
         });
 
-        HomeService.getLastSearchLocation(function (location) {
-            if (location !== 'null' && location) {
-                $scope.getWeather(location);
-            }
-            else {
-                $scope.reqLoader = false;
-                console.log("location data is null for last search");
-            }
-        });
+
         /*recieving location information and then weather information to show weather information on home page*/
         $scope.getDetails = function () {
             $scope.reqLoader = true;
@@ -73,7 +100,7 @@ angular.module('yoApp')
 
         $scope.getWeather = function (result) {
             if (result.geonames) {
-                if(result.geonames.length>0){
+                if (result.geonames.length > 0) {
                     $scope.showInfo = false;
                     $scope.reqLoader = true;
                     $scope.WILocalionResult = null;
@@ -106,14 +133,14 @@ angular.module('yoApp')
                     });
 
                 }
-                else{
+                else {
                     $scope.reqLoader = false;
                     $scope.showInfo = true;
                     $scope.$apply();
                 }
 
             }
-            else if(result._id){
+            else if (result.geoNameId) {
                 $scope.showInfo = false;
                 $scope.reqLoader = true;
                 $scope.WILocalionResult = null;
@@ -139,7 +166,7 @@ angular.module('yoApp')
                 }
                 HomeService.updateOrSaveLocationDetails(result);
                 HomeService.getWeatherDetails(result, function (weatherInfo) {
-                    $scope.fullName = result.fullName ;
+                    $scope.fullName = result.fullName;
                     $scope.city = $scope.fullName;
                     $scope.WIWeatherResult = weatherInfo;
                     $scope.$apply();
@@ -148,6 +175,7 @@ angular.module('yoApp')
 
             }
 
+
         };
     }])
     .directive('myCurrentTime', ['$interval', 'dateFilter',
@@ -155,6 +183,7 @@ angular.module('yoApp')
             return function (scope, element, attrs) {
                 var format,
                     stopTime;
+
                 function updateTime() {
                     element.text(dateFilter(new Date(), format));
                 }
