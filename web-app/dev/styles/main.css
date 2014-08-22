@@ -29,6 +29,7 @@
     bottom: 0;
     left: 0;
     background: #000;
+    z-index: 2;
 }
 
 /* Customize container */
@@ -412,4 +413,22 @@ ul.profile-details li input[type="text"] {
 .profile-contact{
     margin-top: 5px;
    background-color: #f5f5f5;
+}
+
+.address{
+    font-size: small;
+}
+.about{
+    margin-bottom: 10px;
+    text-align: left !important;
+}
+.control-label{
+    text-align: left!important;
+    padding-left: 100px;
+}
+.edit-profile{
+    text-align: right;
+}
+p.email{
+    text-indent: 50px;
 }

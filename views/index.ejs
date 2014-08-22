@@ -13,9 +13,9 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="scripts/geocompletejs/jquery.geocomplete.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="scripts/services/HomeService.js"></script>
-    <script src="scripts/services/ContactService.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/profile.js"></script>
+    <script src="scripts/services/HomeService.js"></script>
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/contact.js"></script>
     <script src="scripts/controllers/about.js"></script>
@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <%
-                if(!user)
+                if(!user || !(user.email?true:(user.roles?true:(user. twitterId?true:false))))
                 { %>
                 <li id="NotLoggedIn">
                     <a href="" ng-click="signIn()">
@@ -86,7 +86,10 @@
                     </a>
                 </li>
                 <% }
-                else{ %>
+                else{
+                    var userid = user._id ? user._id : user.id;
+                    console.log(">>>>>>>>>>>ID>>>>>>>>>>>>",userid);
+                %>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
                         <img src='<%= user.profilePicUrl %>' style="width: 25px;height: 25px"
@@ -94,13 +97,14 @@
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#/profile" ng-click="getProfileDeta('<%= user._id %>')"><i
+                        <li><a href="#/profile"><i
                                         class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
+                    <input type="hidden" value="<%=userid%>" id="profileData"/>
                     <!-- /.dropdown-user -->
                 </li>
                 <% }

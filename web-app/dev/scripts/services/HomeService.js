@@ -14,9 +14,9 @@ angular.module('yoApp')
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-                    console.log(data,'data in service');
+                    console.log(data, 'data in service');
                     if (data) {
-                    callback(data);
+                        callback(data);
                     }
                     else
                         callback(null);
@@ -57,7 +57,7 @@ angular.module('yoApp')
                 });
         };
 
-        this.updateOrSaveLocationDetails=function(data){
+        this.updateOrSaveLocationDetails = function (data) {
             $http.post("/addlocationdata", data)
                 .success(function () {
                     console.log("Information sucessfully added");
@@ -67,11 +67,11 @@ angular.module('yoApp')
                 });
         };
 
-        this.getLastSearchLocation=function(callback){
+        this.getLastSearchLocation = function (callback) {
             $http.get("/getLastSearchLocation")
                 .success(function (location) {
-                    if(location.length)
-                    callback(null);
+                    if (location.length)
+                        callback(null);
                     callback(location);
                 }).
                 error(function (error) {
@@ -79,16 +79,38 @@ angular.module('yoApp')
                     callback(error);
                 });
         };
-        this.getProfileDeta=function(userId,callback){
-            $http.get("/getProfileDeta"+userId)
+
+        this.getProfileDeta = function (userId, callback) {
+            $http.get("/getProfileDeta/" + userId)
                 .success(function (userData) {
-                    if(!userData)
+                    if (!userData)
                         callback(null);
                     callback(userData);
                 }).
                 error(function (error) {
-                    console.log("error during getProfileDeta: ", error.message);
+                    console.log("error during get Profile Deta: ", error.message);
                     callback(error);
                 });
+        };
+
+        this.updateProfileInfo = function (userId, data) {
+             $http.put("/updateProfileInfo/"+userId,{userData:data})
+             .success(function (result) {
+             console.log(result);
+             }).
+             error(function (error) {
+             console.log("error during update Profile Deta: ", error.message);
+             });
+
+        };
+        this.updateAboutInfo = function (userId, data) {
+             $http.put("/updateAboutInfo/"+userId,{userData:data})
+             .success(function (result) {
+             console.log(result);
+             }).
+             error(function (error) {
+             console.log("error during update Profile Deta: ", error.message);
+             });
+
         }
     }]);

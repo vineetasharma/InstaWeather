@@ -66,7 +66,6 @@ angular.module('yoApp')
         };
 
         $scope.getWeather = function (result) {
-
             $scope.reqLoader = true;
             console.log('getWeather method called');
             $scope.WILocalionResult = null;

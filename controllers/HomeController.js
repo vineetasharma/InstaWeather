@@ -20,19 +20,16 @@ exports.index = function (req, res) {
         res.loginUser(req.user._id, req.user.username, ['user']);
     }
     var user = req.checkLoggedIn();
-    console.log(user,'user');
     if(user){
         User.findOne({_id: user._id}, function (err, data) {
             if (err) {
-                res.render('index', {user: null, picURL:null});
+                res.render('index', {user: null});
             }
             else if (data) {
-                console.log(data,'data chggv vjhjh');
-                res.render('index', {user: data.username, picURL:data.profilePicUrl});
-
+                res.render('index', {user: data});
             }
             else{
-                res.render('index', {user: null, picURL:null});
+                res.render('index', {user: null});
             }
         });
 

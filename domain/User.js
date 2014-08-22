@@ -10,6 +10,7 @@
  * Define the Schema of the collection (MongooseJS schema definition)
  * */
 exports.schema = {
+    About:String,
     username:String,
     password:String,
     email:String,
@@ -19,7 +20,6 @@ exports.schema = {
     lastSearchedLocation : {},
     profilePicUrl:String,
     profileData:{
-        About:String,
         Birthday:String,
         Gender:String,
         Mobile:{type:Number},

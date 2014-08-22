@@ -86,4 +86,8 @@ _app.get('/getLastSearchLocation',controllers.location.getLastSearchLocation);
 
 _app.post('/sendMail',controllers.home.sendMail);
 
-_app.get('/getProfileDeta?:_id',controllers.user.getProfileDeta);
+_app.get('/getProfileDeta/:_id',controllers.user.getProfileDeta);
+
+_app.put('/updateProfileInfo/:_id',controllers.user.updateProfileInfo);
+
+_app.put('/updateAboutInfo/:_id',controllers.user.updateAboutInfo);
