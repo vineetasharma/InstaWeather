@@ -7,16 +7,20 @@
                         <img class="profile-image" src={{currentUser.profilePicUrl}} alt="profile pic">
                     </div>
                     <div class="col-xs-5 about col-sm-12 profile-contact">
-                        <h4>About:</h4>
+                        <h5>Email:</h5>
+                        <p class="email">{{currentUser.email}}</p>
+                        <h5>About:</h5>
                         <label ng-show="!isEditAbout"
                                class="pull-left col-sm-3 control-label">{{currentUser.About}}</label>
+
                         <div ng-show="isEditAbout" class="col-xs-5 col-sm-12">
-                            <textarea rows="2" cols="29" class="about" ng-model="AboutInfo"
-                                      ng-init="AboutInfo=currentUser.About"></textarea>
-                            <button class="btn btn-info about pull-right" ng-click="saveAboutInfo()">save</button>
+                            <textarea rows="2" cols="29" class="about" id="About" data-value="currentUser.About"></textarea>
+                            <button class="btn btn-info about pull-right" ng-click="updateAboutInfo()">save</button>
                         </div>
                         <a href="javaScript:void(0);" ng-show="!isEditAbout" ng-click="showAboutTextArea()"
                            class="edit-profile col-sm-12 pull right">Edit</a>
+                        <a href="javaScript:void(0);" ng-show="isEditAbout" ng-click="hideAboutTextArea()"
+                           class="edit-profile col-sm-12 pull right">Back</a>
                     </div>
                 </div>
                 <!--/row-->

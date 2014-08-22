@@ -17,6 +17,10 @@ angular.module('yoApp')
             $scope.isEditprofile = true;
         };
 
+        $scope.hideProfileEditFields = function () {
+            $scope.isEditprofile = false;
+        };
+
         $scope.updateProfileInfo = function () {
             $scope.isEditprofile = false;
             var data = {
@@ -43,6 +47,10 @@ angular.module('yoApp')
 
         $scope.showAboutTextArea = function () {
             $scope.isEditAbout = true;
+            $scope.$apply();
+        };
+        $scope.hideAboutTextArea = function () {
+            $scope.isEditAbout = false;
             $scope.$apply();
         };
         $scope.updateAboutInfo = function () {
