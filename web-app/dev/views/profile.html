@@ -45,26 +45,26 @@
                                         <form class="form-horizontal ng-pristine ng-valid" role="form">
                                             <div class="form-group" ng-repeat="(key,value) in currentUser.profileData">
                                                 <label ng-show="value || isEditprofile"
-                                                        class="col-sm-3 control-label pull-left">{{key}}</label>
-                                                <div class="col-sm-9">
-                                                    <label ng-show="!isEditprofile"
+                                                        class="col-sm-4 control-label pull-left">{{key}}</label>
+                                                <div class="col-sm-8" ng-show="value || isEditprofile">
+                                                    <label ng-show="value && !isEditprofile"
                                                            class="col-sm-3 control-label pull-left">{{value}}</label>
                                                     <div ng-show="isEditprofile" class="col-sm-3 control-label">
-                                                        <input type="text" class="text" id="{{key}}" value="{{value}}">
+                                                        <input type="text" class="text" id="{{key}}" value="{{value?value:''}}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group" ng-repeat="(key,value) in currentUser.Address">
-                                                <label ng-show="value || isEditprofile" class="col-sm-3 control-label pull-left">{{key}}</label>
-                                                <div class="col-sm-9">
-                                                    <label ng-show="!isEditprofile"
+                                                <label ng-show="value || isEditprofile" class="col-sm-4 control-label pull-left">{{key}}</label>
+                                                <div class="col-sm-8">
+                                                    <label ng-show="value && !isEditprofile"
                                                            class="col-sm-3 control-label pull-left">{{value}}</label>
                                                     <div ng-show="isEditprofile" class="col-sm-3 control-label">
-                                                        <input type="text" class="text" id="{{key}}" value="{{value}}">
+                                                        <input type="text" class="text" id="{{key}}" value="{{value?value:''}}" >
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button ng-show="isEditprofile" class="btn btn-info about pull-right"
+                                            <button ng-show="isEditprofile" class="btn btn-info save pull-center"
                                                     ng-click="updateProfileInfo()">save
                                             </button>
                                             <!--                             <button type="submit" class="btn btn-default">save</button>-->

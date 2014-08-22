@@ -432,3 +432,9 @@ ul.profile-details li input[type="text"] {
 p.email{
     text-indent: 50px;
 }
+.form-group {
+     margin-bottom: 0px;
+}
+.save{
+    margin-top: 25px;
+}
