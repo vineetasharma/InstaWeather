@@ -10,13 +10,10 @@ angular.module('yoApp')
         var monthNames = [ "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December" ];
         var dayNames=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-//        var month=jQuery('.dateClass').text();
-//        alert(jQuery('.dateClass').text());
         var date=new Date();
         var day=date.getDay();
         $scope.month=monthNames[date.getMonth()];
         $scope.day=dayNames[day-1];
-        console.log(day,':',$scope.month);
         jQuery(function () {
 
             var options = {
@@ -24,7 +21,6 @@ angular.module('yoApp')
             };
             $("#city").geocomplete(options).bind("geocode:result", function (event, result) {
                 $scope.reqLoader = true;
-                console.log('getDetail method called');
                 $scope.WILocalionResult = null;
                 $scope.WIWeatherResult = null;
                 HomeService.getDetails(function (result) {
@@ -59,7 +55,6 @@ angular.module('yoApp')
         /*recieving location information and then weather information to show weather information on home page*/
         $scope.getDetails = function () {
             $scope.reqLoader = true;
-            console.log('getDetail method called');
             $scope.WILocalionResult = null;
             $scope.WIWeatherResult = null;
             $scope.showInfo = false;
@@ -77,8 +72,48 @@ angular.module('yoApp')
         };
 
         $scope.getWeather = function (result) {
-            console.log('getWeather method called');
-            if (result.geonames.length > 0) {
+            if (result.geonames) {
+                if(result.geonames.length>0){
+                    $scope.showInfo = false;
+                    $scope.reqLoader = true;
+                    $scope.WILocalionResult = null;
+                    $scope.WIWeatherResult = null;
+                    var flag = false;
+                    if ($scope.mostVisitedData) {
+                        console.log('most visited', $scope.mostVisitedData);
+                        $scope.mostVisitedData.forEach(function (mostVisited) {
+                            if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
+                                mostVisited.searchCount++;
+                                flag = true;
+                            }
+                        });
+                        if (!flag) {
+                            $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
+                                locationName: result.geonames[0].name,
+                                fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
+                                latitude: result.geonames[0].lat,
+                                longitude: result.geonames[0].lng,
+                                searchCount: 1});
+
+                        }
+                    }
+                    HomeService.updateOrSaveLocationDetails(result);
+                    HomeService.getWeatherDetails(result, function (weatherInfo) {
+                        $scope.fullName = result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName;
+                        $scope.city = $scope.fullName;
+                        $scope.WIWeatherResult = weatherInfo;
+                        $scope.$apply();
+                    });
+
+                }
+                else{
+                    $scope.reqLoader = false;
+                    $scope.showInfo = true;
+                    $scope.$apply();
+                }
+
+            }
+            else if(result._id){
                 $scope.showInfo = false;
                 $scope.reqLoader = true;
                 $scope.WILocalionResult = null;
@@ -104,17 +139,15 @@ angular.module('yoApp')
                 }
                 HomeService.updateOrSaveLocationDetails(result);
                 HomeService.getWeatherDetails(result, function (weatherInfo) {
-                    $scope.fullName = result.fullName ? result.fullName : (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName);
+                    $scope.fullName = result.fullName ;
                     $scope.city = $scope.fullName;
                     $scope.WIWeatherResult = weatherInfo;
                     $scope.$apply();
                 });
+
+
             }
-            else{
-                $scope.reqLoader = false;
-                $scope.showInfo = true;
-                $scope.$apply();
-            }
+
         };
     }])
     .directive('myCurrentTime', ['$interval', 'dateFilter',
