@@ -5,7 +5,6 @@ exports.sendMailService = function (mailData) {
     var emitter = this;
     var file = fs.readFileSync(_process.cwd() + '/web-app/dev/views/mailMessage.ejs', "utf8");
     var html = _ejs.render(file, mailData);
-    console.log(mailData, 'maildata');
     var transport = _nodemailer.createTransport({
         service: _config.mailService.service,
         auth: {

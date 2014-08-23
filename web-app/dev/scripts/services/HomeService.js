@@ -14,7 +14,6 @@ angular.module('yoApp')
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-                    console.log(data, 'data in service');
                     if (data) {
                         callback(data);
                     }
@@ -91,15 +90,5 @@ angular.module('yoApp')
                     console.log("error during get Profile Deta: ", error.message);
                     callback(error);
                 });
-        };
-
-        this.updateProfileInfo = function (userId, data) {
-             $http.put("/updateProfileInfo/"+userId,{userData:data})
-             .success(function (result) {
-             console.log(result);
-             }).
-             error(function (error) {
-             console.log("error during update Profile Deta: ", error.message);
-             });
         };
     }]);

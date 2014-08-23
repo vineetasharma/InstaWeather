@@ -1,6 +1,6 @@
 
 
-<div class="row profile-row">
+<div class="row profile-row" ng-show="currentUser.username">
     <div class="col-sm-3">
         <div class="row profile">
             <div class=" pull-right">
@@ -16,19 +16,20 @@
                 <h3>Public profile</h3>
                 <div class="boxed-group-inner clearfix js-uploadable-container js-upload-avatar-image is-default">
                     <a href="#/profile"class="pull right">Back</a>
-                    <form class="columns ng-pristine ng-valid" method="post" action="/updateProfileInfo">
+                    <form class="columns ng-pristine ng-valid" method="post" enctype="multipart/form-data" action="/updateProfileInfo">
                         <div class="column two-thirds">
                             <dl class="form edit-profile-avatar">
                                 <dt><label for="uploadPic">Profile picture</label></dt>
                                 <dd class="avatar-upload-container clearfix">
                                     <img alt="{{currentUser.username}}" class="profile-avatar" name="profilePic" height="70" src="{{currentUser.profilePicUrl}}" width="70">
+                                    <input type="hidden" id="profilePicUrl" name="profilePicUrl" value="{{currentUser.profilePicUrl}}">
                                     <div class="avatar-upload">
                                         <a href="javaScript:void(0);" class="button button-change-profile-picture">
                                             <label for="uploadPic"
                                                    class="label-upload-profile-picture">
                                                 Upload new picture
-                                                <input id="uploadPic" name="uploadPic" type="file"
-                                                       multiple="multiple"
+                                                <input id="uploadPic" name="uploadPic" type="file" accept=".jpg,.jpeg,.gif,.png"
+
                                                        class="manual-file-chooser js-manual-file-chooser js-avatar-field">
                                             </label>
                                         </a>
@@ -66,8 +67,8 @@
                             </dl>
                             <dl class="form">
                                 <dt><label for="Email">Email</label></dt>
-                                <dd><input class="long" id="Email" name="Email" value="{{currentUser.email}}" disabled="disabled"
-                                           size="30" type="text"></dd>
+                                <dd class="profile-info"><label class="long" >{{currentUser.email}}</label></dd>
+                                <input type="hidden" id="Email" name="Email" value="{{currentUser.email}}">
                             </dl>
                             <dl class="form">
                                 <dt><label for="About">About</label></dt>
@@ -119,10 +120,7 @@
                                 <dd><input class="long" id="Pin" name="Pin"  value="{{currentUser.Address.pin?currentUser.Address.pin:''}}"
                                            size="30" type="text"></dd>
                             </dl>
-                            <input type="submit" class="btn btn-info save pull-center">save</input>
-                           <!-- <p>
-                                <button type="button" ng-click="updateProfileInfo()" class="button primary">Update profile</button>
-                            </p>-->
+                            <input type="submit" class="btn btn-info save pull-center" value="save"</input>
                         </div>
                     </form>
                 </div>

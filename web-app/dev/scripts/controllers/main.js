@@ -10,11 +10,4 @@ angular.module('yoApp')
                 keyboard: true
             });
         };
-
-        $scope.getProfileDeta = function (userId) {
-            HomeService.getProfileDeta(userId, function (user) {
-                $scope.profileData = user.profileData;
-                $scope.address = user.Address;
-            });
-        };
     }]);

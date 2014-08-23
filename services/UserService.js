@@ -1,4 +1,6 @@
 var EventName = require("../src/enum/EventName");
+var fs = require('fs');
+
 
 exports.findOrCreateTwitterAccountService = function (profile) {
     var emitter = this;
@@ -42,7 +44,6 @@ exports.findOrCreateTwitterAccountService = function (profile) {
 
 exports.findOrCreateFacebookAccountService = function (accessToken, profile) {
     var emitter = this;
-    console.log(profile, 'FB profile');
     User.findOne({email: profile.emails[0].value}, function (err, data) {
         if (err) {
             emitter.emit("error", err);
@@ -108,7 +109,7 @@ exports.addLastSearchedLocation = function (userId, lastSearchedLocation) {
 
 exports.getProfileDeta = function (userId) {
     var emitter = this;
-    User.findOne({_id: userId}, {email: 1, profileData: 1, Address: 1, About: 1, profilePicUrl: 1}, function (err, data) {
+    User.findOne({_id: userId}, {username: 1, email: 1, profileData: 1, Address: 1, About: 1, profilePicUrl: 1}, function (err, data) {
         if (err) {
             emitter.emit(EventName.ERROR, err);
         }
@@ -118,26 +119,69 @@ exports.getProfileDeta = function (userId) {
     })
 }.toEmitter();
 
-exports.updateProfileDeta = function (userId, userData) {
+exports.updateProfileInfo = function (fields, profilePicUrl) {
     var emitter = this;
-    log.info(">>>>>>>>>>userData>>>>>>>>>.", userData);
-    User.update({_id: userId}, {$set: {
-        'profileData.Birthday': userData.profileData.Birthday,
-        'profileData.Gender': userData.profileData.Gender,
-        'profileData.Mobile': userData.profileData.Mobile,
-        'profileData.CurrentCity': userData.profileData.CurrentCity,
-        'Address.Hometown': userData.Address.Hometown,
-        'Address.City': userData.Address.City,
-        'Address.State': userData.Address.State,
-        'Address.Country': userData.Address.Country,
-        'Address.pin': userData.Address.pin
+    User.update({email: fields.Email}, {$set: {
+        'username': fields.Name,
+        'profilePicUrl': profilePicUrl,
+        'profileData.Birthday': fields.Birthday,
+        'profileData.Gender': fields.Gender,
+        'profileData.Mobile': fields.Mobile,
+        'profileData.CurrentCity': fields.CurrentCity,
+        'Address.Hometown': fields.Hometown,
+        'Address.City': fields.City,
+        'Address.State': fields.State,
+        'Address.Country': fields.Country,
+        'Address.pin': fields.Pin
     }}, {upsert: true }, function (err, data) {
         if (err) {
             emitter.emit(EventName.ERROR, err);
         }
         else {
-            log.info(">>>>>>>>>>result Data>>>>>>>>>.", data);
             emitter.emit(EventName.DONE, data);
         }
     });
 }.toEmitter();
+
+exports.valiDateProfileInfo = function (req, res) {
+    var emitter = this;
+    var form = new _formidable.IncomingForm();
+    form.keepExtensions = true;     //keep file extension
+    form.uploadDir = __appBaseDir + "/web-app/dev/images/upload";       //set upload directory
+    form.parse(req, function (err, fields, files) {
+        var fileType = files.uploadPic.type.split('/')[1].toLowerCase().trim();
+        var curr_date = new Date();
+        var dd = curr_date.getDate();
+        var mm = curr_date.getMonth();
+        var yy = curr_date.getFullYear();
+        var m = curr_date.getMinutes();
+        var h = curr_date.getHours();
+        var fileName = '/' + m + h + dd + mm + yy + files.uploadPic.name;
+        var uploadDirPath = form.uploadDir + fileName;
+        var profilePicUrl = fields.profilePicUrl;
+        if (files.uploadPic.size > 0) {
+            if (fileType != 'jpeg' && fileType != 'jpg' && fileType != 'png' && fileType != 'gif') {
+                fs.unlink(files.uploadPic.path);
+                emitter.emit(EventName.ERROR, 'File type as  jpeg, gif or png Should be required');
+            }
+            else {
+                fs.rename(files.uploadPic.path, uploadDirPath, function (err) {
+                    if (err)
+                        emitter.emit(EventName.ERROR, err);
+                    else
+                        emitter.emit(EventName.DONE, {fields: fields,
+                            profilePicUrl: "/images/upload/"+fileName
+                        });
+                });
+            }
+        }
+        else {
+            fs.unlink(files.uploadPic.path);
+            emitter.emit(EventName.DONE, {
+                fields: fields,
+                profilePicUrl: profilePicUrl
+            });
+        }
+    });
+}.toEmitter();
+

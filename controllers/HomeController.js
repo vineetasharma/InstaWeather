@@ -36,7 +36,6 @@ exports.index = function (req, res) {
     }
     else{
         res.render('index', {user: (user ? user : (req.user ? req.user : null))});
-        console.log('else part of request');
     }
 
 };

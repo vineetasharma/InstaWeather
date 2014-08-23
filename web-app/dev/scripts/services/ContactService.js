@@ -15,8 +15,6 @@ angular.module('yoApp')
         this.sendMail = function (mailData, callback) {
             $http.post("/sendMail", mailData)
                 .success(function (data) {
-                    console.log(data, ' data in contact service ');
-
                     callback(data);
                 }).
                 error(function (error) {
