@@ -20,8 +20,8 @@ angular
                 templateUrl: '../views/profile.html',
                 controller: 'profileCtrl'
             })
-            .when('/profile/photos', {
-                templateUrl: '../views/userpics.html',
+            .when('/editprofile', {
+                templateUrl: '../views/editProfile.html',
                 controller: 'profileCtrl'
             })
             .when('/about',{

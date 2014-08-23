@@ -120,13 +120,13 @@ exports.getProfileDeta = function (userId) {
 
 exports.updateProfileDeta = function (userId, userData) {
     var emitter = this;
-    log.info(">>>>>>>>>>userData>>>>>>>>>.",userData);
-    User.update({_id: userId}, {$set:{
+    log.info(">>>>>>>>>>userData>>>>>>>>>.", userData);
+    User.update({_id: userId}, {$set: {
         'profileData.Birthday': userData.profileData.Birthday,
         'profileData.Gender': userData.profileData.Gender,
         'profileData.Mobile': userData.profileData.Mobile,
-        'profileData.CurrentCity':userData.profileData.CurrentCity,
-        'Address.Hometown':userData.Address.Hometown,
+        'profileData.CurrentCity': userData.profileData.CurrentCity,
+        'Address.Hometown': userData.Address.Hometown,
         'Address.City': userData.Address.City,
         'Address.State': userData.Address.State,
         'Address.Country': userData.Address.Country,
@@ -136,24 +136,8 @@ exports.updateProfileDeta = function (userId, userData) {
             emitter.emit(EventName.ERROR, err);
         }
         else {
-            log.info(">>>>>>>>>>result Data>>>>>>>>>.",data);
+            log.info(">>>>>>>>>>result Data>>>>>>>>>.", data);
             emitter.emit(EventName.DONE, data);
         }
     });
 }.toEmitter();
-
-exports.updateAboutInfo = function (userId, userData) {
-    var emitter = this;
-    log.info(">>>>>>>>>>userData>>>>>>>>>.",userData);
-    User.update({_id: userId}, {$set:{
-        'About': userData.About}}, {upsert: true }, function (err, data) {
-        if (err) {
-            emitter.emit(EventName.ERROR, err);
-        }
-        else {
-            log.info(">>>>>>>>>>result Data>>>>>>>>>.",data);
-            emitter.emit(EventName.DONE, data);
-        }
-    });
-}.toEmitter();
-/*,About:userData.About,profilePicUrl:userData.profilePicUrl*/

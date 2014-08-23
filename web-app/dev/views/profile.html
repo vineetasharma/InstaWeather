@@ -1,87 +1,73 @@
-<div class="profile-row">
-    <div id="content">
+<div class="row profile-row ">
+    <div class="col-sm-3">
         <div class="row profile">
-            <div class="col-sm-3">
-                <div class="row profile">
-                    <div class="">
-                        <img class="profile-image" src={{currentUser.profilePicUrl}}>
-                    </div>
-                    <div class="col-xs-5 about col-sm-12 profile-contact">
-                        <h5>Email:</h5>
-                        <p class="email">{{currentUser.email}}</p>
-                        <h5>About:</h5>
-                        <label ng-show="!isEditAbout"
-                               class="pull-left col-sm-3 control-label">{{currentUser.About}}</label>
-
-                        <div ng-show="isEditAbout" class="col-xs-5 col-sm-12">
-                            <textarea rows="2" cols="29" class="about" id="About" data-value="currentUser.About"></textarea>
-                            <button class="btn btn-info about pull-right" ng-click="updateAboutInfo()">save</button>
-                        </div>
-                        <a href="javaScript:void(0);" ng-show="!isEditAbout" ng-click="showAboutTextArea()"
-                           class="edit-profile col-sm-12 pull right">Edit</a>
-                        <a href="javaScript:void(0);" ng-show="isEditAbout" ng-click="hideAboutTextArea()"
-                           class="edit-profile col-sm-12 pull right">Back</a>
-                    </div>
-                </div>
-                <!--/row-->
+            <div class=" pull-right">
+                <a href="#/editprofile"> <img class="profile-image" src={{currentUser.profilePicUrl}}></a>
             </div>
-            <!--/col-->
-            <div class="col-sm-9">
-
-                <ul class="nav nav-tabs" id="myTab">
-                    <li class="active"><a href="#/profile">Profile</a></li>
-                    <li class=""><a href="#/profile/photos">Photos</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-info">
-                                    <div class="panel-body">
-                                        <a href="javaScript:void(0);" ng-show="isEditprofile" ng-click="hideProfileEditFields()"
-                                           class="edit-profile col-sm-12 pull right">Back</a>
-                                        <a href="javaScript:void(0);" class="col-md-12 edit-profile"
-                                           ng-show="!isEditprofile" ng-click="showProfileEditFields()">Edit</a>
-                                        <form class="form-horizontal ng-pristine ng-valid" role="form">
-                                            <div class="form-group" ng-repeat="(key,value) in currentUser.profileData">
-                                                <label ng-show="value || isEditprofile"
-                                                        class="col-sm-4 control-label pull-left">{{key}}</label>
-                                                <div class="col-sm-8" ng-show="value || isEditprofile">
-                                                    <label ng-show="value && !isEditprofile"
-                                                           class="col-sm-3 control-label pull-left">{{value}}</label>
-                                                    <div ng-show="isEditprofile" class="col-sm-3 control-label">
-                                                        <input type="text" class="text" id="{{key}}" value="{{value?value:''}}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" ng-repeat="(key,value) in currentUser.Address">
-                                                <label ng-show="value || isEditprofile" class="col-sm-4 control-label pull-left">{{key}}</label>
-                                                <div class="col-sm-8">
-                                                    <label ng-show="value && !isEditprofile"
-                                                           class="col-sm-3 control-label pull-left">{{value}}</label>
-                                                    <div ng-show="isEditprofile" class="col-sm-3 control-label">
-                                                        <input type="text" class="text" id="{{key}}" value="{{value?value:''}}" >
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button ng-show="isEditprofile" class="btn btn-info save pull-center"
-                                                    ng-click="updateProfileInfo()">save
-                                            </button>
-                                            <!--                             <button type="submit" class="btn btn-default">save</button>-->
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/col-->
-                        </div>
-                        <!--/row-->
-                    </div>
-                </div>
-            </div>
-            <!--/col-->
         </div>
-        <!--/profile-->
-
+        <!--/row-->
     </div>
-    <!-- end: Content -->
+    <!--/col-->
+    <div class="col-sm-9">
+        <div class="settings-content">
+            <div class="boxed-group">
+                <h3>Public profile</h3>
+                <div class="boxed-group-inner clearfix
+                             js-uploadable-container js-upload-avatar-image is-default">
+                    <div class="columns ng-pristine">
+                        <div class="column two-thirds">
+                            <dl class="form" ng-show="currentUser.username">
+                                <dt><label for="user_profile_name">Name</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_name">{{currentUser.username}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.email">
+                                <dt><label for="user_profile_email">Email </label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_email">{{currentUser.email}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.About">
+                                <dt><label for="user_profile_about">About</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_about">{{currentUser.About}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.profileData.Birthday">
+                                <dt><label for="user_profile_birthday">Birthday</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_birthday">{{currentUser.profileData.Birthday}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.profileData.Gender">
+                                <dt><label for="user_profile_gender">Gender</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_gender">{{currentUser.profileData.Gender}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.profileData.Mobile">
+                                <dt><label for="user_profile_mobile">Mobile</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_mobile">{{currentUser.profileData.Mobile}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.Address.Hometown">
+                                <dt><label for="user_profile_hometown">Hometown</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_hometown">{{currentUser.Address.Hometown}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.Address.City">
+                                <dt><label for="user_profile_city">City</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_city">{{currentUser.Address.City}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.profileData.CurrentCity">
+                                <dt><label for="user_profile_currentCity">CurrentCity</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_currentCity">{{currentUser.profileData.CurrentCity}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.Address.State">
+                                <dt><label for="user_profile_state">State</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_state">{{currentUser.Address.State}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.Address.Country">
+                                <dt><label for="user_profile_country">Country</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_country">{{currentUser.Address.Country}}</label></dd>
+                            </dl>
+                            <dl class="form" ng-show="currentUser.Address.pin">
+                                <dt><label for="user_profile_pin">Pin</label></dt>
+                                <dd class="profile-info"><label class="long" id="user_profile_pin">{{currentUser.Address.pin}}</label></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

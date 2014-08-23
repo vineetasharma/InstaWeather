@@ -21,18 +21,18 @@
     "jwt-simple": "0.2.0",
     "mime": "1.2.11",
     "mongoose": "3.8.14",
+    "nodemailer": "~1.1.1",
     "passport": "0.2.0",
     "passport-facebook": "~1.0.3",
     "passport-http-bearer": "1.0.1",
     "passport-twitter": "^1.0.2",
+    "process": "~0.7.0",
     "qrcode-terminal": "0.9.4",
     "redis": "0.11.0",
     "request": "2.39.0",
     "socket.io": "1.0.6",
     "socket.io-redis": "0.1.3",
-    "underscore": "1.6.0",
-    "nodemailer": "~1.1.1",
-    "process": "~0.7.0"
+    "underscore": "1.6.0"
   },
   "devDependencies": {
     "grunt": "0.4.5",

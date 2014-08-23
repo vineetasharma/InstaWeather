@@ -3,7 +3,8 @@
 var EventName = require("../src/enum/EventName");
 var HttpStatusCode = require("../src/enum/HttpStatusCode");
 
-exports.findOrCreateTwitterAccountController = function (accessToken, refreshToken, profile, done) {
+
+    exports.findOrCreateTwitterAccountController = function (accessToken, refreshToken, profile, done) {
   UserService.findOrCreateTwitterAccountService(profile)
     .on("success", function (user) {
           done(null, user);
@@ -46,13 +47,16 @@ exports.updateProfileInfo = function (req, res) {
         });
 };
 
-exports.updateAboutInfo = function (req, res) {
-    UserService.updateAboutInfo(req.params._id,req.body.userData)
-        .on(EventName.ERROR, function (err) {
-            log.error(err);
-            res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
-        })
-        .on(EventName.DONE, function (result) {
-            res.sendSuccessAPIResponse(result, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
-        });
+exports.updateProfileInfoTemp = function (req, res) {
+   log.info("req.body>>>>>>>>>>>>>>>>>>>>>.>",req.body);
+    var form = new _formidable.IncomingForm();
+
+    /* UserService.updateProfileDeta(req.params._id,req.body.userData)
+         .on(EventName.ERROR, function (err) {
+             log.error(err);
+             res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
+         })
+         .on(EventName.DONE, function (result) {
+             res.sendSuccessAPIResponse(result, HttpStatusCode.SUCCESS_READ_OPERATION_PERFORMED);
+         });*/
 };

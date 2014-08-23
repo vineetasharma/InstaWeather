@@ -101,16 +101,5 @@ angular.module('yoApp')
              error(function (error) {
              console.log("error during update Profile Deta: ", error.message);
              });
-
         };
-        this.updateAboutInfo = function (userId, data) {
-             $http.put("/updateAboutInfo/"+userId,{userData:data})
-             .success(function (result) {
-             console.log(result);
-             }).
-             error(function (error) {
-             console.log("error during update Profile Deta: ", error.message);
-             });
-
-        }
     }]);

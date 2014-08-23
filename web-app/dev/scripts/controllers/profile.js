@@ -8,22 +8,10 @@
  */
 angular.module('yoApp')
     .controller('profileCtrl', ['$scope', 'HomeService', function ($scope, HomeService) {
-
-        $scope.isEditAbout = false;
-        $scope.isEditprofile = false;
-
-
-        $scope.showProfileEditFields = function () {
-            $scope.isEditprofile = true;
-        };
-
-        $scope.hideProfileEditFields = function () {
-            $scope.isEditprofile = false;
-        };
-
         $scope.updateProfileInfo = function () {
             $scope.isEditprofile = false;
             var data = {
+                username: jQuery("#Name").val(),
                 Address: {
                     City: jQuery("#City").val(),
                     Country: jQuery("#Country").val(),
@@ -38,28 +26,11 @@ angular.module('yoApp')
                     Mobile: jQuery("#Mobile").val()
                 }
             };
-            HomeService.updateProfileInfo($scope.currentUser._id, data);
+           console.log("data>>>>>>>>..",data);
+           /* HomeService.updateProfileInfo($scope.currentUser._id, data);
             $scope.currentUser.Address=data.Address;
             $scope.currentUser.profileData=data.profileData;
-            $scope.$apply();
-
-        };
-
-        $scope.showAboutTextArea = function () {
-            $scope.isEditAbout = true;
-            $scope.$apply();
-        };
-        $scope.hideAboutTextArea = function () {
-            $scope.isEditAbout = false;
-            $scope.$apply();
-        };
-        $scope.updateAboutInfo = function () {
-            $scope.isEditAbout = false;
-            var data = {
-                About:jQuery("#About").val()
-            };
-            HomeService.updateAboutInfo($scope.currentUser._id, data);
-            $scope.currentUser.About=data.About;
+            $scope.$apply();*/
 
         };
         $scope.getProfileDeta = function (userId) {
@@ -69,8 +40,4 @@ angular.module('yoApp')
             });
         };
         $scope.getProfileDeta($("#profileData").val());
-
-        $scope.updateProfileDeta = function (userId, data) {
-            HomeService.updateProfileDeta(userId, data);
-        };
     }]);

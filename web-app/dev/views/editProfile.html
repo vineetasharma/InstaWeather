@@ -1,0 +1,132 @@
+
+
+<div class="row profile-row">
+    <div class="col-sm-3">
+        <div class="row profile">
+            <div class=" pull-right">
+                <img class="profile-image" src={{currentUser.profilePicUrl}}>
+            </div>
+        </div>
+        <!--/row-->
+    </div>
+    <!--/col-->
+    <div class="col-sm-9">
+        <div class="settings-content">
+            <div class="boxed-group">
+                <h3>Public profile</h3>
+                <div class="boxed-group-inner clearfix js-uploadable-container js-upload-avatar-image is-default">
+                    <a href="#/profile"class="pull right">Back</a>
+                    <form class="columns ng-pristine ng-valid" method="post" action="/updateProfileInfo">
+                        <div class="column two-thirds">
+                            <dl class="form edit-profile-avatar">
+                                <dt><label for="uploadPic">Profile picture</label></dt>
+                                <dd class="avatar-upload-container clearfix">
+                                    <img alt="{{currentUser.username}}" class="profile-avatar" name="profilePic" height="70" src="{{currentUser.profilePicUrl}}" width="70">
+                                    <div class="avatar-upload">
+                                        <a href="javaScript:void(0);" class="button button-change-profile-picture">
+                                            <label for="uploadPic"
+                                                   class="label-upload-profile-picture">
+                                                Upload new picture
+                                                <input id="uploadPic" name="uploadPic" type="file"
+                                                       multiple="multiple"
+                                                       class="manual-file-chooser js-manual-file-chooser js-avatar-field">
+                                            </label>
+                                        </a>
+                                        <div class="upload-state default">
+                                            <p>You can also drag and drop a picture from your computer.</p>
+                                        </div>
+                                        <div class="upload-state loading">
+        <span class="button disabled">
+          <img alt="" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16"> Uploading...
+        </span>
+                                        </div>
+                                        <div class="upload-state danger too-big">
+                                            Please upload a picture smaller than 1 MB.
+                                        </div>
+                                        <div class="upload-state danger bad-dimensions">
+                                            Please upload a picture smaller than 10,000x10,000.
+                                        </div>
+                                        <div class="upload-state danger bad-file">
+                                            Unfortunately, we only support PNG, GIF, or JPG pictures.
+                                        </div>
+                                        <div class="upload-state danger bad-browser">
+                                            This browser doesn't support uploading pictures.
+                                        </div>
+                                        <div class="upload-state danger failed-request">
+                                            Something went really wrong and we can't process that picture.
+                                        </div>
+                                    </div>
+                                    <!-- /.avatar-upload -->
+                                </dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Name">Name</label></dt>
+                                <dd><input class="long" id="Name" name="Name"  value="{{currentUser.username?currentUser.username:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Email">Email</label></dt>
+                                <dd><input class="long" id="Email" name="Email" value="{{currentUser.email}}" disabled="disabled"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="About">About</label></dt>
+                                <dd><input class="long" id="About" name="About"  value="{{currentUser.About?currentUser.About:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Birthday">Birthday</label></dt>
+                                <dd><input class="long" id="Birthday" name="Birthday"  value="{{currentUser.profileData.Birthday?currentUser.profileData.Birthday:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Gender">Gender</label></dt>
+                                <dd><input class="long" id="Gender" name="Gender"  value="{{currentUser.profileData.Gender?currentUser.profileData.Gender:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Mobile">Mobile</label></dt>
+                                <dd><input class="long" id="Mobile" name="Mobile"  value="{{currentUser.profileData.Mobile?currentUser.profileData.Mobile:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Hometown">Hometown</label></dt>
+                                <dd><input class="long" id="Hometown" name="Hometown"  value="{{currentUser.Address.Hometown?currentUser.Address.Hometown:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="City">City</label></dt>
+                                <dd><input class="long" id="City" name="City"  value="{{currentUser.Address.City?currentUser.Address.City:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="CurrentCity">CurrentCity</label></dt>
+                                <dd><input class="long" id="CurrentCity" name="CurrentCity"  value="{{currentUser.profileData.CurrentCity?currentUser.profileData.CurrentCity:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="State">State</label></dt>
+                                <dd><input class="long" id="State" name="State"  value="{{currentUser.Address.State?currentUser.Address.State:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Country">Country</label></dt>
+                                <dd><input class="long" id="Country" name="Country"  value="{{currentUser.Address.Country?currentUser.Address.Country:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Pin">Pin</label></dt>
+                                <dd><input class="long" id="Pin" name="Pin"  value="{{currentUser.Address.pin?currentUser.Address.pin:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <input type="submit" class="btn btn-info save pull-center">save</input>
+                           <!-- <p>
+                                <button type="button" ng-click="updateProfileInfo()" class="button primary">Update profile</button>
+                            </p>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,6 @@ var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy
   , TwitterStrategy = require('passport-twitter').Strategy;
 
-
 passport.serializeUser(function (user, done) {
   done(null, user);
 });
@@ -90,4 +89,4 @@ _app.get('/getProfileDeta/:_id',controllers.user.getProfileDeta);
 
 _app.put('/updateProfileInfo/:_id',controllers.user.updateProfileInfo);
 
-_app.put('/updateAboutInfo/:_id',controllers.user.updateAboutInfo);
+_app.post('/updateProfileInfo',controllers.user.updateProfileInfoTemp);
