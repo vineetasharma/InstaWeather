@@ -95,10 +95,10 @@
                 <% }
                 else{
                     var userid = user._id ? user._id : user.id;
+                    console.log(userid);
                 %>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-
                         <img src='<%= user.profilePicUrl %>' style="width: 25px;height: 25px"
                              onerror="this.src='images/img/defaultProfile.jpg'"> &nbsp;<%= user.username %>
                         <i class="fa fa-caret-down"></i>

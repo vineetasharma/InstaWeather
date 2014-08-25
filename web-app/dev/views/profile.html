@@ -1,8 +1,8 @@
-<div class="row profile-row " ng-show="currentUser.username">
+<div class="row profile-row " ng-if="currentUser.username">
     <div class="col-sm-3">
         <div class="row profile">
             <div class=" pull-right">
-                <a href="#/profile"> <img class="profile-image" src={{currentUser.profilePicUrl}}></a>
+                <a href="#/profile"> <img class="profile-image" ng-src="{{currentUser.profilePicUrl}}"></a>
             </div>
         </div>
         <!--/row-->
@@ -14,7 +14,7 @@
                 <h3>Public profile</h3>
                 <div ng-if="!isEditable" class="boxed-group-inner clearfix
                              js-uploadable-container js-upload-avatar-image is-default">
-                    <a href="#/profile" class="pull right" ng-click="showEditProfileForm()"><img class="edit" src="/images/img/editProfile.png"></a>
+                    <a href="#/profile" class="pull right" ng-click="showEditProfileForm()"><img class="edit" ng-src="/images/img/editProfile.png"></a>
                     <div class="columns ng-pristine">
                         <div class="column two-thirds">
                             <dl class="form" ng-if="currentUser.username">
@@ -77,7 +77,7 @@
                                 <dt><label for="uploadPic">Profile picture</label></dt>
                                 <dd class="avatar-upload-container clearfix">
                                     <img alt="{{currentUser.username}}" class="profile-avatar" name="profilePic"
-                                         height="70" src="{{currentUser.profilePicUrl}}" width="70">
+                                         height="70" ng-src="{{currentUser.profilePicUrl}}" width="70">
                                     <input type="hidden" id="profilePicUrl" name="profilePicUrl"
                                            value="{{currentUser.profilePicUrl}}">
 
@@ -98,7 +98,7 @@
                                         </div>
                                         <div class="upload-state loading">
         <span class="button disabled">
-          <img alt="" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16"> Uploading...
+          <img alt="" height="16" ng-src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16"> Uploading...
         </span>
                                         </div>
                                     </div>

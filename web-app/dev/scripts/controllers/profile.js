@@ -8,6 +8,7 @@
  */
 angular.module('yoApp')
     .controller('profileCtrl', ['$scope','$window', 'HomeService', function ($scope,$window, HomeService) {
+        $scope.isEditable=false;
         $scope.getProfileData = function (userId) {
             if(userId){
                 HomeService.getProfileData(userId, function (userData) {
@@ -19,7 +20,6 @@ angular.module('yoApp')
             }
         };
         $scope.getProfileData($("#profileData").val());
-        $scope.isEditable=false;
         $scope.showEditProfileForm=function(){
             $scope.isEditable=true;
         };

@@ -15,7 +15,7 @@
                             <div id="weather-icon" ng-show="WIWeatherResult.weather[0].description">
                                 <i class="wi-day-sprinkle weather-icon"></i>
                                 <img class="img-icon"
-                                     src="http://openweathermap.org/img/w/{{WIWeatherResult.weather[0].icon}}.png">
+                                     ng-src="http://openweathermap.org/img/w/{{WIWeatherResult.weather[0].icon}}.png">
                             </div>
                             <div id="weather-info">
                                 <h5 class="h5">{{WIWeatherResult.weather[0].description}}</h5>
@@ -35,7 +35,7 @@
                     <div class="col-lg-6">
                         <div class="panel wa-1">
                             <div id="humidity-icon">
-                                <img class="hw" src="../images/img/humidity.png">
+                                <img class="hw" ng-src="../images/img/humidity.png">
                             </div>
                             <div id="humidity-info">
                                 <h5>Humidity</h5>
@@ -48,7 +48,7 @@
                     <div class="col-lg-6">
                         <div class="panel wa-1">
                             <div id="windspeed-icon">
-                                <img class="hw" src="../images/img/windSpeed.gif">
+                                <img class="hw" ng-src="../images/img/windSpeed.gif">
                             </div>
                             <div id="windspeed-info">
                                 <h5>WindSpeed</h5>
@@ -64,7 +64,7 @@
         </div>
         <div ng-hide="WIWeatherResult">
 
-            <img src="../images/img/ajax_loader_gray_512.gif" style="width: 250px;height: 250px; margin-top: 50px; margin-left: 35%" ng-show="reqLoader">
+            <img ng-src="../images/img/ajax_loader_gray_512.gif" style="width: 250px;height: 250px; margin-top: 50px; margin-left: 35%" ng-show="reqLoader">
 
         </div>
         <div id="info" ng-show="showInfo">
