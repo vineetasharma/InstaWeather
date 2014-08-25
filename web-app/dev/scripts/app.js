@@ -20,10 +20,6 @@ angular
                 templateUrl: '../views/profile.html',
                 controller: 'profileCtrl'
             })
-            .when('/editprofile', {
-                templateUrl: '../views/editProfile.html',
-                controller: 'profileCtrl'
-            })
             .when('/about',{
                 templateUrl: '../views/about.html',
                 controller: 'AboutCtrl'

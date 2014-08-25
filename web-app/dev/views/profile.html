@@ -2,7 +2,7 @@
     <div class="col-sm-3">
         <div class="row profile">
             <div class=" pull-right">
-                <a href="#/editprofile"> <img class="profile-image" src={{currentUser.profilePicUrl}}></a>
+                <a href="#/profile" ng-click="showEditProfileForm()"> <img class="profile-image" src={{currentUser.profilePicUrl}}></a>
             </div>
         </div>
         <!--/row-->
@@ -12,60 +12,172 @@
         <div class="settings-content">
             <div class="boxed-group">
                 <h3>Public profile</h3>
-                <div class="boxed-group-inner clearfix
+                <div ng-if="!isEditable" class="boxed-group-inner clearfix
                              js-uploadable-container js-upload-avatar-image is-default">
                     <div class="columns ng-pristine">
                         <div class="column two-thirds">
-                            <dl class="form" ng-show="currentUser.username">
+                            <dl class="form" ng-if="currentUser.username">
                                 <dt><label for="user_profile_name">Name</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_name">{{currentUser.username}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.email">
+                            <dl class="form" ng-if="currentUser.email">
                                 <dt><label for="user_profile_email">Email </label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_email">{{currentUser.email}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.About">
+                            <dl class="form" ng-if="currentUser.About">
                                 <dt><label for="user_profile_about">About</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_about">{{currentUser.About}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.profileData.Birthday">
+                            <dl class="form" ng-if="currentUser.profileData.Birthday">
                                 <dt><label for="user_profile_birthday">Birthday</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_birthday">{{currentUser.profileData.Birthday}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.profileData.Gender">
+                            <dl class="form" ng-if="currentUser.profileData.Gender">
                                 <dt><label for="user_profile_gender">Gender</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_gender">{{currentUser.profileData.Gender}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.profileData.Mobile">
+                            <dl class="form" ng-if="currentUser.profileData.Mobile">
                                 <dt><label for="user_profile_mobile">Mobile</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_mobile">{{currentUser.profileData.Mobile}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.Address.Hometown">
+                            <dl class="form" ng-if="currentUser.Address.Hometown">
                                 <dt><label for="user_profile_hometown">Hometown</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_hometown">{{currentUser.Address.Hometown}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.Address.City">
+                            <dl class="form" ng-if="currentUser.Address.City">
                                 <dt><label for="user_profile_city">City</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_city">{{currentUser.Address.City}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.profileData.CurrentCity">
+                            <dl class="form" ng-if="currentUser.profileData.CurrentCity">
                                 <dt><label for="user_profile_currentCity">CurrentCity</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_currentCity">{{currentUser.profileData.CurrentCity}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.Address.State">
+                            <dl class="form" ng-if="currentUser.Address.State">
                                 <dt><label for="user_profile_state">State</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_state">{{currentUser.Address.State}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.Address.Country">
+                            <dl class="form" ng-if="currentUser.Address.Country">
                                 <dt><label for="user_profile_country">Country</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_country">{{currentUser.Address.Country}}</label></dd>
                             </dl>
-                            <dl class="form" ng-show="currentUser.Address.pin">
+                            <dl class="form" ng-if="currentUser.Address.pin">
                                 <dt><label for="user_profile_pin">Pin</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_pin">{{currentUser.Address.pin}}</label></dd>
                             </dl>
                         </div>
                     </div>
+                </div>
+                <div ng-if="isEditable" class="boxed-group-inner clearfix js-uploadable-container js-upload-avatar-image is-default">
+                    <a href="#/profile" class="pull right" ng-click="hideEditProfileForm()">Back</a>
+                    <form class="columns ng-pristine ng-valid" method="post" enctype="multipart/form-data"
+                          action="/updateProfileInfo">
+                        <div class="column two-thirds">
+                            <dl class="form edit-profile-avatar">
+                                <dt><label for="uploadPic">Profile picture</label></dt>
+                                <dd class="avatar-upload-container clearfix">
+                                    <img alt="{{currentUser.username}}" class="profile-avatar" name="profilePic"
+                                         height="70" src="{{currentUser.profilePicUrl}}" width="70">
+                                    <input type="hidden" id="profilePicUrl" name="profilePicUrl"
+                                           value="{{currentUser.profilePicUrl}}">
+
+                                    <div class="avatar-upload">
+                                        <a href="javaScript:void(0);" class="button button-change-profile-picture">
+                                            <label for="uploadPic"
+                                                   class="label-upload-profile-picture">
+                                                Upload new picture
+                                                <input id="uploadPic" name="uploadPic" type="file"
+                                                       accept=".jpg,.jpeg,.gif,.png"
+
+                                                       class="manual-file-chooser js-manual-file-chooser js-avatar-field">
+                                            </label>
+                                        </a>
+
+                                        <div class="upload-state default">
+                                            <p>You can also drag and drop a picture from your computer.</p>
+                                        </div>
+                                        <div class="upload-state loading">
+        <span class="button disabled">
+          <img alt="" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16"> Uploading...
+        </span>
+                                        </div>
+                                    </div>
+                                    <!-- /.avatar-upload -->
+                                </dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Name">Name</label></dt>
+                                <dd><input class="long" id="Name" name="Name"
+                                           value="{{currentUser.username?currentUser.username:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Email">Email</label></dt>
+                                <dd class="profile-info"><label class="long">{{currentUser.email}}</label></dd>
+                                <input type="hidden" id="Email" name="Email" value="{{currentUser.email}}">
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="About">About</label></dt>
+                                <dd><input class="long" id="About" name="About"
+                                           value="{{currentUser.About?currentUser.About:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Birthday">Birthday</label></dt>
+                                <dd><input class="long" id="Birthday" name="Birthday"
+                                           value="{{currentUser.profileData.Birthday?currentUser.profileData.Birthday:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Gender">Gender</label></dt>
+                                <dd><input class="long" id="Gender" name="Gender"
+                                           value="{{currentUser.profileData.Gender?currentUser.profileData.Gender:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Mobile">Mobile</label></dt>
+                                <dd><input class="long" id="Mobile" name="Mobile"
+                                           value="{{currentUser.profileData.Mobile?currentUser.profileData.Mobile:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Hometown">Hometown</label></dt>
+                                <dd><input class="long" id="Hometown" name="Hometown"
+                                           value="{{currentUser.Address.Hometown?currentUser.Address.Hometown:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="City">City</label></dt>
+                                <dd><input class="long" id="City" name="City"
+                                           value="{{currentUser.Address.City?currentUser.Address.City:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="CurrentCity">CurrentCity</label></dt>
+                                <dd><input class="long" id="CurrentCity" name="CurrentCity"
+                                           value="{{currentUser.profileData.CurrentCity?currentUser.profileData.CurrentCity:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="State">State</label></dt>
+                                <dd><input class="long" id="State" name="State"
+                                           value="{{currentUser.Address.State?currentUser.Address.State:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Country">Country</label></dt>
+                                <dd><input class="long" id="Country" name="Country"
+                                           value="{{currentUser.Address.Country?currentUser.Address.Country:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label for="Pin">Pin</label></dt>
+                                <dd><input class="long" id="Pin" name="Pin"
+                                           value="{{currentUser.Address.pin?currentUser.Address.pin:''}}"
+                                           size="30" type="text"></dd>
+                            </dl>
+                            <input type="submit" class="btn btn-info save pull-center" value="save"></input>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

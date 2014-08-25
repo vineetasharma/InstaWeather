@@ -14,4 +14,11 @@ angular.module('yoApp')
             });
         };
         $scope.getProfileDeta($("#profileData").val());
+        $scope.isEditable=false;
+        $scope.showEditProfileForm=function(){
+            $scope.isEditable=true;
+        };
+        $scope.hideEditProfileForm=function(){
+            $scope.isEditable=false;
+        };
     }]);
