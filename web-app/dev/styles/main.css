@@ -510,6 +510,11 @@ ul.profile-details li input[type="text"] {
     text-align: right;
 }
 
+.edit{
+height: 50px;
+width: 50px;
+}
+
 p.email {
     text-indent: 50px;
 }

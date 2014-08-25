@@ -2,7 +2,7 @@
     <div class="col-sm-3">
         <div class="row profile">
             <div class=" pull-right">
-                <a href="#/profile" ng-click="showEditProfileForm()"> <img class="profile-image" src={{currentUser.profilePicUrl}}></a>
+                <a href="#/profile"> <img class="profile-image" src={{currentUser.profilePicUrl}}></a>
             </div>
         </div>
         <!--/row-->
@@ -14,6 +14,7 @@
                 <h3>Public profile</h3>
                 <div ng-if="!isEditable" class="boxed-group-inner clearfix
                              js-uploadable-container js-upload-avatar-image is-default">
+                    <a href="#/profile" class="pull right" ng-click="showEditProfileForm()"><img class="edit" src="/images/img/editProfile.png"></a>
                     <div class="columns ng-pristine">
                         <div class="column two-thirds">
                             <dl class="form" ng-if="currentUser.username">
