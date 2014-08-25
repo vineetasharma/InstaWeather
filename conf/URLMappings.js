@@ -16,7 +16,6 @@ var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy
   , TwitterStrategy = require('passport-twitter').Strategy;
 
-
 passport.serializeUser(function (user, done) {
   done(null, user);
 });
@@ -83,4 +82,9 @@ _app.post('/addlocationdata',controllers.location.saveSearchPlaceDetails);
 _app.get('/getMostSearchPlaceDetails',controllers.location.getMostSearchPlaceDetails);
 
 _app.get('/getLastSearchLocation',controllers.location.getLastSearchLocation);
+
 _app.post('/sendMail',controllers.home.sendMail);
+
+_app.get('/getProfileDeta/:_id',controllers.user.getProfileDeta);
+
+_app.post('/updateProfileInfo',controllers.user.updateProfileInfo);

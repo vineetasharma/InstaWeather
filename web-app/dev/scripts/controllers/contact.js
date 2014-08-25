@@ -1,15 +1,15 @@
 function createAutoClosingAlert(selector, delay) {
-    $(selector).show()
-    var alert = $(selector).alert();
+    jQuery(selector).show();
+    var alert = jQuery(selector).alert();
     window.setTimeout(function() { alert.hide() }, delay);
 }
 angular.module('yoApp')
     .controller('contactCtrl', ['$scope', 'ContactService', function ($scope, ContactService) {
-        $(".alert-info").hide();
-        $(".alert-success").hide();
-        $(".alert-dismissable").hide();
-        $(".alert-error").hide();
-        $(".alert-warning").hide();
+        jQuery(".alert-info").hide();
+        jQuery(".alert-success").hide();
+        jQuery(".alert-dismissable").hide();
+        jQuery(".alert-error").hide();
+        jQuery(".alert-warning").hide();
 
         $scope.sendMail = function () {
 

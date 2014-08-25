@@ -5,12 +5,14 @@ var express = require('express'),
     passport = require("passport"),
     BearerStrategy = require("passport-http-bearer"),
     expressValidator = require('express-validator'),
-    connectFormidable = require('./custom_modules/connect-formidable'),
+//    connectFormidable = require('./custom_modules/connect-formidable'),
     Util = require("./src/Utils"),
     viewEngine = require("ejs-locals"),
     socket = require('socket.io'),
     expressSession = require('express-session'),
     nodemailer=require('nodemailer'),
+    formidable=require('formidable'),
+    bodyParser=require('body-parser'),
     ejs=require('ejs'),
     process=require('process');
 
@@ -22,6 +24,9 @@ global.__defineGetter__("_passport", function () {
 });
 global.__defineGetter__("_nodemailer", function () {
     return nodemailer
+});
+global.__defineGetter__("_formidable", function () {
+    return formidable
 });
 global.__defineGetter__("_ejs", function () {
     return ejs
@@ -82,7 +87,11 @@ app.use(express.methodOverride());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(AppBuilder.apiHelperToolInjectionMiddleware);
-app.use(connectFormidable());
+//app.use(connectFormidable());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+
 app.use(app.router);
 app.configure('development', function () {
     express.errorHandler.title = _config.appName;

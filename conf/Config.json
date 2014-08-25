@@ -1,35 +1,50 @@
 {
-  "common": {
-    "socketEndpointURI": "/socket/stream",
-    "maxCountForListingApi": 100,
-    "oauth": {
-      "bearer": {
-        "generatorSecret": "3khjb4k3h4k3jh42kjh43k2h5kj5h3k6jg5j4df6hd456t45gf67j5gh7k6j7k56hfj5tfruygjg6iy456gf5j5jdt3uf645jhy45gy6i746iuyg4u5ft3ud5u34ft5jy",
-        "generatorAlgorithm": "AES192"
-      }
+    "common": {
+        "socketEndpointURI": "/socket/stream",
+        "maxCountForListingApi": 100,
+        "oauth": {
+            "bearer": {
+                "generatorSecret": "3khjb4k3h4k3jh42kjh43k2h5kj5h3k6jg5j4df6hd456t45gf67j5gh7k6j7k56hfj5tfruygjg6iy456gf5j5jdt3uf645jhy45gy6i746iuyg4u5ft3ud5u34ft5jy",
+                "generatorAlgorithm": "AES192"
+            }
+        },
+        "statelessCookieName": "_npabotsess",
+        "sessionTimeMills": 1800000,
+        "authFailRedirectUrl": "/",
+        "facebookAuth": {
+            "clientID": "745335648840982",
+            "clientSecret": "929abe47517dc2673cdab7b7f7650b8f",
+            "callbackURL": "http://localhost:9092/auth/facebook/callback"
+        },
+        "mailService": {
+            "service": "Gmail",
+            "email": "contactinstaweather@gmail.com",
+            "pass": "igdefault"
+        },
+        "twitterAuth": {
+            "consumerKey": "DEo7OyOxExJ3PuDqp8h6GpFr8",
+            "consumerSecret": "Noh9fh7LHFO6Swt8cNnco60kdbei9O4lGViOCexS5mBTZXhspH",
+            "callbackURL": "http://localhost:9092/auth/twitter/callback"
+        }
     },
-    "statelessCookieName": "_npabotsess",
-    "sessionTimeMills": 1800000,
-    "authFailRedirectUrl": "/"
-  },
-  "development": {
-    "facebookAuth": {
-      "clientID": "745335648840982",
-      "clientSecret": "929abe47517dc2673cdab7b7f7650b8f",
-      "callbackURL": "http://localhost:9092/auth/facebook/callback"
+    "development": {
+        "facebookAuth": {
+            "clientID": "745335648840982",
+            "clientSecret": "929abe47517dc2673cdab7b7f7650b8f",
+            "callbackURL": "http://localhost:9092/auth/facebook/callback"
+        },
+        "mailService": {
+            "service": "Gmail",
+            "email": "contactinstaweather@gmail.com",
+            "pass": "igdefault"
+        },
+        "twitterAuth": {
+            "consumerKey": "DEo7OyOxExJ3PuDqp8h6GpFr8",
+            "consumerSecret": "Noh9fh7LHFO6Swt8cNnco60kdbei9O4lGViOCexS5mBTZXhspH",
+            "callbackURL": "http://localhost:9092/auth/twitter/callback"
+        }
     },
-      "mailService":{
-          "service":"Gmail",
-          "email": "contactinstaweather@gmail.com",
-          "pass": "igdefault"
-      },
-      "twitterAuth": {
-          "consumerKey": "DEo7OyOxExJ3PuDqp8h6GpFr8",
-          "consumerSecret": "Noh9fh7LHFO6Swt8cNnco60kdbei9O4lGViOCexS5mBTZXhspH",
-          "callbackURL": "http://localhost:9092/auth/twitter/callback"
-      }
-  },
-  "production": {},
-  "test": {},
-  "qa": {}
+    "production": {},
+    "test": {},
+    "qa": {}
 }
