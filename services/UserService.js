@@ -107,7 +107,7 @@ exports.addLastSearchedLocation = function (userId, lastSearchedLocation) {
     })
 }.toEmitter();
 
-exports.getProfileDeta = function (userId) {
+exports.getProfileData = function (userId) {
     var emitter = this;
     User.findOne({_id: userId}, {username: 1, email: 1, profileData: 1, Address: 1, About: 1, profilePicUrl: 1}, function (err, data) {
         if (err) {

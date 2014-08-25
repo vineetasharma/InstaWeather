@@ -137,15 +137,15 @@ angular.module('yoApp')
       });
     };
 
-    this.getProfileDeta = function (userId, callback) {
-      $http.get("/getProfileDeta/" + userId)
+    this.getProfileData = function (userId, callback) {
+      $http.get("/getProfileData/" + userId)
         .success(function (userData) {
           if (!userData)
             callback(null);
           callback(userData);
         }).
         error(function (error) {
-          console.log("error during get Profile Deta: ", error.message);
+          console.log("error during get Profile Data: ", error.message);
           callback(error);
         });
     };
