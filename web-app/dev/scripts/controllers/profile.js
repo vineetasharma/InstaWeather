@@ -7,11 +7,16 @@
  * Created by sandeepchhapola on 30/7/14.
  */
 angular.module('yoApp')
-    .controller('profileCtrl', ['$scope', 'HomeService', function ($scope, HomeService) {
+    .controller('profileCtrl', ['$scope','$window', 'HomeService', function ($scope,$window, HomeService) {
         $scope.getProfileData = function (userId) {
-            HomeService.getProfileData(userId, function (userData) {
+            if(userId){
+                HomeService.getProfileData(userId, function (userData) {
                 $scope.currentUser = userData;
             });
+        }
+            else{
+                $window.location.href='#/home';
+            }
         };
         $scope.getProfileData($("#profileData").val());
         $scope.isEditable=false;

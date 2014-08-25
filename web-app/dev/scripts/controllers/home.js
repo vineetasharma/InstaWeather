@@ -1,8 +1,6 @@
 angular.module('yoApp')
   .controller('homeCtrl', ['$scope', 'HomeService', '$interval', function ($scope, HomeService, $interval) {
-    console.log('userIP', myip);
     var user = $('#profileData').val();
-    console.log(user, 'user');
     if (!user) {
       $scope.reqLoader = true;
       HomeService.showCurrentLocationInfo(myip, function (currentLocationInfo) {
