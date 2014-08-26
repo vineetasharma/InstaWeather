@@ -2,7 +2,7 @@
     <div class="col-sm-3">
         <div class="row profile">
             <div class=" pull-right">
-                <a href="#/profile"> <img class="profile-image" ng-src="{{currentUser.profilePicUrl}}"></a>
+                <a href="#/profile"> <img class="profile-image" onerror="this.src='images/img/defaultProfile.jpg'" ng-src="{{currentUser.profilePicUrl}}"></a>
             </div>
         </div>
         <!--/row-->
