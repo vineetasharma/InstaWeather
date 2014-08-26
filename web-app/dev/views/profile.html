@@ -12,14 +12,12 @@
         <div class="settings-content">
             <div class="boxed-group">
                 <h3>Public profile</h3>
-
                 <div ng-if="!isEditable" class="boxed-group-inner clearfix
                              js-uploadable-container js-upload-avatar-image is-default">
                     <a href="#/profile" class="pull right" ng-click="showEditProfileForm()"><img class="edit" title="Edit"
                                                                                                  ng-src="/images/img/editProfile.png"></a>
-
                     <div class="columns ng-pristine">
-                        <div class="column two-thirds">
+                        <div class="column three-fourths">
                             <dl class="form" ng-if="currentUser.username">
                                 <dt><label for="user_profile_name">Name</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_name">{{currentUser.username}}</label>
@@ -86,15 +84,13 @@
                 <div ng-if="isEditable"
                      class="boxed-group-inner clearfix js-uploadable-container js-upload-avatar-image is-default">
                     <a href="#/profile" class="pull right" ng-click="hideEditProfileForm()">Back</a>
-
-                    <div class="column two-thirds">
+                    <div class="column three-fourths ">
                         <dl class="form edit-profile-avatar">
                             <dt><label for="uploadPic">Profile picture</label></dt>
                             <form method="post" action="/uploadProfilePic" enctype="multipart/form-data">
                                 <dd class="avatar-upload-container clearfix">
                                     <img ng-if="isuploadPic" class="profile-avatar" name="profilePic"
                                          id="profilePic" height="70" src="{{uploadPicURL}}" width="70">
-
                                     <div class="avatar-upload">
                                         <a href="javaScript:void(0);" class="button button-change-profile-picture">
                                             <input type="file" id="uploadPic" name="uploadPic"
