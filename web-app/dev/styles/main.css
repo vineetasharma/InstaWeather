@@ -553,3 +553,8 @@ p.email {
     padding-top: 7px;
     padding-left: 7px;
 }
+
+.button-change-profile-picture{
+    padding: 0px;
+    width: 285px;
+}

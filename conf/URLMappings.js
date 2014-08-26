@@ -88,3 +88,5 @@ _app.post('/sendMail',controllers.home.sendMail);
 _app.get('/getProfileData/:_id',controllers.user.getProfileData);
 
 _app.post('/updateProfileInfo',controllers.user.updateProfileInfo);
+
+_app.post('/uploadProfilePic',controllers.user.uploadProfilePic);

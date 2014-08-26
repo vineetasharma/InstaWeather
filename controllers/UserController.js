@@ -40,11 +40,28 @@ exports.updateProfileInfo = function (req, res) {
             res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
         })
         .on(EventName.DONE, function (result) {
-            log.info('result.profilePicUrl>>>>>>>>>>>>>>>',result.profilePicUrl);
-            UserService.updateProfileInfo(result.fields, result.profilePicUrl)
+            UserService.updateProfileInfo(result.fields)
                 .on(EventName.ERROR, function (err) {
                     log.error(err);
                     res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
+                })
+                .on(EventName.DONE, function (result) {
+                    res.redirect('/');
+                });
+        });
+};
+
+exports.uploadProfilePic = function (req, res) {
+    UserService.valiDateUploadProfilePic(req, res)
+        .on(EventName.ERROR, function (err) {
+            log.error(err);
+            res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
+        })
+        .on(EventName.DONE, function (result) {
+            UserService.uploadProfilePic(result.email, result.profilePicUrl)
+                .on(EventName.ERROR, function (err) {
+                    log.error(err);
+                    res.sendErrorAPIResponse(err, HttpStatusCode.SERVER_ERROR);
                 })
                 .on(EventName.DONE, function (result) {
                     res.redirect('/');
