@@ -22,6 +22,7 @@ angular.module('yoApp')
 
             }
             else {
+                $scope.reqLoader = true;
                 var location = JSON.parse(cookieInfo);
                 HomeService.getWeatherDetails(location, function (data) {
                     if (data) {
@@ -116,11 +117,11 @@ angular.module('yoApp')
                         latitude: result.geonames[0].lat,
                         longitude: result.geonames[0].lng
                     }
-                    $.cookie("location",JSON.stringify(cookieObject));
+                    $.cookie("location", JSON.stringify(cookieObject));
 
                 }
                 if (result.geoNameId)
-                    $.cookie("location",JSON.stringify(result));
+                    $.cookie("location", JSON.stringify(result));
             }
             if (result.geonames) {
                 if (result.geonames.length > 0) {
