@@ -514,7 +514,7 @@ dl.form > dd input[type="text"].is-autocheck-successful, dl.form > dd #adv_code_
 }
 
 dl.form > dd input[type="text"].is-autocheck-errored, dl.form > dd #adv_code_search .is-autocheck-errored.search-page-label, #adv_code_search dl.form > dd .is-autocheck-errored.search-page-label, dl.form > dd input[type="password"].is-autocheck-errored, dl.form > dd input[type="email"].is-autocheck-errored {
-    background-image: url("/images/modules/ajax/error.png?334b1507")
+    background-image: url("/images/modules/ajax/error.png?334b1507");
 }
 
 dl.form > dd textarea {

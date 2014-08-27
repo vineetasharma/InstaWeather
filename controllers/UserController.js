@@ -46,7 +46,7 @@ exports.updateProfileInfo = function (req, res) {
                     res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
                 })
                 .on(EventName.DONE, function (result) {
-                    res.redirect('/');
+                    res.redirect('/#/profile');
                 });
         });
 };
@@ -64,7 +64,7 @@ exports.uploadProfilePic = function (req, res) {
                     res.sendErrorAPIResponse(err, HttpStatusCode.SERVER_ERROR);
                 })
                 .on(EventName.DONE, function (result) {
-                    res.redirect('/');
+                    res.redirect('/#/profile');
                 });
         });
 };
