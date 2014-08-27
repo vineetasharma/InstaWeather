@@ -58,7 +58,7 @@ exports.findOrCreateFacebookAccountService = function (accessToken, profile) {
                 About: "",
                 profileData: {
                     Birthday: "",
-                    Gender: "",
+                    Gender:profile.gender,
                     Mobile: "",
                     CurrentCity: ""
                 },
@@ -109,7 +109,7 @@ exports.addLastSearchedLocation = function (userId, lastSearchedLocation) {
 
 exports.getProfileData = function (userId) {
     var emitter = this;
-    User.findOne({_id: userId}, {username: 1, email: 1, profileData: 1, Address: 1, About: 1, profilePicUrl: 1}, function (err, data) {
+    User.findOne({_id: userId}, {username: 1, email: 1, profileData: 1, Address: 1, About: 1, profilePicUrl: 1, lastSearchedLocation:1}, function (err, data) {
         if (err) {
             emitter.emit(EventName.ERROR, err);
         }

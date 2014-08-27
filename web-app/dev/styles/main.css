@@ -558,3 +558,7 @@ p.email {
     padding: 0px;
     width: 285px;
 }
+.error{
+    color: red;
+    font-size: 14px;
+}

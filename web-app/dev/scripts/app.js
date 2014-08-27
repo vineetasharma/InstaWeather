@@ -26,7 +26,7 @@ angular
             })
             .when('/contact',{
                 templateUrl: '../views/contact.html',
-                controller: 'contactCtrl'
+                controller: 'homeCtrl'
             })
             .otherwise({
                 redirectTo: '/home'

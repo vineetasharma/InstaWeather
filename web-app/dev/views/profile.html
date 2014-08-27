@@ -48,6 +48,10 @@
                                 <dd class="profile-info"><label class="long" id="user_profile_mobile">{{currentUser.profileData.Mobile}}</label>
                                 </dd>
                             </dl>
+                            <dl class="form" ng-if="currentUser.lastSearchedLocation.fullName">
+                                <dt><label>Last Searched Place</label></dt>
+                                <dd class="profile-info"><label class="long">{{currentUser.lastSearchedLocation.fullName}}</label></dd>
+                            </dl>
                             <dl class="form" ng-if="currentUser.Address.Hometown">
                                 <dt><label for="user_profile_hometown">Hometown</label></dt>
                                 <dd class="profile-info"><label class="long" id="user_profile_hometown">{{currentUser.Address.Hometown}}</label>
@@ -107,7 +111,7 @@
                             </form>
                         </dl>
                         <form class="columns ng-pristine ng-valid" method="post" enctype="multipart/form-data"
-                              action="/updateProfileInfo">
+                              action="/updateProfileInfo" name="userForm" novalidate>
                             <dl class="form">
                                 <dt><label for="Name">Name</label></dt>
                                 <dd><input class="long" id="Name" name="Name"
@@ -129,19 +133,30 @@
                                 <dt><label for="Birthday">Birthday</label></dt>
                                 <dd><input class="long" id="Birthday" name="Birthday"
                                            value="{{currentUser.profileData.Birthday?currentUser.profileData.Birthday:''}}"
-                                           size="30" type="text"></dd>
+                                           size="30" type="text">
+                                </dd>
                             </dl>
                             <dl class="form">
-                                <dt><label for="Gender">Gender</label></dt>
-                                <dd><input class="long" id="Gender" name="Gender"
+                                <dt><label for="Gender" ng-class="{ 'has-error' : userForm.Gender.$invalid && !userForm.Gender.$pristine}">Gender</label></dt>
+                                <dd><input class="long form-control" id="Gender" ng-model="Gender" name="Gender"
                                            value="{{currentUser.profileData.Gender?currentUser.profileData.Gender:''}}"
-                                           size="30" type="text"></dd>
+                                           size="30" type="text" ng-pattern="/^[a-zA-z]+$/">
+                                    <p ng-if="userForm.Gender.$error.pattern" class="help-block error">Enter Alphabets Only.</p>
+                                </dd>
                             </dl>
                             <dl class="form">
-                                <dt><label for="Mobile">Mobile</label></dt>
-                                <dd><input class="long" id="Mobile" name="Mobile"
+                                <dt><label for="Mobile" ng-class="{ 'has-error' : userForm.Mobile.$invalid && !userForm.Mobile.$pristine }">Mobile</label></dt>
+                                <dd><input class="long form-control" id="Mobile" name="Mobile" ng-model="Mobile"
                                            value="{{currentUser.profileData.Mobile?currentUser.profileData.Mobile:''}}"
-                                           size="30" type="text"></dd>
+                                           size="30" type="text" ng-pattern="/^[0-9]+$/" ng-minlength="10" ng-maxlength="10">
+                                    <p ng-if="userForm.Mobile.$error.minlength" class="help-block error">Mobile number is too short.</p>
+                                    <p ng-if="userForm.Mobile.$error.maxlength" class="help-block error">Mobile number is too long.</p>
+                                    <p ng-if="userForm.Mobile.$error.pattern" class="help-block error">Enter a numeric value</p>
+                                </dd>
+                            </dl>
+                            <dl class="form">
+                                <dt><label>Last Searched Place</label></dt>
+                                <dd class="profile-info"><label class="long">{{currentUser.lastSearchedLocation.fullName}}</label></dd>
                             </dl>
                             <dl class="form">
                                 <dt><label for="Hometown">Hometown</label></dt>
@@ -153,12 +168,6 @@
                                 <dt><label for="City">City</label></dt>
                                 <dd><input class="long" id="City" name="City"
                                            value="{{currentUser.Address.City?currentUser.Address.City:''}}"
-                                           size="30" type="text"></dd>
-                            </dl>
-                            <dl class="form">
-                                <dt><label for="CurrentCity">CurrentCity</label></dt>
-                                <dd><input class="long" id="CurrentCity" name="CurrentCity"
-                                           value="{{currentUser.profileData.CurrentCity?currentUser.profileData.CurrentCity:''}}"
                                            size="30" type="text"></dd>
                             </dl>
                             <dl class="form">
@@ -174,10 +183,13 @@
                                            size="30" type="text"></dd>
                             </dl>
                             <dl class="form">
-                                <dt><label for="Pin">Pin</label></dt>
-                                <dd><input class="long" id="Pin" name="Pin"
+                                <dt><label for="Pin" ng-class="{ 'has-error' : userForm.Pin.$invalid && !userForm.Pin.$pristine}" >Pin</label></dt>
+                                <dd><input class="long form-control" id="Pin" name="Pin" ng-model="Pin"
                                            value="{{currentUser.Address.pin?currentUser.Address.pin:''}}"
-                                           size="30" type="text"></dd>
+                                           size="30" type="text" ng-pattern="/^[0-9]+$/" ng-minlength="6" ng-maxlength="6"></dd>
+                                <p ng-if="userForm.Pin.$error.minlength" class="help-block error">PIN number is too short.</p>
+                                <p ng-if="userForm.Pin.$error.maxlength" class="help-block error">PIN number is too long.</p>
+                                <p ng-if="userForm.Pin.$error.pattern" class="help-block error">Enter a numeric value</p>
                             </dl>
                             <input type="submit" class="btn btn-info save pull-center" value="save"/>
                         </form>
