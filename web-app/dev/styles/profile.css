@@ -430,15 +430,15 @@
     padding: 0
 }
 
-.setup-form .form dd input[type="text"], .setup-form .form dd input[type="password"], .setup-form .form dd input[type="email"] {
+.setup-form .form dd input[type="text"], .setup-form .form dd input[type="date"], .setup-form .form dd input[type="password"], .setup-form .form dd input[type="email"] {
     width: 100%
 }
 
-label, input[type="text"], #adv_code_search .search-page-label, input[type="password"], input[type="email"], input[type="number"], input[type="tel"], input[type="url"], textarea {
+label, input[type="text"],input[type="date"], #adv_code_search .search-page-label, input[type="password"], input[type="email"], input[type="number"], input[type="tel"], input[type="url"], textarea {
     font-size: 13px
 }
 
-input[type="text"], #adv_code_search .search-page-label, input[type="password"], input[type="email"], input[type="number"], input[type="tel"], input[type="url"], textarea {
+input[type="text"], #adv_code_search .search-page-label, input[type="password"], input[type="date"], input[type="email"], input[type="number"], input[type="tel"], input[type="url"], textarea {
     min-height: 34px;
     padding: 7px 8px;
     color: #333;
@@ -452,16 +452,16 @@ input[type="text"], #adv_code_search .search-page-label, input[type="password"],
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075)
 }
 
-input[type="text"].focus, #adv_code_search .focus.search-page-label, input[type="text"]:focus, .focused .drag-and-drop, #adv_code_search .search-page-label:focus, input[type="password"].focus, input[type="password"]:focus, input[type="email"].focus, input[type="email"]:focus, input[type="number"].focus, input[type="number"]:focus, input[type="tel"].focus, input[type="tel"]:focus, input[type="url"].focus, input[type="url"]:focus, textarea.focus, textarea:focus {
+input[type="text"].focus, #adv_code_search .focus.search-page-label, input[type="text"]:focus, .focused .drag-and-drop, #adv_code_search .search-page-label:focus, input[type="password"].focus, input[type="date"].focus, input[type="password"]:focus, input[type="email"].focus, input[type="email"]:focus, input[type="number"].focus, input[type="number"]:focus, input[type="tel"].focus, input[type="tel"]:focus, input[type="url"].focus, input[type="url"]:focus, textarea.focus, textarea:focus {
     border-color: #51a7e8;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(81, 167, 232, 0.5)
 }
 
-input[type="text"].input-contrast, #adv_code_search .input-contrast.search-page-label, input[type="password"].input-contrast, input[type="email"].input-contrast, input[type="number"].input-contrast, input[type="tel"].input-contrast, input[type="url"].input-contrast, textarea.input-contrast {
+input[type="text"].input-contrast, #adv_code_search .input-contrast.search-page-label, input[type="password"].input-contrast, input[type="email"].input-contrast, input[type="number"].input-contrast, input[type="date"].input-contrast, input[type="tel"].input-contrast, input[type="url"].input-contrast, textarea.input-contrast {
     background-color: #fafafa
 }
 
-input[type="text"].input-contrast:focus, .focused .input-contrast.drag-and-drop, #adv_code_search .input-contrast.search-page-label:focus, input[type="password"].input-contrast:focus, input[type="email"].input-contrast:focus, input[type="number"].input-contrast:focus, input[type="tel"].input-contrast:focus, input[type="url"].input-contrast:focus, textarea.input-contrast:focus {
+input[type="text"].input-contrast:focus, .focused .input-contrast.drag-and-drop, #adv_code_search .input-contrast.search-page-label:focus, input[type="password"].input-contrast:focus, input[type="email"].input-contrast:focus, input[type="date"].input-contrast:focus, input[type="number"].input-contrast:focus, input[type="tel"].input-contrast:focus, input[type="url"].input-contrast:focus, textarea.input-contrast:focus {
     background-color: #fff
 }
 
@@ -469,11 +469,11 @@ dl.form {
     margin: 15px 0
 }
 
-dl.form input[type="text"], dl.form #adv_code_search .search-page-label, #adv_code_search dl.form .search-page-label, dl.form input[type="password"], dl.form input[type="email"], dl.form textarea {
+dl.form input[type="text"], dl.form input[type="date"], dl.form #adv_code_search .search-page-label, #adv_code_search dl.form .search-page-label, dl.form input[type="password"], dl.form input[type="email"], dl.form textarea {
     background-color: #fafafa
 }
 
-dl.form input[type="text"]:focus, dl.form .focused .drag-and-drop, .focused dl.form .drag-and-drop, dl.form #adv_code_search .search-page-label:focus, #adv_code_search dl.form .search-page-label:focus, dl.form input[type="password"]:focus, dl.form input[type="email"]:focus, dl.form textarea:focus {
+dl.form input[type="text"]:focus,dl.form input[type="date"]:focus, dl.form .focused .drag-and-drop, .focused dl.form .drag-and-drop, dl.form #adv_code_search .search-page-label:focus, #adv_code_search dl.form .search-page-label:focus, dl.form input[type="password"]:focus, dl.form input[type="email"]:focus, dl.form textarea:focus {
     background-color: #fff
 }
 
@@ -485,7 +485,7 @@ dl.form > dt label {
     position: relative
 }
 
-dl.form > dd input[type="text"], dl.form > dd #adv_code_search .search-page-label, #adv_code_search dl.form > dd .search-page-label, dl.form > dd input[type="password"], dl.form > dd input[type="email"] {
+dl.form > dd input[type="text"],dd input[type="date"], dl.form > dd #adv_code_search .search-page-label, #adv_code_search dl.form > dd .search-page-label, dl.form > dd input[type="password"], dl.form > dd input[type="email"] {
     width: 440px;
     max-width: 100%;
     margin-right: 5px;
@@ -500,7 +500,7 @@ dl.form > dd input[type="text"].shorter, dl.form > dd #adv_code_search .shorter.
     width: 130px
 }
 
-dl.form > dd input[type="text"].long, dl.form > dd #adv_code_search .long.search-page-label, #adv_code_search dl.form > dd .long.search-page-label, dl.form > dd input[type="password"].long, dl.form > dd input[type="email"].long {
+dl.form > dd input[type="text"].long,input[type="date"].long, dl.form > dd #adv_code_search .long.search-page-label, #adv_code_search dl.form > dd .long.search-page-label, dl.form > dd input[type="password"].long, dl.form > dd input[type="email"].long {
     width: 100%
 }
 

@@ -1,8 +1,8 @@
-<div class="row profile-row " ng-if="currentUser.username">
+<div class="row profile-row " ng-if="Email">
     <div class="col-sm-3">
         <div class="row profile">
             <div class=" pull-right">
-                <a href="#/profile"> <img class="profile-image" onerror="this.src='images/img/defaultProfile.jpg'" ng-src="{{currentUser.profilePicUrl}}"></a>
+                <a href="#/profile"> <img class="profile-image" onerror="this.src='images/img/defaultProfile.jpg'" ng-src="{{profilePicUrl}}"></a>
             </div>
         </div>
         <!--/row-->
@@ -18,68 +18,63 @@
                                                                                                  ng-src="/images/img/editProfile.png"></a>
                     <div class="columns ng-pristine">
                         <div class="column three-fourths">
-                            <dl class="form" ng-if="currentUser.username">
+                            <dl class="form" ng-if="Name">
                                 <dt><label for="user_profile_name">Name</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_name">{{currentUser.username}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_name">{{Name}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.email">
+                            <dl class="form" ng-if="Email">
                                 <dt><label for="user_profile_email">Email </label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_email">{{currentUser.email}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_email">{{Email}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.About">
+                            <dl class="form" ng-if="About">
                                 <dt><label for="user_profile_about">About</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_about">{{currentUser.About}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_about">{{About}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.profileData.Birthday">
+                            <dl class="form" ng-if="Birthday">
                                 <dt><label for="user_profile_birthday">Birthday</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_birthday">{{currentUser.profileData.Birthday}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_birthday">{{Birthday}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.profileData.Gender">
+                            <dl class="form" ng-if="Gender">
                                 <dt><label for="user_profile_gender">Gender</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_gender">{{currentUser.profileData.Gender}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_gender">{{Gender}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.profileData.Mobile">
+                            <dl class="form" ng-if="Mobile">
                                 <dt><label for="user_profile_mobile">Mobile</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_mobile">{{currentUser.profileData.Mobile}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_mobile">{{Mobile}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.lastSearchedLocation.fullName">
+                            <dl class="form" ng-if="lastSearchedPlace">
                                 <dt><label>Last Searched Place</label></dt>
-                                <dd class="profile-info"><label class="long">{{currentUser.lastSearchedLocation.fullName}}</label></dd>
+                                <dd class="profile-info"><label class="long">{{lastSearchedPlace}}</label></dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.Address.Hometown">
+                            <dl class="form" ng-if="Hometown">
                                 <dt><label for="user_profile_hometown">Hometown</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_hometown">{{currentUser.Address.Hometown}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_hometown">{{Hometown}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.Address.City">
+                            <dl class="form" ng-if="City">
                                 <dt><label for="user_profile_city">City</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_city">{{currentUser.Address.City}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_city">{{City}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.profileData.CurrentCity">
-                                <dt><label for="user_profile_currentCity">CurrentCity</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_currentCity">{{currentUser.profileData.CurrentCity}}</label>
-                                </dd>
-                            </dl>
-                            <dl class="form" ng-if="currentUser.Address.State">
+                            <dl class="form" ng-if="State">
                                 <dt><label for="user_profile_state">State</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_state">{{currentUser.Address.State}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_state">{{State}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.Address.Country">
+                            <dl class="form" ng-if="Country">
                                 <dt><label for="user_profile_country">Country</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_country">{{currentUser.Address.Country}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_country">{{Country}}</label>
                                 </dd>
                             </dl>
-                            <dl class="form" ng-if="currentUser.Address.pin">
+                            <dl class="form" ng-if="Pin">
                                 <dt><label for="user_profile_pin">Pin</label></dt>
-                                <dd class="profile-info"><label class="long" id="user_profile_pin">{{currentUser.Address.pin}}</label>
+                                <dd class="profile-info"><label class="long" id="user_profile_pin">{{Pin}}</label>
                                 </dd>
                             </dl>
                         </div>
@@ -101,7 +96,7 @@
                                                    onchange="angular.element(this).scope().showUploadedPic(this)"
                                                    accept=".jpg,.jpeg,.gif,.png">
                                         </a>
-                                        <input type="hidden" name="email" value="{{currentUser.email}}"/>
+                                        <input type="hidden" name="email" value="{{Email}}"/>
                                         <input type="submit" class="btn btn-info save pull-center" value="upload"/>
                                         <input type="button" class="btn btn-info save pull-center"
                                                ng-click="clearUploadedPic()" value="cancel"/>
@@ -115,31 +110,31 @@
                             <dl class="form">
                                 <dt><label for="Name">Name</label></dt>
                                 <dd><input class="long" id="Name" name="Name"
-                                           value="{{currentUser.username?currentUser.username:''}}"
+                                           value="{{Name}}"
                                            size="30" type="text"></dd>
                             </dl>
                             <dl class="form">
                                 <dt><label for="Email">Email</label></dt>
-                                <dd class="profile-info"><label class="long">{{currentUser.email}}</label></dd>
-                                <input type="hidden" id="Email" name="Email" value="{{currentUser.email}}">
+                                <dd class="profile-info"><label class="long">{{Email}}</label></dd>
+                                <input type="hidden" id="Email" name="Email" value="{{Email}}">
                             </dl>
                             <dl class="form">
                                 <dt><label for="About">About</label></dt>
                                 <dd><input class="long" id="About" name="About"
-                                           value="{{currentUser.About?currentUser.About:''}}"
+                                           value="{{About}}"
                                            size="30" type="text"></dd>
                             </dl>
                             <dl class="form">
-                                <dt><label for="Birthday">Birthday</label></dt>
-                                <dd><input class="long" id="Birthday" name="Birthday"
-                                           value="{{currentUser.profileData.Birthday?currentUser.profileData.Birthday:''}}"
-                                           size="30" type="text">
+                                <dt><label for="Birthday" ng-class="{ 'has-error' : userForm.Birthday.$invalid && !userForm.Birthday.$pristine}">Birthday</label></dt>
+                                <dd><input class="long form-control" id="Birthday" name="Birthday"
+                                           value="{{Birthday}}" ng-model="Birthday"
+                                           size="30" type="date">
                                 </dd>
                             </dl>
                             <dl class="form">
                                 <dt><label for="Gender" ng-class="{ 'has-error' : userForm.Gender.$invalid && !userForm.Gender.$pristine}">Gender</label></dt>
                                 <dd><input class="long form-control" id="Gender" ng-model="Gender" name="Gender"
-                                           value="{{currentUser.profileData.Gender?currentUser.profileData.Gender:''}}"
+                                           value="{{Gender}}"
                                            size="30" type="text" ng-pattern="/^[a-zA-z]+$/">
                                     <p ng-if="userForm.Gender.$error.pattern" class="help-block error">Enter Alphabets Only.</p>
                                 </dd>
@@ -147,7 +142,7 @@
                             <dl class="form">
                                 <dt><label for="Mobile" ng-class="{ 'has-error' : userForm.Mobile.$invalid && !userForm.Mobile.$pristine }">Mobile</label></dt>
                                 <dd><input class="long form-control" id="Mobile" name="Mobile" ng-model="Mobile"
-                                           value="{{currentUser.profileData.Mobile?currentUser.profileData.Mobile:''}}"
+                                           value="{{Mobile}}"
                                            size="30" type="text" ng-pattern="/^[0-9]+$/" ng-minlength="10" ng-maxlength="10">
                                     <p ng-if="userForm.Mobile.$error.minlength" class="help-block error">Mobile number is too short.</p>
                                     <p ng-if="userForm.Mobile.$error.maxlength" class="help-block error">Mobile number is too long.</p>
@@ -156,36 +151,39 @@
                             </dl>
                             <dl class="form">
                                 <dt><label>Last Searched Place</label></dt>
-                                <dd class="profile-info"><label class="long">{{currentUser.lastSearchedLocation.fullName}}</label></dd>
+                                <dd class="profile-info"><label class="long">{{lastSearchedPlace}}</label></dd>
                             </dl>
                             <dl class="form">
                                 <dt><label for="Hometown">Hometown</label></dt>
                                 <dd><input class="long" id="Hometown" name="Hometown"
-                                           value="{{currentUser.Address.Hometown?currentUser.Address.Hometown:''}}"
+                                           value="{{Hometown}}"
                                            size="30" type="text"></dd>
                             </dl>
                             <dl class="form">
                                 <dt><label for="City">City</label></dt>
                                 <dd><input class="long" id="City" name="City"
-                                           value="{{currentUser.Address.City?currentUser.Address.City:''}}"
+                                           value="{{City}}"
                                            size="30" type="text"></dd>
                             </dl>
                             <dl class="form">
-                                <dt><label for="State">State</label></dt>
-                                <dd><input class="long" id="State" name="State"
-                                           value="{{currentUser.Address.State?currentUser.Address.State:''}}"
-                                           size="30" type="text"></dd>
+                                <dt><label for="State" ng-class="{ 'has-error' : userForm.State.$invalid && !userForm.State.$pristine}">State</label></dt>
+                                <dd><input class="long" id="State" name="State" ng-model="State"
+                                           value="{{State}}"  ng-pattern="/^[a-zA-z]+$/"
+                                           size="30" type="text">
+                                    <p ng-if="userForm.State.$error.pattern" class="help-block error">Enter Alphabets Only.</p>
+                                </dd>
                             </dl>
                             <dl class="form">
-                                <dt><label for="Country">Country</label></dt>
-                                <dd><input class="long" id="Country" name="Country"
-                                           value="{{currentUser.Address.Country?currentUser.Address.Country:''}}"
+                                <dt><label for="Country" ng-class="{ 'has-error' : userForm.Country.$invalid && !userForm.Country.$pristine}">Country</label></dt>
+                                <dd><input class="long" id="Country" name="Country" ng-model="Country"
+                                           value="{{Country}}"  ng-pattern="/^[a-zA-z]+$/"
                                            size="30" type="text"></dd>
+                                <p ng-if="userForm.Country.$error.pattern" class="help-block error">Enter Alphabets Only.</p>
                             </dl>
                             <dl class="form">
                                 <dt><label for="Pin" ng-class="{ 'has-error' : userForm.Pin.$invalid && !userForm.Pin.$pristine}" >Pin</label></dt>
                                 <dd><input class="long form-control" id="Pin" name="Pin" ng-model="Pin"
-                                           value="{{currentUser.Address.pin?currentUser.Address.pin:''}}"
+                                           value="{{Pin}}"
                                            size="30" type="text" ng-pattern="/^[0-9]+$/" ng-minlength="6" ng-maxlength="6"></dd>
                                 <p ng-if="userForm.Pin.$error.minlength" class="help-block error">PIN number is too short.</p>
                                 <p ng-if="userForm.Pin.$error.maxlength" class="help-block error">PIN number is too long.</p>
