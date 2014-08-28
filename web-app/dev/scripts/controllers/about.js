@@ -9,5 +9,4 @@
  */
 angular.module('yoApp')
     .controller('AboutCtrl', ['$scope',function ($scope) {
-        console.log(">>>>>>>>>>>>About us called>>>>>>>>>>")
     }]);

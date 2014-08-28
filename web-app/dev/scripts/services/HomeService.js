@@ -95,10 +95,7 @@ angular.module('yoApp')
 
     this.updateOrSaveLocationDetails = function (data) {
       $http.post("/addlocationdata", data)
-        .success(function () {
-          console.log("Information sucessfully added");
-        }).
-        error(function (error) {
+          .error(function (error) {
           console.log("error during saving information: ", error.message);
         });
     };
@@ -117,7 +114,6 @@ angular.module('yoApp')
     };
 
     this.showCurrentLocationInfo = function (Userip, callback) {
-      console.log('userIp',Userip);
       jQuery.ajax({
         url: "http://api.ipaddresslabs.com/iplocation/v1.7/locateip",
         dataType: 'jsonp',
