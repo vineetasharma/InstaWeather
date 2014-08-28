@@ -22,8 +22,8 @@ exports.findOrCreateFacebookAccountController = function (accessToken, refreshTo
         });
 };
 
-exports.getProfileDeta = function (req, res) {
-    UserService.getProfileDeta(req.params._id)
+exports.getProfileData = function (req, res) {
+    UserService.getProfileData(req.params._id)
         .on(EventName.ERROR, function (err) {
             log.error(err);
             res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
@@ -40,7 +40,6 @@ exports.updateProfileInfo = function (req, res) {
             res.sendErrorAPIResponse(err.message, HttpStatusCode.SERVER_ERROR);
         })
         .on(EventName.DONE, function (result) {
-            log.info('result.profilePicUrl>>>>>>>>>>>>>>>',result.profilePicUrl);
             UserService.updateProfileInfo(result.fields, result.profilePicUrl)
                 .on(EventName.ERROR, function (err) {
                     log.error(err);

@@ -127,25 +127,24 @@ angular.module('yoApp')
           format: 'json'
         },
         success: function (data) {
-          console.log(data, 'data of current location in home service using IP');
           callback(data);
         }, error: function (err) {
-          console.log("error during searching current  location using IP: ", err);
+          console.log(err.message);
           callback(null);
         }
 
       });
     };
 
-    this.getProfileDeta = function (userId, callback) {
-      $http.get("/getProfileDeta/" + userId)
+    this.getProfileData = function (userId, callback) {
+      $http.get("/getProfileData/" + userId)
         .success(function (userData) {
           if (!userData)
             callback(null);
           callback(userData);
         }).
         error(function (error) {
-          console.log("error during get Profile Deta: ", error.message);
+          console.log(error.message);
           callback(error);
         });
     };

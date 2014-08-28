@@ -8,12 +8,12 @@
  */
 angular.module('yoApp')
     .controller('profileCtrl', ['$scope', 'HomeService', function ($scope, HomeService) {
-        $scope.getProfileDeta = function (userId) {
-            HomeService.getProfileDeta(userId, function (userData) {
+        $scope.getProfileData = function (userId) {
+            HomeService.getProfileData(userId, function (userData) {
                 $scope.currentUser = userData;
             });
         };
-        $scope.getProfileDeta($("#profileData").val());
+        $scope.getProfileData($("#profileData").val());
         $scope.isEditable=false;
         $scope.showEditProfileForm=function(){
             $scope.isEditable=true;

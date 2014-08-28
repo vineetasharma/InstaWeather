@@ -26,35 +26,6 @@
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/contact.js"></script>
     <script src="scripts/controllers/about.js"></script>
-    <style type="text/css">@charset "UTF-8";
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
-            display: none !important;
-        }
-
-        ng\:form {
-            display: block;
-        }
-
-        .ng-animate-block-transitions {
-            transition: 0s all !important;
-            -webkit-transition: 0s all !important;
-        }
-
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
-            display: none !important;
-        }
-
-        ng\:form {
-            display: block;
-        }
-
-        .ng-animate-block-transitions {
-            transition: 0s all !important;
-            -webkit-transition: 0s all !important;
-        }
-
-
-    </style>
     <title>InstaWeather</title>
 </head>
 <body ng-controller="mainCtrl" id="home" class="ng-scope">
@@ -86,7 +57,7 @@
                     </a>
                 </li>
                 <%
-                if(!user || !(user.email?true:(user.roles?true:(user. twitterId?true:false))))
+                if(!user || !(user.email ? true : (user.roles ? true : (user.twitterId ? true : false))))
                 { %>
                 <li id="NotLoggedIn">
                     <a href="" ng-click="signIn()">
@@ -112,8 +83,7 @@
                         <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
-                    <input type="hidden" value="<%=userid%>" id="profileData"/>
-                    <!-- /.dropdown-user -->
+                    <input type="hidden" value="<%= userid %>" id="profileData"/>
                 </li>
                 <% }
                 %>
@@ -134,9 +104,7 @@
         </div>
     </div>
 </div>
-<!-- /.row -->
 <div id="view" ng-view></div>
-
 <footer id="footer">
     <div class="container">
         <div class="navbar-header">

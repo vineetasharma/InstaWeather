@@ -98,7 +98,6 @@ exports.addLastSearchedLocation = function (userId, lastSearchedLocation) {
     };
     User.update({_id: userId}, {$set: {lastSearchedLocation: location}}, function (err, data) {
         if (err) {
-            log.info("Error in update lastSearchedLocation");
             emitter.emit("error", err);
         }
         else {
@@ -107,7 +106,7 @@ exports.addLastSearchedLocation = function (userId, lastSearchedLocation) {
     })
 }.toEmitter();
 
-exports.getProfileDeta = function (userId) {
+exports.getProfileData = function (userId) {
     var emitter = this;
     User.findOne({_id: userId}, {username: 1, email: 1, profileData: 1, Address: 1, About: 1, profilePicUrl: 1}, function (err, data) {
         if (err) {
@@ -170,7 +169,7 @@ exports.valiDateProfileInfo = function (req, res) {
                         emitter.emit(EventName.ERROR, err);
                     else
                         emitter.emit(EventName.DONE, {fields: fields,
-                            profilePicUrl: "/images/upload/"+fileName
+                            profilePicUrl: "/images/upload/" + fileName
                         });
                 });
             }

@@ -107,7 +107,6 @@ angular.module('yoApp')
 
         $scope.getWeather = function (result) {
             var user = $('#profileData').val();
-            console.log(user);
             if (!user) {
                 if (result.geonames ? (result.geonames.length > 0) : null) {
                     var cookieObject = {
