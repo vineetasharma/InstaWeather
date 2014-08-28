@@ -7,7 +7,6 @@ angular.module('yoApp')
     .controller('contactCtrl', ['$scope', 'ContactService', function ($scope, ContactService) {
         jQuery(".alert-info").hide();
         jQuery(".alert-success").hide();
-        jQuery(".alert-dismissable").hide();
         jQuery(".alert-error").hide();
         jQuery(".alert-warning").hide();
 
