@@ -16,8 +16,7 @@ exports.findOrCreateTwitterAccountService = function (profile) {
                 profileData: {
                     Birthday: "",
                     Gender: "",
-                    Mobile: "",
-                    CurrentCity: ""
+                    Mobile: ""
                 },
                 Address: {
                     Hometown: "",
@@ -59,8 +58,7 @@ exports.findOrCreateFacebookAccountService = function (accessToken, profile) {
                 profileData: {
                     Birthday: "",
                     Gender: "",
-                    Mobile: "",
-                    CurrentCity: ""
+                    Mobile: ""
                 },
                 Address: {
                     Hometown: "",
@@ -126,7 +124,6 @@ exports.updateProfileInfo = function (fields, profilePicUrl) {
         'profileData.Birthday': fields.Birthday,
         'profileData.Gender': fields.Gender,
         'profileData.Mobile': fields.Mobile,
-        'profileData.CurrentCity': fields.CurrentCity,
         'Address.Hometown': fields.Hometown,
         'Address.City': fields.City,
         'Address.State': fields.State,

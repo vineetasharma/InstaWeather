@@ -84,7 +84,6 @@ angular.module('yoApp')
             $scope.mostVisitedData = data;
         });
 
-
         /*recieving location information and then weather information to show weather information on home page*/
         $scope.getDetails = function () {
             $scope.reqLoader = true;
@@ -115,7 +114,7 @@ angular.module('yoApp')
                         fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
                         latitude: result.geonames[0].lat,
                         longitude: result.geonames[0].lng
-                    }
+                    };
                     $.cookie("location", JSON.stringify(cookieObject));
 
                 }

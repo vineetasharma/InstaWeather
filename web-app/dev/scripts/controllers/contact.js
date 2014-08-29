@@ -7,15 +7,11 @@ angular.module('yoApp')
     .controller('contactCtrl', ['$scope', 'ContactService', function ($scope, ContactService) {
         jQuery(".alert-info").hide();
         jQuery(".alert-success").hide();
-        jQuery(".alert-dismissable").hide();
         jQuery(".alert-error").hide();
         jQuery(".alert-warning").hide();
 
         $scope.sendMail = function () {
-
             $scope.loader=true;
-
-
             $scope.disable = true;
             if ($scope.name && $scope.message && $scope.email) {
                 ContactService.isValidEmail($scope.email, function (valid) {
@@ -33,7 +29,6 @@ angular.module('yoApp')
                             message: $scope.message
                         };
                         ContactService.sendMail(mailData, function (data) {
-
                             if (data) {
                                 createAutoClosingAlert(".alert-success", 3000);
                                 $scope.name = '';
@@ -47,7 +42,6 @@ angular.module('yoApp')
                                 $scope.disable = false;
                                 createAutoClosingAlert(".alert-error", 3000);
                                 $scope.loader=false;
-
                             }
                         });
 
@@ -60,9 +54,6 @@ angular.module('yoApp')
                 $scope.loader=false;
                 createAutoClosingAlert(".alert-warning", 3000);
             }
-
         }
-
-
     }]);
 
