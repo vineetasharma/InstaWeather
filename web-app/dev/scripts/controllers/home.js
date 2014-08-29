@@ -31,9 +31,7 @@ angular.module('yoApp')
                         $scope.city = $scope.fullName;
                         $scope.WIWeatherResult = data;
                     }
-
                 });
-
             }
         }
         else {
@@ -52,17 +50,14 @@ angular.module('yoApp')
             "July", "August", "September", "October", "November", "December" ];
         var dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
         var date = new Date();
-        var day = date.getDay();
         $scope.month = monthNames[date.getMonth()];
-        $scope.day = dayNames[day - 1];
+        $scope.day = dayNames[date.getDay() - 1];
         jQuery(function () {
             var options = {
                 types: ['(cities)']
             };
             $("#city").geocomplete(options).bind("geocode:result", function (event, result) {
-                $scope.reqLoader = true;
-                $scope.WILocalionResult = null;
-                $scope.WIWeatherResult = null;
+                init();
                 HomeService.getDetails(function (result) {
                     if (result) {
                         $scope.WILocalionResult = result;
@@ -86,10 +81,7 @@ angular.module('yoApp')
 
         /*recieving location information and then weather information to show weather information on home page*/
         $scope.getDetails = function () {
-            $scope.reqLoader = true;
-            $scope.WILocalionResult = null;
-            $scope.WIWeatherResult = null;
-            $scope.showInfo = false;
+            init();
             HomeService.getDetails(function (result) {
                 if (result) {
                     $scope.WILocalionResult = result;
@@ -107,71 +99,52 @@ angular.module('yoApp')
         $scope.getWeather = function (result) {
             var user = $('#profileData').val();
             if (!user) {
-                if (result.geonames ? (result.geonames.length > 0) : null) {
-                    var cookieObject = {
+                var cookieObject;
+                if (result.geonames?result.geonames[0]:null) {
+                    cookieObject = {
                         geoNameId: result.geonames[0].geonameId,
                         locationName: result.geonames[0].name,
                         fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
                         latitude: result.geonames[0].lat,
                         longitude: result.geonames[0].lng
-                    };
-                    $.cookie("location", JSON.stringify(cookieObject));
-
+                    }
                 }
                 if (result.geoNameId)
-                    $.cookie("location", JSON.stringify(result));
+                    cookieObject = result;
+                $.cookie("location", JSON.stringify(cookieObject));
             }
-            if (result.geonames) {
-                if (result.geonames.length > 0) {
-                    $scope.showInfo = false;
-                    $scope.reqLoader = true;
-                    $scope.WILocalionResult = null;
-                    $scope.WIWeatherResult = null;
-                    var flag = false;
-                    if ($scope.mostVisitedData) {
-                        $scope.mostVisitedData.forEach(function (mostVisited) {
-                            if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
-                                mostVisited.searchCount++;
-                                flag = true;
-                            }
-                        });
-                        if (!flag) {
-                            $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
-                                locationName: result.geonames[0].name,
-                                fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
-                                latitude: result.geonames[0].lat,
-                                longitude: result.geonames[0].lng,
-                                searchCount: 1});
-
+            if (result.geonames?result.geonames[0]:null) {
+                init();
+                var flag = false;
+                if ($scope.mostVisitedData) {
+                    $scope.mostVisitedData.forEach(function (mostVisited) {
+                        if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
+                            mostVisited.searchCount++;
+                            flag = true;
                         }
-
-                        HomeService.updateOrSaveLocationDetails(result);
-                        HomeService.getWeatherDetails(result, function (weatherInfo) {
-                            $scope.fullName = result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName;
-                            $scope.city = $scope.fullName;
-                            $scope.WIWeatherResult = weatherInfo;
-                            $scope.$apply();
-                        });
+                    });
+                    if (!flag) {
+                        $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
+                            locationName: result.geonames[0].name,
+                            fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
+                            latitude: result.geonames[0].lat,
+                            longitude: result.geonames[0].lng,
+                            searchCount: 1});
 
                     }
-                    else {
-                        $scope.reqLoader = false;
-                        $scope.showInfo = true;
+
+                    HomeService.updateOrSaveLocationDetails(result);
+                    HomeService.getWeatherDetails(result, function (weatherInfo) {
+                        $scope.fullName = result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName;
+                        $scope.city = $scope.fullName;
+                        $scope.WIWeatherResult = weatherInfo;
                         $scope.$apply();
-                    }
+                    });
 
-                }
-                else {
-                    $scope.reqLoader = false;
-
-                    $scope.showInfo = true;
                 }
             }
             else if (result.geoNameId) {
-                $scope.showInfo = false;
-                $scope.reqLoader = true;
-                $scope.WILocalionResult = null;
-                $scope.WIWeatherResult = null;
+                init();
                 var flag = false;
                 if ($scope.mostVisitedData) {
                     $scope.mostVisitedData.forEach(function (mostVisited) {
@@ -197,9 +170,19 @@ angular.module('yoApp')
                     $scope.WIWeatherResult = weatherInfo;
                     $scope.$apply();
                 });
-
-
             }
+            else {
+                $scope.reqLoader = false;
+                $scope.showInfo = true;
+            }
+
+        };
+        /*Initialize some common variables*/
+        function init(){
+            $scope.showInfo = false;
+            $scope.reqLoader = true;
+            $scope.WILocalionResult = null;
+            $scope.WIWeatherResult = null;
         }
 
     }   ])
