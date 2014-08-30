@@ -23,7 +23,6 @@ exports.schema = {
         Birthday:String,
         Gender:String,
         Mobile:{type:Number},
-        CurrentCity:String
     },
     Address:{
         Hometown:String,
@@ -33,19 +32,3 @@ exports.schema = {
         pin:Number
     }
 };
-
-/*
-profileData:{
-    About:"",
-        Birthday:"",
-        Gender:"",
-        Mobile:"",
-        CurrentCity:"",
-        Address:{
-        Hometown:"",
-            City:"",
-            State:"",
-            Country:"",
-            pin:""
-    }
-}*/

@@ -3,23 +3,23 @@ angular.module('yoApp')
 
         this.getDetails = function (callback) {
             var searchLocation = jQuery("#city").val().toString().split(', ');
-
             var searchLocationLength = searchLocation.length;
+
             jQuery.ajax({
                 url: "http://ws.geonames.org/searchJSON",
                 dataType: "jsonp",
                 data: {
                     name_equals: searchLocation[0],
-                    adminName1: (searchLocationLength) > 1 ? searchLocation[1] : false,
                     countryName: searchLocation[searchLocationLength - 1],
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-                    if (data) {
-                        callback(data);
+                    if (data.geonames.length > 0) {
+                        getLngLat(searchLocation,data.geonames,callback);
                     }
-                    else
+                    else {
                         callback(null);
+                    }
                 }, error: function (err) {
                     console.log("error during searching location: ", err);
                     callback(null);
@@ -27,58 +27,21 @@ angular.module('yoApp')
             });
         };
 
-        this.getWeatherDetails = function (result, callback) {
-            if (result.geolocation_data) {
-                jQuery.ajax({
-                    url: "http://api.openweathermap.org/data/2.5/weather?",
-                    dataType: "jsonp",
-                    data: {
-                        lat: result.geolocation_data.latitude,
-                        lon: result.geolocation_data.longitude
-                    },
-                    success: function (data) {
-                        callback(data);
-                    }, error: function (err) {
-                        console.log("error during receiving weather data: ", err);
-                        callback(null);
-                    }
-                });
-            } else if (result.geonames) {
-                jQuery.ajax({
-                    url: "http://api.openweathermap.org/data/2.5/weather?",
-                    dataType: "jsonp",
-                    data: {
-                        lat: result.geonames ? result.geonames[0].lat : result.latitude,
-                        lon: result.geonames ? result.geonames[0].lng : result.longitude
-                    },
-                    success: function (data) {
-                        callback(data);
-                    }, error: function (err) {
-                        console.log("error during recieving weather data: ", err);
-                        callback(null);
-                    }
-                });
-            }
-            else {
-                jQuery.ajax({
-                    url: "http://api.openweathermap.org/data/2.5/weather?",
-                    dataType: "jsonp",
-                    data: {
-                        lat: result.geonames ? result.geonames[0].lat : result.latitude,
-                        lon: result.geonames ? result.geonames[0].lng : result.longitude
-                    },
-                    success: function (data) {
-                        callback(data);
-                    }, error: function (err) {
-                        console.log("error during recieving weather data: ", err);
-                        callback(null);
-
-
-                    }
-                });
-
-            }
-
+        this.getWeatherDetails = function (geoData, callback) {
+            jQuery.ajax({
+                url: "http://api.openweathermap.org/data/2.5/weather?",
+                dataType: "jsonp",
+                data: {
+                    lat: geoData.latitude,
+                    lon: geoData.longitude
+                },
+                success: function (data) {
+                    callback(data);
+                }, error: function (err) {
+                    console.log("error during receiving weather data: ", err);
+                    callback(null);
+                }
+            });
         };
 
         this.getMostSearchPlaceDetails = function (callback) {
@@ -102,9 +65,6 @@ angular.module('yoApp')
         this.getLastSearchLocation = function (callback) {
             $http.get("/getLastSearchLocation")
                 .success(function (location) {
-                    if (location.length)
-                        callback(null);
-                    else
                         callback(location);
                 }).
                 error(function (error) {
@@ -122,8 +82,12 @@ angular.module('yoApp')
                     ip: Userip,
                     format: 'json'
                 },
-                success: function (data) {
-                    callback(data);
+                success: function (geoData) {
+                    callback({
+                        fullName:geoData.geolocation_data.city+', '+geoData.geolocation_data.region_name+', '+geoData.geolocation_data.country_name,
+                        latitude: geoData.geolocation_data.latitude,
+                        longitude: geoData.geolocation_data.longitude
+                    });
                 }, error: function (err) {
                     console.log(err.message);
                     callback(null);
@@ -138,11 +102,38 @@ angular.module('yoApp')
                     if (!userData)
                         callback(null);
                     else
-                    callback(userData);
+                        callback(userData);
                 }).
                 error(function (error) {
                     console.log(error.message);
                     callback(null);
                 });
         };
+
+        var getLngLat = function (searchLocation,geoData,callback) {
+            console.log(">>>>>>>>geoData>>>>>>>>>.",geoData);
+            if (geoData.length > 1) {
+                var isFound=false;
+                geoData.forEach(function (data) {
+                    var toponymName = (searchLocation.length) > 3 ? (searchLocation[0]+', '+searchLocation[1]) : searchLocation[0];
+                    var adminName1 = (searchLocation.length) > 3 ? searchLocation[2] : (searchLocation.length) > 1 ? searchLocation[1]:'';
+                    var countryName=searchLocation[searchLocation.length - 1];
+                    if((data.adminName1==adminName1 || data.adminCode1==adminName1) && data.countryName==countryName){
+                        isFound=true;
+                        callback({
+                                geoNameId: data.geonameId,
+                                locationName:data.toponymName,
+                                fullName: searchLocation.toString().split(',').join(', '),
+                                latitude: data.lat,
+                                longitude: data.lng
+                            });
+                    }
+                });
+                if(!isFound){
+                    callback(null);
+                }
+            }
+            else
+                callback(geoData);
+        }
     }]);

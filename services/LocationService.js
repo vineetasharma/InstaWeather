@@ -6,17 +6,17 @@ var EventName = require("../src/enum/EventName");
  * */
 exports.saveSearchPlaceDetails = function (reqData) {
     var emitter = this;
-    Location.findOne({geoNameId: reqData.geoNameId ? reqData.geoNameId : reqData.geonames[0].geonameId}, function (err, location) {
+    Location.findOne({geoNameId: reqData.geoNameId}, function (err, location) {
         if (err) {
             emitter.emit(EventName.ERROR, err);
         }
         else if (!location) {
             new Location({
-                geoNameId: reqData.geonames[0].geonameId,
-                locationName: reqData.geonames[0].name,
-                fullName: (reqData.geonames[0].name + ', ' + reqData.geonames[0].adminName1 + ', ' + reqData.geonames[0].countryName),
-                latitude: reqData.geonames[0].lat,
-                longitude: reqData.geonames[0].lng,
+                geoNameId: reqData.geoNameId,
+                locationName: reqData.locationName,
+                fullName: reqData.locationName,
+                latitude: reqData.latitude,
+                longitude: reqData.longitude,
                 searchCount: 1
             }).save(function (err, location) {
                     if (err) {

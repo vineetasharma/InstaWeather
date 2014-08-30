@@ -10,9 +10,9 @@ angular.module('yoApp')
                         HomeService.getWeatherDetails(currentLocationInfo, function (data) {
                             if (data) {
                                 $scope.reqLoader = false;
-                                $scope.fullName = currentLocationInfo.geolocation_data.city + ',' + currentLocationInfo.geolocation_data.country_name;
-                                $scope.city = $scope.fullName;
                                 $scope.WIWeatherResult = data;
+                                $scope.fullName = currentLocationInfo.fullName;
+                                $scope.$apply();
                             }
 
                         });
@@ -27,8 +27,7 @@ angular.module('yoApp')
                 HomeService.getWeatherDetails(location, function (data) {
                     if (data) {
                         $scope.reqLoader = false;
-                        $scope.fullName = location.fullName ? location.fullName : (location.name + ', ' + location.adminName1 + ', ' + location.countryName);
-                        $scope.city = $scope.fullName;
+                        $scope.fullName = location.fullName ;
                         $scope.WIWeatherResult = data;
                     }
                 });
@@ -44,6 +43,7 @@ angular.module('yoApp')
                 }
             });
         }
+
         $scope.format = 'h:mm';
         $scope.formatDate = 'd';
         var monthNames = [ "January", "February", "March", "April", "May", "June",
@@ -52,6 +52,7 @@ angular.module('yoApp')
         var date = new Date();
         $scope.month = monthNames[date.getMonth()];
         $scope.day = dayNames[date.getDay() - 1];
+
         jQuery(function () {
             var options = {
                 types: ['(cities)']
@@ -61,8 +62,7 @@ angular.module('yoApp')
                 HomeService.getDetails(function (result) {
                     if (result) {
                         $scope.WILocalionResult = result;
-                        $scope.getWeather(result);
-
+                       $scope.getWeather(result);
                     }
                     else {
                         $scope.showInfo = true;
@@ -73,7 +73,6 @@ angular.module('yoApp')
             });
 
         });
-
 
         HomeService.getMostSearchPlaceDetails(function (data) {
             $scope.mostVisitedData = data;
@@ -96,94 +95,65 @@ angular.module('yoApp')
             });
         };
 
-        $scope.getWeather = function (result) {
+        /*Initialize some common variables*/
+        var init=function(){
+            $scope.showInfo = false;
+            $scope.reqLoader = true;
+            $scope.WILocalionResult = null;
+            $scope.WIWeatherResult = null;
+        };
+
+        var createCookieObject=function(geoData){
+            var cookieObject = {
+                geoNameId: geoData.geoNameId,
+                locationName: geoData.locationName,
+                fullName: geoData.fullName,
+                latitude: geoData.latitude,
+                longitude: geoData.longitude
+            };
+            $.cookie("location", JSON.stringify(cookieObject));
+        };
+
+        $scope.getWeather = function (geoData) {
             var user = $('#profileData').val();
-            if (!user) {
-                var cookieObject;
-                if (result.geonames?result.geonames[0]:null) {
-                    cookieObject = {
-                        geoNameId: result.geonames[0].geonameId,
-                        locationName: result.geonames[0].name,
-                        fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
-                        latitude: result.geonames[0].lat,
-                        longitude: result.geonames[0].lng
-                    }
-                }
-                if (result.geoNameId)
-                    cookieObject = result;
-                $.cookie("location", JSON.stringify(cookieObject));
+            if (!user && geoData) {
+                createCookieObject(geoData);
             }
-            if (result.geonames?result.geonames[0]:null) {
+            if (geoData) {
                 init();
                 var flag = false;
                 if ($scope.mostVisitedData) {
                     $scope.mostVisitedData.forEach(function (mostVisited) {
-                        if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
+                        if (mostVisited.geoNameId == geoData.geoNameId) {
                             mostVisited.searchCount++;
                             flag = true;
                         }
                     });
                     if (!flag) {
-                        $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
-                            locationName: result.geonames[0].name,
-                            fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
-                            latitude: result.geonames[0].lat,
-                            longitude: result.geonames[0].lng,
+                        $scope.mostVisitedData.push({geoNameId:  geoData.geoNameId,
+                            locationName: geoData.locationName,
+                            fullName: geoData.fullName,
+                            latitude: geoData.latitude,
+                            longitude: geoData.longitude,
                             searchCount: 1});
 
                     }
 
-                    HomeService.updateOrSaveLocationDetails(result);
-                    HomeService.getWeatherDetails(result, function (weatherInfo) {
-                        $scope.fullName = result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName;
-                        $scope.city = $scope.fullName;
+                    HomeService.updateOrSaveLocationDetails(geoData);
+                    HomeService.getWeatherDetails(geoData, function (weatherInfo) {
+                        $scope.fullName = geoData.fullName;
                         $scope.WIWeatherResult = weatherInfo;
                         $scope.$apply();
                     });
 
                 }
             }
-            else if (result.geoNameId) {
-                init();
-                var flag = false;
-                if ($scope.mostVisitedData) {
-                    $scope.mostVisitedData.forEach(function (mostVisited) {
-                        if (mostVisited.geoNameId == (result.geoNameId ? result.geoNameId : result.geonames[0].geonameId)) {
-                            mostVisited.searchCount++;
-                            flag = true;
-                        }
-                    });
-                    if (!flag) {
-                        $scope.mostVisitedData.push({geoNameId: result.geonames[0].geonameId,
-                            locationName: result.geonames[0].name,
-                            fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
-                            latitude: result.geonames[0].lat,
-                            longitude: result.geonames[0].lng,
-                            searchCount: 1});
-
-                    }
-                }
-                HomeService.updateOrSaveLocationDetails(result);
-                HomeService.getWeatherDetails(result, function (weatherInfo) {
-                    $scope.fullName = result.fullName;
-                    $scope.city = $scope.fullName;
-                    $scope.WIWeatherResult = weatherInfo;
-                    $scope.$apply();
-                });
-            }
             else {
                 $scope.reqLoader = false;
                 $scope.showInfo = true;
             }
-
         };
-        /*Initialize some common variables*/
-        function init(){
-            $scope.showInfo = false;
-            $scope.reqLoader = true;
-            $scope.WILocalionResult = null;
-            $scope.WIWeatherResult = null;
-        }
+
 
     }   ])
     .
