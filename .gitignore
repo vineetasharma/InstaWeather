@@ -3,3 +3,4 @@ bower_components/
 client/
 node_modules/
 experiments
+web-app/dev/bower_components

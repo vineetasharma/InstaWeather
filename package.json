@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node start",
-    "preinstall": "bower install",
-    "test": "grunt test"
+    "start": "node start"
   },
   "dependencies": {
     "async": "0.9.0",
