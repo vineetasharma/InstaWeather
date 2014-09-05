@@ -111,7 +111,8 @@ app.use(express.logger("dev"));
 if (__appEnv == "production") {
   app.use(express.static(path.join(__dirname, 'web-app', "dist")));
 } else {
-  app.use(express.static(path.join(__dirname, 'web-app', "bower_components")));
+    log.info(">>>>>>>>>>>>>>>",__dirname);
+  app.use(express.static(path.join(__dirname, "bower_components")));
   app.use(express.static(path.join(__dirname, 'web-app', "dev")));
 }
 //Initialize the Database connection and load models
