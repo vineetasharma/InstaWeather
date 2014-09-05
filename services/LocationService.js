@@ -14,7 +14,7 @@ exports.saveSearchPlaceDetails = function (reqData) {
             new Location({
                 geoNameId: reqData.geoNameId,
                 locationName: reqData.locationName,
-                fullName: reqData.locationName,
+                fullName: reqData.fullName,
                 latitude: reqData.latitude,
                 longitude: reqData.longitude,
                 searchCount: 1

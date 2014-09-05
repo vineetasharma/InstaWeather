@@ -111,29 +111,33 @@ angular.module('yoApp')
         };
 
         var getLngLat = function (searchLocation,geoData,callback) {
-            console.log(">>>>>>>>geoData>>>>>>>>>.",geoData);
-            if (geoData.length > 1) {
+            var geoDataLength=geoData.length;
+            if (geoDataLength > 1) {
+                var locationData={};
                 var isFound=false;
-                geoData.forEach(function (data) {
-                    var toponymName = (searchLocation.length) > 3 ? (searchLocation[0]+', '+searchLocation[1]) : searchLocation[0];
-                    var adminName1 = (searchLocation.length) > 3 ? searchLocation[2] : (searchLocation.length) > 1 ? searchLocation[1]:'';
-                    var countryName=searchLocation[searchLocation.length - 1];
-                    if((data.adminName1==adminName1 || data.adminCode1==adminName1) && data.countryName==countryName){
+                var fullName=jQuery("#city").val();
+                var adminName1 = (searchLocation.length) > 3 ? searchLocation[2] : (searchLocation.length) > 1 ? searchLocation[1]:'';
+                var countryName=searchLocation[searchLocation.length - 1];
+                for(var i=0;i<geoDataLength;i++){
+                    if((geoData[i].adminName1==adminName1 || geoData[i].adminCode1==adminName1) && geoData[i].countryName==countryName){
                         isFound=true;
-                        callback({
-                                geoNameId: data.geonameId,
-                                locationName:data.toponymName,
-                                fullName: searchLocation.toString().split(',').join(', '),
-                                latitude: data.lat,
-                                longitude: data.lng
-                            });
+                        locationData={
+                            geoNameId: geoData[i].geonameId,
+                            locationName:geoData[i].toponymName,
+                            fullName: fullName,
+                            latitude: geoData[i].lat,
+                            longitude: geoData[i].lng
+                        };
+                        break;
                     }
-                });
-                if(!isFound){
-                    callback(null);
                 }
-            }
-            else
-                callback(geoData);
+                if(isFound){
+                    callback(locationData);
+                }
+                else{
+                    callback(geoData[0]);
+                }
+            }else
+                callback(geoData[0]);
         }
     }]);
