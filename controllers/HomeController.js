@@ -32,7 +32,6 @@ exports.index = function (req, res) {
                 res.render('index', {user: null});
             }
         });
-
     }
     else{
         res.render('index', {user: (user ? user : (req.user ? req.user : null))});

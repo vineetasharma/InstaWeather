@@ -3,7 +3,6 @@
  */
 angular.module('yoApp')
     .controller('mainCtrl', ['$scope','HomeService', function ($scope,HomeService) {
-
         /*login pop up*/
         $scope.signIn = function () {
             jQuery('#signin').modal({

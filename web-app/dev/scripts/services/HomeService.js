@@ -15,7 +15,6 @@ angular.module('yoApp')
                     username: 'vineetasharma'
                 },
                 success: function (data) {
-
                     if (data) {
                         callback(data);
                     }
@@ -73,13 +72,9 @@ angular.module('yoApp')
                     }, error: function (err) {
                         console.log("error during recieving weather data: ", err);
                         callback(null);
-
-
                     }
                 });
-
             }
-
         };
 
         this.getMostSearchPlaceDetails = function (callback) {
@@ -128,7 +123,6 @@ angular.module('yoApp')
                     console.log("error during searching current  location using IP: ", err);
                     callback(null);
                 }
-
             });
         };
 

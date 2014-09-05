@@ -14,12 +14,9 @@ angular.module('yoApp')
                                 $scope.city = $scope.fullName;
                                 $scope.WIWeatherResult = data;
                             }
-
                         });
                     }
-
                 });
-
             }
             else {
                 $scope.reqLoader = true;
@@ -31,9 +28,7 @@ angular.module('yoApp')
                         $scope.city = $scope.fullName;
                         $scope.WIWeatherResult = data;
                     }
-
                 });
-
             }
         }
         else {
@@ -67,23 +62,18 @@ angular.module('yoApp')
                     if (result) {
                         $scope.WILocalionResult = result;
                         $scope.getWeather(result);
-
                     }
                     else {
                         $scope.showInfo = true;
                         $scope.$apply();
                     }
                 });
-
             });
-
         });
-
 
         HomeService.getMostSearchPlaceDetails(function (data) {
             $scope.mostVisitedData = data;
         });
-
 
         /*recieving location information and then weather information to show weather information on home page*/
         $scope.getDetails = function () {
@@ -98,7 +88,6 @@ angular.module('yoApp')
                     $scope.reqLoader = false;
                 }
                 else {
-
                     $scope.showInfo = false;
                     $scope.$apply();
                 }
@@ -116,7 +105,7 @@ angular.module('yoApp')
                         fullName: (result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName),
                         latitude: result.geonames[0].lat,
                         longitude: result.geonames[0].lng
-                    }
+                    };
                     $.cookie("location", JSON.stringify(cookieObject));
 
                 }
@@ -144,9 +133,7 @@ angular.module('yoApp')
                                 latitude: result.geonames[0].lat,
                                 longitude: result.geonames[0].lng,
                                 searchCount: 1});
-
                         }
-
                         HomeService.updateOrSaveLocationDetails(result);
                         HomeService.getWeatherDetails(result, function (weatherInfo) {
                             $scope.fullName = result.geonames[0].name + ', ' + result.geonames[0].adminName1 + ', ' + result.geonames[0].countryName;
@@ -154,18 +141,15 @@ angular.module('yoApp')
                             $scope.WIWeatherResult = weatherInfo;
                             $scope.$apply();
                         });
-
                     }
                     else {
                         $scope.reqLoader = false;
                         $scope.showInfo = true;
                         $scope.$apply();
                     }
-
                 }
                 else {
                     $scope.reqLoader = false;
-
                     $scope.showInfo = true;
                 }
             }
@@ -189,7 +173,6 @@ angular.module('yoApp')
                             latitude: result.geonames[0].lat,
                             longitude: result.geonames[0].lng,
                             searchCount: 1});
-
                     }
                 }
                 HomeService.updateOrSaveLocationDetails(result);
@@ -199,14 +182,11 @@ angular.module('yoApp')
                     $scope.WIWeatherResult = weatherInfo;
                     $scope.$apply();
                 });
-
-
             }
         }
+    }])
 
-    }   ])
-    .
-    directive('myCurrentTime', ['$interval', 'dateFilter',
+    .directive('myCurrentTime', ['$interval', 'dateFilter',
         function ($interval, dateFilter) {
             return function (scope, element, attrs) {
                 var format,

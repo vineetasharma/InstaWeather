@@ -7,9 +7,7 @@ angular.module('yoApp')
             else {
                 var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
                 callback(re.test(email));
-
             }
-
         };
 
         this.sendMail = function (mailData, callback) {
@@ -21,6 +19,5 @@ angular.module('yoApp')
                     console.log("error during sending mail: ", error);
                     callback(null);
                 });
-
         }
     }]);

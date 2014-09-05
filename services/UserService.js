@@ -1,7 +1,6 @@
 var EventName = require("../src/enum/EventName");
 var fs = require('fs');
 
-
 exports.findOrCreateTwitterAccountService = function (profile) {
     var emitter = this;
     User.findOne({twitterId: profile.id}, function (err, data) {

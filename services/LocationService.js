@@ -18,7 +18,8 @@ exports.saveSearchPlaceDetails = function (reqData) {
                 latitude: reqData.geonames[0].lat,
                 longitude: reqData.geonames[0].lng,
                 searchCount: 1
-            }).save(function (err, location) {
+            })
+                .save(function (err, location) {
                     if (err) {
                         log.error(err);
                         emitter.emit(EventName.ERROR, err);
@@ -59,7 +60,7 @@ exports.getMostSearchPlaceDetails = function () {
 
 exports.getLastSearchLocation = function (userId) {
     var emitter = this;
-    User.findOne({_id:userId}).exec(function (err, user) {
+    User.findOne({_id: userId}).exec(function (err, user) {
         if (err) {
             log.info("Locations find error: ", err.message);
             emitter.emit(EventName.ERROR, err);
