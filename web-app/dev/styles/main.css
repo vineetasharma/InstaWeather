@@ -287,6 +287,7 @@ body {
 
 .in-h3 {
     padding: 20px;
+    font-size: 20px;
     padding-left: 22px;
     color: #000000;
 }
@@ -509,6 +510,11 @@ ul.profile-details li input[type="text"] {
     text-align: right;
 }
 
+.edit{
+height: 50px;
+width: 50px;
+}
+
 p.email {
     text-indent: 50px;
 }
@@ -546,4 +552,13 @@ p.email {
     height: 35px;
     padding-top: 7px;
     padding-left: 7px;
+}
+
+.button-change-profile-picture{
+    padding: 0px;
+    width: 285px;
+}
+.error{
+    color: red;
+    font-size: 14px;
 }
